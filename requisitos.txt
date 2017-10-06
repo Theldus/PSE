@@ -33,3 +33,26 @@ Algoritmos
 Comparação
 	Erro médio quadrático entre duas imagens
 	Erro médio quadrático entre dois histogramas
+	Relação pico sinal-ruído entre duas imagens
+Histograma
+	Geração de histograma
+	Função de densidade de probabilidade
+Processamento pontual
+	Operações lógicas
+		NOT
+		AND
+		OR
+	Operações aritméticas
+		Soma
+		Subtração
+		Multiplicação
+ 	Cores
+		Conversão para RGB
+		Conversão para HSV
+	Transformação de intensidade
+		Transformação logarítmica
+Processamento local 
+	Filtros passa-baixa
+		Filtro gaussiano
+	Filtro passa-alto
+		Filtro laplaciano
