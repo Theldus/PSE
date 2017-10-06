@@ -15,4 +15,4 @@ Veja o documento instruções.txt para ver as intruções de como usar esse git 
 Veja o documento requisitos.txt para ver os requisitos obrigatórios desse sistema.
 
 #### Papeis
-Veja o documento papeis para quem fará o que.
+Veja o documento papeis.txt para quem fará o que.
