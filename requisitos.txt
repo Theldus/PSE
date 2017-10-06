@@ -1,0 +1,35 @@
+Requisitos obrigatários
+
+Área de trabalho (workspace)
+	- Os sistema deve oferecer componentes, que arrastados dentro do workspace
+	são reajustados automaticamente.
+NodeBox
+	- O usuário pode inserir, remover e configurar cada NodeBox.
+	- O usuário pode realizar ligações entre as NodeBox.
+	- O sistema deve exibir uma lista de NodeBox para disponibilizá-la aos usuários.
+	- O usuário pode selecionar uma NodeBox por vez.
+	- O usuário pode selecionar a opção de deixar o fluxo dinâmico ou estático.
+Entrada e Saída
+	- O sistema deve permitir o processamento de imagens com extensões: jpg, png, raw.
+	O usuário pode importar e exportar as imagens por meio de NodeBox
+	específicas para tal trabalho com as mesmas extensões permitidas pelo sistema.
+Ligações
+	- O sistema deve impedir ligações inválidas entre as NodeBox aplicando uma
+	exceção comum à todas.
+	- O sistema deve garantir que as ligações feitas gerem um fluxo de dados
+	(imagem) e controle (algoritmos).
+Ferramentas e Recursos
+	- O sistema deve disponibilizar uma barra de ferramentas de uso comum à
+	todas workspaces, com funções de rápido acesso para manipular o conteúdo
+	gerado na mesma.
+	- O sistema deve disponibilizar um menu lateral flutuante para exibir os
+	componentes (NodeBox) e outras funções para manipular o programa como
+	todo
+
+Algoritmos
+	- O sistema deve implementar os seguintes algoritmos
+
+				Lista de Algoritmos
+Comparação
+	Erro médio quadrático entre duas imagens
+	Erro médio quadrático entre dois histogramas
