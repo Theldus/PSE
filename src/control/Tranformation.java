@@ -1,6 +1,6 @@
 package control;
 
-//Classe para fazer transformações sobre uma imagem
+//Classe com métodos para fazer transformações sobre uma imagem
 public class Tranformation {
 
     //Método para fazer transformação logarítmica de intensidade de uma imagem A
