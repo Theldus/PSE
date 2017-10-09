@@ -1,29 +1,30 @@
 package control;
 
-//Classe para executar e testar métodos
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Reader;
+
+//Classe para executar scripts
 public class Main {
 
+    /*É necessário passar o caminho do script como argumento
+      caso contrário o método joga uma exceção e o programa para.*/
+    //Método para executar scripts
     public static void main(String[] args) {
-
-        Operation Op = new Operation();
-        InputOutput Io = new InputOutput();
-        Utility util = new Utility();
-
-        int [][] A = Io.readText("a.txt", 3, 3);
-        int [][] B = Io.readText("b.txt", 3, 3);
-        int [][] C;
-
-        //C = Op.sum(A, B);
-        //C = Op.minus(A, B);
-        //C = Op.times(A, B);
-        //C = Op.not(A);
-        //C = Op.and(A, B);
-        //C = Op.or(A, B);
-        //Io.print(C);
-        //C = util.getBlank(100,100);
-        //Io.print(C,"blank.png","png");
-        //C = Io.read("blank.png");
-        //Io.print(C, "blank2.png", "png");
-
+        //Utiliza-se a engine chamada nashorn para executar javascript
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("nashorn");
+        File file = new File(args[0]);
+        Reader read = null;
+        try{ read = new FileReader(file); }
+        catch (FileNotFoundException e) { e.printStackTrace(); }
+        String result;
+        try { result = (String)engine.eval(read);
+            System.out.println(result); }
+        catch (ScriptException e) { e.printStackTrace(); }
     }
 }
