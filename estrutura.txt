@@ -1,0 +1,16 @@
+Estutrura das classes e pacotes
+algorithms
+  Compare
+  Filter
+  Histogram
+  Operation
+  Tranform
+  Utility
+inputoutput
+  IO
+gui
+  NodeBox
+  ...
+observer
+  Node
+  ...
