@@ -9,8 +9,14 @@ algorithms
 inputoutput
   IO
 gui
+  BasicUI
+  Component
+  Coordinates
   NodeBox
-  ...
+  NodeBoxFilter
+  NodeBoxPreview
+  Main
+  Workspace
 observer
   Node
-  ...
+  Observer
