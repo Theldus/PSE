@@ -1,2 +1,0 @@
-Classe flow
-  Para gerar um fluxo de execução será usada um grafo. Os vértices representam os algoritmos e as arestas, a entrada e saída
