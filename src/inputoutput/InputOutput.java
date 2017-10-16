@@ -1,4 +1,4 @@
-package control;
+package inputoutput;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

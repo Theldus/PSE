@@ -1,4 +1,4 @@
-package control;
+package algorithms;
 
 //Classe com métodos para fitrar uma imagem
 public class Filter {

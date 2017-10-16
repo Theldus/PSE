@@ -1,7 +1,7 @@
 //Importar as classes
-var Utility = Java.type("control.Utility");
-var InputOutput = Java.type("control.InputOutput");
-var Operation = Java.type("control.Operation");
+var Utility = Java.type("algorithms.Utility");
+var InputOutput = Java.type("inputoutput.InputOutput");
+var Operation = Java.type("algorithms.Operation");
 
 //Instanciar as classes
 var Util = new Utility();
