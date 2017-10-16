@@ -1,4 +1,4 @@
-package control;
+package algorithms;
 
 //Classe com métodos auxiliares
 public class Utility {

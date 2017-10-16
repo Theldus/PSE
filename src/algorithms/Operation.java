@@ -1,4 +1,4 @@
-package control;
+package algorithms;
 
 //Classe com métodos para fazer operações aritméticas e lógicas sobre imagens
 public class Operation {

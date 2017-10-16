@@ -1,4 +1,4 @@
-package control;
+package algorithms;
 
 //Classe com métodos para calcular histograma e afins
 public class Histogram {
