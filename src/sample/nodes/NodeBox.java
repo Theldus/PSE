@@ -15,11 +15,14 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import sample.NodeBoxObserver;
 import sample.Workspace.Workspace;
 import sample.util.Coordinates;
 import sample.util.Dimension;
+import sample.util.Edge;
 
+import javax.xml.stream.EventFilter;
 import java.io.File;
 
 import static sample.util.Appearance.*;
@@ -234,13 +237,38 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
             setInput(createChannel());
             getInput().setLayoutX(0.0f);
-            //getChildren().add(getInput());
+            getChildren().add(getInput());
 
             setOutput(createChannel());
             getOutput().setLayoutX(NodeBox.this.getMinWidth());
-            //getChildren().add(getOutput());
+            getChildren().add(getOutput());
 
             getChildren().add(createContainer());
+        }
+
+        public void setEvents(){
+
+            input.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                   NodeBoxController controller =  NodeBoxController.getInstance();
+                   controller.initConnection(NodeBox.this, Edge.IO.Input,new Coordinates(event.getSceneX()-50,event.getSceneY()));
+                   System.out.println("CLICK INPUT!!!");
+                   //event.consume();
+                   //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
+                }
+            });
+
+            output.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    NodeBoxController controller =  NodeBoxController.getInstance();
+                    controller.initConnection(NodeBox.this, Edge.IO.Output,new Coordinates(event.getSceneX()-50,event.getSceneY()));
+                    System.out.println("CLICK OUTPUT!!!");
+                    //event.consume();
+                    //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
+                }
+            });
         }
 
         public Circle createChannel(){

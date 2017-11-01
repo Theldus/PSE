@@ -20,16 +20,16 @@ public class NodeBoxDraggable extends DraggedBehavior {
     public void onMouseEntered(MouseEvent event) {
         NodeBox nodeBox = cast();
 
-        nodeBox.getHeader().setVisible(true);
-        nodeBox.getNode().add(nodeBox.getNode().getInput());
-        nodeBox.getNode().add(nodeBox.getNode().getOutput());
+        //nodeBox.getHeader().setVisible(true);
+        //nodeBox.getNode().add(nodeBox.getNode().getInput());
+        //nodeBox.getNode().add(nodeBox.getNode().getOutput());
     }
 
     @Override
     public void onMouseExited(MouseEvent event) {
         NodeBox nodeBox = cast();
-        nodeBox.getHeader().setVisible(false);
-        nodeBox.getNode().remove(nodeBox.getNode().getInput());
-        nodeBox.getNode().remove(nodeBox.getNode().getOutput());
+        //nodeBox.getHeader().setVisible(false);
+        //nodeBox.getNode().remove(nodeBox.getNode().getInput());
+        //nodeBox.getNode().remove(nodeBox.getNode().getOutput());
     }
 }

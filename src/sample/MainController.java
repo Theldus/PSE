@@ -15,7 +15,7 @@ public class MainController {
     }
 
     private List<NodeBox> nodeBoxList;
-    private Workspace workspace;
+    private static Workspace workspace;
 
     private MainController() {
         this.nodeBoxList = new ArrayList<>();
@@ -30,8 +30,8 @@ public class MainController {
         this.workspace = workspace;
     }
 
-    public Workspace getCurrentWorkspace(){
-        return this.workspace;
+    public static Workspace getCurrentWorkspace(){
+        return workspace;
     }
 
 }

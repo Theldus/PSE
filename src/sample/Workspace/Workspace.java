@@ -27,19 +27,11 @@ public class Workspace extends AnchorPane implements WokspaceSubject {
 
     public Workspace(Dimension dimension){
 
-
-
         this.nodeBoxList = new ArrayList<>();
         setMinSize(dimension.getWidth(),dimension.getHeight());
         setPrefSize(dimension.getWidth(),dimension.getHeight());
         setProperty();
         addDots(60);
-        this.setOnMouseDragged(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println(event.getSceneX()+" "+event.getSceneY());
-            }
-        });
     }
 
     public void setProperty(){
