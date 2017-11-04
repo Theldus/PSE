@@ -8,7 +8,7 @@ import static sample.util.Appearance.ICONS_PATH;
 public class GaussianFilter extends NodeBox {
 
     public GaussianFilter(Workspace root) {
-        super("Gaussian Filter", root, ICONS_PATH+"DefaultFilterIcon"+ICONS_EXT);
+        super("Gaussian Filter", root, "DefaultFilterIcon"+ICONS_EXT);
     }
 
     @Override

@@ -8,7 +8,7 @@ import static sample.util.Appearance.ICONS_PATH;
 public class Histogram extends NodeBox {
 
     public Histogram(Workspace root) {
-        super("Histogram", root, ICONS_PATH+"DefaultShowIcon"+ICONS_EXT);
+        super("Histogram", root, "DefaultShowIcon"+ICONS_EXT);
     }
 
     @Override

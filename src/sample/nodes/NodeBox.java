@@ -92,8 +92,8 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
 
     private ImageView createIcon(String pathName, Dimension dimension ){
-        pathName = "src/images/" + pathName;
-        ImageView imageView = new ImageView( new File(pathName).toURI().toString() );
+        pathName = "icons/" + pathName;
+        ImageView imageView = new ImageView( sample.Main.class.getResource(pathName).toString() );
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setFitWidth(dimension.getWidth());
