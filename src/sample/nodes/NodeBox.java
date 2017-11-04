@@ -15,7 +15,6 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import sample.NodeBoxObserver;
 import sample.Workspace.Workspace;
 import sample.util.Coordinates;
@@ -244,6 +243,10 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             getChildren().add(getOutput());
 
             getChildren().add(createContainer());
+
+            /* Move input and output to front. */
+            input.toFront();
+            output.toFront();
         }
 
         public void setEvents(){
@@ -252,7 +255,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
                 @Override
                 public void handle(MouseEvent event) {
                    NodeBoxController controller =  NodeBoxController.getInstance();
-                   controller.initConnection(NodeBox.this, Edge.IO.Input,new Coordinates(event.getSceneX()-50,event.getSceneY()));
+                   controller.initConnection(NodeBox.this, Edge.IO.Input);
                    System.out.println("CLICK INPUT!!!");
                    //event.consume();
                    //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
@@ -263,7 +266,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
                 @Override
                 public void handle(MouseEvent event) {
                     NodeBoxController controller =  NodeBoxController.getInstance();
-                    controller.initConnection(NodeBox.this, Edge.IO.Output,new Coordinates(event.getSceneX()-50,event.getSceneY()));
+                    controller.initConnection(NodeBox.this, Edge.IO.Output);
                     System.out.println("CLICK OUTPUT!!!");
                     //event.consume();
                     //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
