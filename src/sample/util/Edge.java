@@ -1,6 +1,7 @@
 package sample.util;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -46,7 +47,6 @@ public class Edge {
     public NodeBox getNodeBoxSource() {
         return nodeBoxSource;
     }
-
     public void setNodeBoxSource(NodeBox nodeBoxSource) {
         this.nodeBoxSource = nodeBoxSource;
     }
@@ -54,7 +54,6 @@ public class Edge {
     public NodeBox getNodeBoxTarget() {
         return nodeBoxTarget;
     }
-
     public void setNodeBoxTarget(NodeBox nodeBoxTarget) {
         this.nodeBoxTarget = nodeBoxTarget;
     }
@@ -62,30 +61,32 @@ public class Edge {
     public CubicCurve getLine() {
         return line;
     }
-
     public void setLine(CubicCurve line) {
         this.line = line;
     }
 
-    public CubicCurve setupLine(Coordinates coordinates)
+    public CubicCurve setupLine()
     {
         Circle io = (nodeBoxSource == null) ? nodeBoxTarget.getNode().getOutput()
                 : nodeBoxSource.getNode().getInput();
+
+        Coordinates coordinates = new Coordinates();
+        Bounds bounds = io.localToScene( io.getBoundsInLocal() );
+        coordinates.setX( (bounds.getMinX() + (bounds.getWidth()  / 2)) - 50 );
+        coordinates.setY(  bounds.getMinY() + (bounds.getHeight() / 2)       );
 
         line = new CubicCurve();
         line.setFill(Color.TRANSPARENT);
         line.setStartX   ( coordinates.getX() );
         line.setStartY   ( coordinates.getY() );
-        line.setControlX1(  coordinates.getX() );
-        line.setControlX2(  coordinates.getX() );
+        line.setControlX1( coordinates.getX() );
+        line.setControlX2( coordinates.getX() );
         line.setControlY1( coordinates.getY() );
         line.setControlY2( coordinates.getY() );
         line.setEndX     ( coordinates.getX() );
         line.setEndY     ( coordinates.getY() );
-        line.setStroke(Color.WHITE);
+        line.setStroke(Color.GREENYELLOW);
         line.setStrokeWidth(2);
-
-        System.out.printf("IO X: %f | Y: %f\n", coordinates.getX(), coordinates.getY());
 
         MainController.getCurrentWorkspace().setOnMouseMoved(new EventHandler<MouseEvent>() {
 
@@ -93,11 +94,8 @@ public class Edge {
 
             @Override
             public void handle(MouseEvent event) {
-                //Existe linha sendo criada
+                /* There's a line being created. */
                 if (NodeBoxController.connAcc){
-
-                    //System.out.println("MOVED WORKSPACE!!!");
-
                     double diff = Math.abs (Edge.this.line.getEndX() - Edge.this.line.getStartX());
                     diff = (diff * 0.4);
 
@@ -116,6 +114,23 @@ public class Edge {
         });
 
         return line;
+    }
 
+    public void establishConnection(IO io)
+    {
+        Circle circle = null;
+
+        if (io.equals(IO.Input))
+            circle = nodeBoxSource.getNode().getInput();
+        else
+            circle = nodeBoxTarget.getNode().getOutput();
+
+        Coordinates coordinates = new Coordinates();
+        Bounds bounds = circle.localToScene( circle.getBoundsInLocal() );
+        coordinates.setX( (bounds.getMinX() + (bounds.getWidth()  / 2)) - 50 );
+        coordinates.setY(  bounds.getMinY() + (bounds.getHeight() / 2)       );
+
+        line.setEndX(coordinates.getX());
+        line.setEndY(coordinates.getY());
     }
 }

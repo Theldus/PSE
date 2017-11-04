@@ -1,5 +1,6 @@
 package sample.nodes;
 
+import javafx.scene.shape.CubicCurve;
 import sample.MainController;
 import sample.Workspace.Workspace;
 import sample.util.Coordinates;
@@ -25,30 +26,35 @@ public class NodeBoxController {
     private NodeBoxController() {
         edgeList = new ArrayList<>();
     }
-
     private void resetEdge()
     {
         edgeTemp = null;
     }
 
-    public void initConnection(NodeBox nodeBox, Edge.IO io, Coordinates coordinates){
+    public void initConnection(NodeBox nodeBox, Edge.IO io){
+        /* Start point. */
         if (edgeTemp == null )
         {
-            edgeTemp = new Edge(nodeBox, io);
             connAcc = true;
-            MainController.getCurrentWorkspace().getChildren().add(edgeTemp.setupLine(coordinates));
+            edgeTemp = new Edge(nodeBox, io);
+            MainController.getCurrentWorkspace().getChildren().add(edgeTemp.setupLine());
+            edgeTemp.getLine().toBack();
         }
         else
         {
-            // Loop, operacao invalida
+            /* Invalid operation. */
             if (io.equals(edgeTemp.getLastConnection())) {
+                System.err.println("> initConnection: Invalid connection");
+                MainController.getCurrentWorkspace().getChildren().remove(edgeTemp.getLine());
                 resetEdge();
                 connAcc = false;
             }
 
+            /* End point. */
             else
             {
                 edgeTemp.setEdge(nodeBox,io);
+                edgeTemp.establishConnection(io);
                 connAcc = false;
                 edgeList.add(edgeTemp);
                 resetEdge();
