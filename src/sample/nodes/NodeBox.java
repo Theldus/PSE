@@ -251,18 +251,18 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
         public void setEvents(){
 
-            input.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            input.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                   NodeBoxController controller =  NodeBoxController.getInstance();
-                   controller.initConnection(NodeBox.this, Edge.IO.Input);
-                   System.out.println("CLICK INPUT!!!");
-                   //event.consume();
-                   //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
+                    NodeBoxController controller =  NodeBoxController.getInstance();
+                    controller.initConnection(NodeBox.this, Edge.IO.Input);
+                    System.out.println("CLICK INPUT!!!");
+                    //event.consume();
+                    //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
                 }
             });
 
-            output.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            output.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     NodeBoxController controller =  NodeBoxController.getInstance();
@@ -287,7 +287,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         public void add( Circle circle ){
             this.getChildren().add(circle);
         }
-
         public void remove( Circle circle){
             this.getChildren().remove(circle);
         }
@@ -304,7 +303,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         public Circle getInput() {
             return input;
         }
-
         public void setInput(Circle input) {
             this.input = input;
         }
@@ -312,7 +310,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         public Circle getOutput() {
             return output;
         }
-
         public void setOutput(Circle output) {
             this.output = output;
         }
@@ -320,7 +317,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         public ImageView getDefaultActionIcon() {
             return defaultActionIcon;
         }
-
         public void setDefaultActionIcon(ImageView defaultActionIcon) {
             this.defaultActionIcon = defaultActionIcon;
         }
