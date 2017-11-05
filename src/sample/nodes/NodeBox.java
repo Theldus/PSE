@@ -164,14 +164,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
         private void setEvents(){
 
-            deleteIcon.addEventFilter(MouseEvent.MOUSE_DRAGGED,new EventHandler<MouseEvent>() {
-                public void handle(MouseEvent event) {
-                    deleteIcon.getChildren().remove(0);
-                    deleteIcon.getChildren().add(pressedDeleteIcon);
-                    event.consume();
-                }
-            });
-
             deleteIcon.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
