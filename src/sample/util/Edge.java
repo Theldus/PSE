@@ -109,6 +109,9 @@ public class Edge {
                     Edge.this.line.setEndX( event.getX() );
                     Edge.this.line.setEndY( event.getY() );
                 }
+
+                /* Consume event. */
+                event.consume();
             }
         };
 

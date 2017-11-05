@@ -71,7 +71,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
     @Override
     public void update(Coordinates coordinates){
-        //System.out.println( coordinates.getX() + " " + coordinates.getY() );
         wkc = coordinates;
     }
 
@@ -248,9 +247,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
                 public void handle(MouseEvent event) {
                     NodeBoxController controller =  NodeBoxController.getInstance();
                     controller.initConnection(NodeBox.this, Edge.IO.Input);
-                    System.out.println("CLICK INPUT!!!");
-                    //event.consume();
-                    //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
+                    event.consume();
                 }
             });
 
@@ -259,9 +256,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
                 public void handle(MouseEvent event) {
                     NodeBoxController controller =  NodeBoxController.getInstance();
                     controller.initConnection(NodeBox.this, Edge.IO.Output);
-                    System.out.println("CLICK OUTPUT!!!");
-                    //event.consume();
-                    //System.out.printf("X: %f | Y: %f \n", event.getSceneX(), event.getSceneY());
+                    event.consume();
                 }
             });
         }
