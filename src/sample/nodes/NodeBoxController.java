@@ -46,6 +46,7 @@ public class NodeBoxController {
             if (io.equals(edgeTemp.getLastConnection())) {
                 System.err.println("> initConnection: Invalid connection");
                 MainController.getCurrentWorkspace().getChildren().remove(edgeTemp.getLine());
+                edgeTemp.closeConnection();
                 resetEdge();
                 connAcc = false;
             }
