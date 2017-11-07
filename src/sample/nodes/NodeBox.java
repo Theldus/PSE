@@ -21,15 +21,20 @@ import sample.util.Coordinates;
 import sample.util.Dimension;
 import sample.util.Edge;
 
-import javax.xml.stream.EventFilter;
-import java.io.File;
-
 import static sample.util.Appearance.*;
 
+/**
+ *  NodeBox class. The main definition of what is an 'Node' is here.
+ *  @author Daniel, Davidson.
+ *  @version v1.0
+ */
 public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
     private Image image;
 
+    /**
+     * Fields that defines how a NodeBox will look like.
+     */
     private static Insets defaultPadding = new Insets(5.0f,2.5f,5.0f,2.5f);
     private static CornerRadii defaultCornerRadii = new CornerRadii(20.0f);
     private static BorderWidths defaultBorderWidths = new BorderWidths(2.0f);
@@ -40,6 +45,9 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
     private final Workspace root;
     private final static Dimension dimension = new Dimension(74.0f,64.0f);
 
+    /**
+     * Defines all the mouse events for a Node.
+     */
     private NodeBoxDraggable nodeBoxDraggable;
 
     private Coordinates wkc;
@@ -51,6 +59,12 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
     private final Node node;
     private String actionIcon;
 
+    /**
+     * Setup the appearance: title, icon and workspace.
+     * @param title NodeBox title
+     * @param root Root element that should contain this NodeBox.
+     * @param actionIconName NodeBox icon path.
+     */
     public NodeBox(String title, Workspace root, String actionIconName ){
         this.setMinSize(dimension.getWidth(),dimension.getHeight());
         this.nodeBoxDraggable = new NodeBoxDraggable(this);
@@ -67,28 +81,53 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         setEvents();
     }
 
+    /**
+     * Installs the NodeBox, i.e: sets everything up to work.
+     * At the moment, this just adds itself into the Workspace.
+     * @see GaussianFilter
+     * @see Histogram
+     */
     public abstract void install();
 
+    /**
+     * Updates the mouse movement coordinates.
+     * @param coordinates Current mouse coordinates.
+     */
     @Override
     public void update(Coordinates coordinates){
         wkc = coordinates;
     }
 
+    /**
+     * Initialize the NodeBox on the screen.
+     */
     public void initialize(){
         setTop(getHeader());
         setCenter(getNode());
     }
 
+    /**
+     * Sets the dimensions.
+     */
     private void setProperties(){
         setMinSize(dimension.getWidth(),dimension.getHeight());
         setPadding(defaultPadding);
     }
 
+    /**
+     * Sets the events, i.e: the mouse events, like drag, click
+     * and so on.
+     */
     public void setEvents(){
         nodeBoxDraggable.make();
     }
 
-
+    /**
+     * Creates the NodeBox icon that will be in the center of it.
+     * @param pathName Path to the icon, including the filename.
+     * @param dimension Icon dimensions.
+     * @return Returns an ImageView with the image loaded into it.
+     */
     private ImageView createIcon(String pathName, Dimension dimension ){
         pathName = "icons/" + pathName;
         ImageView imageView = new ImageView( sample.Main.class.getResource(pathName).toString() );
@@ -99,32 +138,61 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         return imageView;
     }
 
+    /**
+     * Gets the NodeBox header.
+     * @return NodeBox header.
+     */
     public Header getHeader() {
         return header;
     }
 
+    /**
+     * Gets the NodeBox Node.
+     * @return NodeBox Node.
+     */
     public Node getNode() {
         return node;
     }
 
+    /**
+     * Header class. It's basically a GridPane made up
+     * of the NodeBox title and the closing 'X' button.
+     * Therefore, it should be used in conjunction with
+     * the NodeBox and not individually.
+     */
     public class Header extends GridPane{
 
+        /**
+         * Header title and container.
+         */
         private Label title;
         private HBox container;
 
+        /**
+         * Default icons for the Header.
+         */
         private ImageView defaultDeleteIcon;
         private ImageView enteredDeleteIcon;
         private ImageView pressedDeleteIcon;
         private AnchorPane deleteIcon;
 
+        /**
+         * Initializes the Header with the title, container,
+         * properties and events.
+         * @param title Header title.
+         */
         public Header( String title ){
             this.title = createTitle(title);
             this.container = createContainer();
             setProperties();
             setEvents();
-            initilize();
+            initialize();
         }
 
+        /**
+         * Sets the basic properties for the Header, like
+         * dimensions and alignments.
+         */
         private void setProperties(){
             setMinSize(getMinWidth(),0.0f);
             setPadding(defaultPadding);
@@ -132,11 +200,20 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             setHgap(20.0f);
         }
 
-        private void initilize(){
+        /**
+         * Initializes the Header, i.e: adds the components
+         * inside the GridPane.
+         */
+        private void initialize(){
             add( title, 0,0 );
             add( container, 1,0 );
         }
 
+        /**
+         * Setup the Header title and adjust the positions.
+         * @param title Header title.
+         * @return Returns a label aligned containing the title.
+         */
         private Label createTitle(String title){
             final Label auxTitle = new Label(title);
             auxTitle.setTextFill(Paint.valueOf(TEXT_COLOR));
@@ -145,6 +222,10 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             return auxTitle;
         }
 
+        /**
+         * Creates a container that will contain the 'x' button.
+         * @return Horizontal box containing the 'X' button.
+         */
         private HBox createContainer(){
             final HBox container = new HBox(5.0f);
             container.setAlignment(Pos.CENTER_RIGHT);
@@ -161,6 +242,11 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             return container;
         }
 
+        /**
+         * Configures the mouse events needed to: change the color
+         * of the button when the mouse on top of it and remove the
+         * NodeBox when clicked.
+         */
         private void setEvents(){
 
             deleteIcon.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -190,46 +276,78 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             });
         }
 
+        /**
+         * Get Header title.
+         * @return Header title.
+         */
         public String getTitle() {
             return title.getText();
         }
 
+        /**
+         * Set Header title.
+         * @param title
+         */
         public void setTitle(String title) {
             this.title.setText(title);
         }
     }
 
+    /**
+     * Node class. Every NodeBox must have one Node. A node is responsible to
+     * control the Input/Output buttons and the icon which represents the node
+     * functionality.
+     *
+     * Do not mix this name with a node Graph! there's nothing to do with it and
+     * much less with the Java's Node (javafx.scene.Node).
+     */
     public class Node extends AnchorPane{
 
+        /**
+         * IO buttons.
+         */
         private Circle input;
         private Circle output;
+
+        /**
+         * Default images.
+         */
         private ImageView defaultActionIcon;
         private ImageView pressedActionIcon;
         private ImageView enteredActionIcon;
         private AnchorPane actionIcon;
 
+        /**
+         * Initializes the Node.
+         */
         public Node(){
             setProperties();
             initialize();
             setEvents();
         }
 
+        /**
+         * Setup the layout properties of a Node.
+         */
         private void setProperties(){
             setMinSize(NodeBox.this.getMinWidth(),NodeBox.this.getMinHeight());
             setMaxSize(getMinWidth(),getMinHeight());
             setPadding(defaultPadding);
-            setBackgroundColor(this, BACKGROUND_COLOR,defaultCornerRadii,null);
+            setBackgroundColor(this, BACKGROUND_COLOR, defaultCornerRadii,null);
             setBorder( defaultBorder );
             setMargin(this,new Insets(0,0,15,0));
         }
 
+        /**
+         * Configures the IO buttons.
+         */
         public void initialize(){
 
-            setInput(createChannel());
+            setInput(createIOButton());
             getInput().setLayoutX(0.0f);
             getChildren().add(getInput());
 
-            setOutput(createChannel());
+            setOutput(createIOButton());
             getOutput().setLayoutX(NodeBox.this.getMinWidth());
             getChildren().add(getOutput());
 
@@ -240,6 +358,9 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             output.toFront();
         }
 
+        /**
+         * Sets up the events needed to control the I/O buttons.
+         */
         public void setEvents(){
 
             input.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -261,7 +382,11 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             });
         }
 
-        public Circle createChannel(){
+        /**
+         * Sets the appearance of an IO button.
+         * @return
+         */
+        public Circle createIOButton(){
             Circle channel = new Circle(5.0f);
             channel.setFill(Paint.valueOf(BACKGROUND_COLOR));
             channel.setStroke(Paint.valueOf(FOREGROUND_COLOR));
@@ -271,13 +396,27 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             return channel;
         }
 
-        public void add( Circle circle ){
+        /**
+         * Adds an IO button.
+         * @param circle Circle element to be added.
+         */
+        public void add(Circle circle){
             this.getChildren().add(circle);
         }
-        public void remove( Circle circle){
+
+        /**
+         * Removes an IO button.
+         * @param circle Circle element to be removed.
+         */
+        public void remove(Circle circle){
             this.getChildren().remove(circle);
         }
 
+        /**
+         * Creates the Horizontal box container that will contains the NodeBox
+         * icon.
+         * @return Horizontal box container.
+         */
         public HBox createContainer(){
             HBox container = new HBox();
             container.setAlignment(Pos.CENTER);
@@ -287,32 +426,72 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             return container;
         }
 
+        /**
+         * Gets the Circle input.
+         * @return Returns the input Circle object.
+         */
         public Circle getInput() {
             return input;
         }
+
+        /**
+         * Sets the Circle input.
+         * @param input Input Circle to be set.
+         */
         public void setInput(Circle input) {
             this.input = input;
         }
 
+        /**
+         * Gets the Circle output.
+         * @return Returns the output Circle object.
+         */
         public Circle getOutput() {
             return output;
         }
+
+        /**
+         * Sets the Circle output.
+         * @param output Output Circle to be set.
+         */
         public void setOutput(Circle output) {
             this.output = output;
         }
 
+        /**
+         * Gets the defaultActionIcon, i.e: the default image of a NodeBox.
+         * @return Returns the defaultActionIcon.
+         */
         public ImageView getDefaultActionIcon() {
             return defaultActionIcon;
         }
+
+        /**
+         * Sets the defaultActionIcon, i.e: the default image of a NodeBox.
+         * @param defaultActionIcon de
+         */
         public void setDefaultActionIcon(ImageView defaultActionIcon) {
             this.defaultActionIcon = defaultActionIcon;
         }
     }
 
+    /**
+     * Sets the Node background color.
+     * @param component Target component to be set the color.
+     * @param hexColor Color value, in WEB format (#AABBCC).
+     * @param cornerRadii Background radius.
+     * @param insets Insets.
+     */
     public void setBackgroundColor( Pane component, String hexColor, CornerRadii cornerRadii, Insets insets ){
         component.setBackground(new Background(new BackgroundFill(Paint.valueOf(hexColor),cornerRadii,insets)));
     }
 
+    /**
+     * Gets the Workspace. Since we support (in the future) multiple
+     * Workspaces, it's important to know which Workspace we are
+     * currently using for this Node.
+     * @return Current Workspace.
+     */
     protected Workspace getRoot() {
         return  root;
     }
