@@ -25,6 +25,7 @@ import static sample.util.Appearance.*;
 
 /**
  *  NodeBox class. The main definition of what is an 'Node' is here.
+ *  @apiNote All filters/nodes should extend NodeBox class.
  *  @author Daniel, Davidson.
  *  @version v1.0
  */
