@@ -74,7 +74,11 @@ public class NodeBoxController {
         else
         {
             /* Invalid operations. */
-            if (io.equals(edgeTemp.getLastConnection())) {
+            NodeBox node = (edgeTemp.getNodeBoxSource() != null) ?
+                    edgeTemp.getNodeBoxSource() : edgeTemp.getNodeBoxTarget();
+
+            /* Input/Input or Output/Output / Same node. */
+            if (node == nodeBox || io.equals(edgeTemp.getLastConnection()) ) {
                 System.err.println("> initConnection: Invalid connection");
                 MainController.getCurrentWorkspace().getChildren().remove(edgeTemp.getLine());
                 edgeTemp.closeConnection();
@@ -83,8 +87,7 @@ public class NodeBoxController {
             }
 
             /* End point. */
-            else
-            {
+            else {
                 edgeTemp.setEdge(nodeBox,io);
                 edgeTemp.establishConnection(io);
                 connAcc = false;
