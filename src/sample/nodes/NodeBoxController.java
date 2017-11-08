@@ -3,6 +3,8 @@ package sample.nodes;
 import sample.MainController;
 import sample.util.Edge;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +23,9 @@ public class NodeBoxController {
     /**
      * Line stuff.
      */
-    List<Edge> edgeList;
-    private Edge edgeTemp = null;
-    public static boolean connAcc = false;
+    public  static List<Edge> edgeList;
+    private static Edge edgeTemp = null;
+    public  static boolean connAcc = false;
 
     /**
      * Gets an instance of this class, since we are using Singleton
@@ -62,7 +64,7 @@ public class NodeBoxController {
      */
     public void initConnection(NodeBox nodeBox, Edge.IO io){
         /* Start point. */
-        if (edgeTemp == null )
+        if (edgeTemp == null)
         {
             connAcc = true;
             edgeTemp = new Edge(nodeBox, io);
@@ -71,7 +73,7 @@ public class NodeBoxController {
         }
         else
         {
-            /* Invalid operation. */
+            /* Invalid operations. */
             if (io.equals(edgeTemp.getLastConnection())) {
                 System.err.println("> initConnection: Invalid connection");
                 MainController.getCurrentWorkspace().getChildren().remove(edgeTemp.getLine());

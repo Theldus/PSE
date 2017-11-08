@@ -2,6 +2,7 @@ package sample.util;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -66,9 +67,9 @@ public class Edge {
      */
     public void setEdge(NodeBox nodeBox, IO io){
         if (io.equals(IO.Input))
-            nodeBoxSource = nodeBox;
-        else
             nodeBoxTarget = nodeBox;
+        else
+            nodeBoxSource = nodeBox;
     }
 
     /**
@@ -128,8 +129,8 @@ public class Edge {
     public CubicCurve setupLine()
     {
         /* Appropriate circle. */
-        Circle io = (nodeBoxSource == null) ? nodeBoxTarget.getNode().getOutput()
-                : nodeBoxSource.getNode().getInput();
+        Circle io = (nodeBoxSource == null) ? nodeBoxTarget.getNode().getInput()
+                : nodeBoxSource.getNode().getOutput();
 
         /* Calculate the coordinates. */
         Coordinates coordinates = new Coordinates();
@@ -199,9 +200,9 @@ public class Edge {
         Circle circle = null;
 
         if (io.equals(IO.Input))
-            circle = nodeBoxSource.getNode().getInput();
+            circle = nodeBoxTarget.getNode().getInput();
         else
-            circle = nodeBoxTarget.getNode().getOutput();
+            circle = nodeBoxSource.getNode().getOutput();
 
         /* Setup line coordinates. */
         Coordinates coordinates = new Coordinates();
@@ -214,6 +215,31 @@ public class Edge {
 
         /* Remove mouse move event filter. */
         MainController.getCurrentWorkspace().removeEventFilter(MouseEvent.MOUSE_MOVED, filter);
+
+        /* Add the line click, to remove the line. */
+        line.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(javafx.scene.input.MouseEvent event) {
+                MainController.getCurrentWorkspace().getChildren().remove(line);
+                NodeBoxController.edgeList.remove(this);
+            }
+        });
+
+        /* Adds mouse enter. */
+        line.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                line.setCursor(Cursor.HAND);
+            }
+        });
+
+        /* Adds mouse exit. */
+        line.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                line.setCursor(Cursor.DEFAULT);
+            }
+        });
     }
 
     /**
