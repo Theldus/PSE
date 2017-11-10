@@ -9,13 +9,21 @@ public class VMenuBar extends HBox {
    private SideBar sideBar;
 
    public VMenuBar(){
-       sideBar = new SideBar();
+       setSideBar(new SideBar());
        createComponent();
    }
 
    public void createComponent() {
-       getChildren().add(sideBar);
+       getChildren().add(getSideBar());
    }
+
+    public SideBar getSideBar() {
+        return sideBar;
+    }
+
+    public void setSideBar(SideBar sideBar) {
+        this.sideBar = sideBar;
+    }
 
     private final class SideBar extends VBox {
 
@@ -33,7 +41,7 @@ public class VMenuBar extends HBox {
    }
 
     public void addMenuItem( VMenuItem item ) {
-        sideBar.addIcon(item.getIcon());
+        getSideBar().addIcon(item.getIcon());
         item.setContainer(this);
     }
 }

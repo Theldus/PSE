@@ -3,6 +3,7 @@ package sample.nodes;
 import sample.Workspace.Workspace;
 
 import static sample.util.Appearance.ICONS_EXT;
+import static sample.util.Appearance.ICONS_PATH;
 
 /**
  * GaussianFilter class. This is a GaussianFilter node.
@@ -13,10 +14,12 @@ public class GaussianFilter extends NodeBox {
     /**
      * Initializes the GaussianFilter.
      * Currently, just setup the title, workspace and icon.
+     * @param title NodeBox title.
      * @param root Workspace to be added.
+     * @param iconPath NodeBox icon path.
      */
-    public GaussianFilter(Workspace root) {
-        super("Gaussian Filter", root, "DefaultFilterIcon"+ICONS_EXT);
+    public GaussianFilter(String title,Workspace root,String iconPath) {
+        super(title, root, iconPath);
     }
 
     /**
