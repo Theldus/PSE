@@ -29,7 +29,7 @@ public final class Toast extends BorderPane {
 
     private Label title = new Label("Information");
     private Label msg;
-    private ImageView icon = new ImageView(new File("src/sample/icons/CheckmarkIcon.png").toURI().toString());
+    private ImageView icon = new ImageView( sample.Main.class.getResource("icons/CheckmarkIcon.png").toString() );
     private Paint backgroudColor = Paint.valueOf("#000000");
 
     public Toast(String msg){
