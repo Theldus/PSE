@@ -22,8 +22,10 @@ public class MainController {
     }
 
     public void installNodes(){
-        NodeBoxFactory.getInstance().createGaussianFilter(getCurrentWorkspace());
-        NodeBoxFactory.getInstance().createHistogram(getCurrentWorkspace());
+        NodeBoxFactory.getInstance().createGaussianFilter("Filtro Gaussiano",
+                getCurrentWorkspace(),"DefaultFilterIcon");
+        NodeBoxFactory.getInstance().createHistogram("Histograma",
+                getCurrentWorkspace(), "DefaultShowIcon");
     }
 
     public void setWorkspace(Workspace workspace){
@@ -33,5 +35,4 @@ public class MainController {
     public static Workspace getCurrentWorkspace(){
         return workspace;
     }
-
 }

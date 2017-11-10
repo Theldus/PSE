@@ -2,31 +2,31 @@
     {
         "className":"GaussianFilter",
         "name":"Filtro Gaussiano",
-        "iconPath":"DefaultFilterIcon",
+        "iconPath":"DefaultFilterIcon.png",
         "description":"Um filtro gaussiano é utilizado para borrar \n ou desfocar a imagem na qual ele é\n aplicado com o objetivo de reduzir os ruídos \n presentes na imagem"
     },
     {
         "className":"LaplacianFilter",
         "name":"Filtro Laplaciano",
-        "iconPath":"DefaultFilterIcon",
+        "iconPath":"DefaultFilterIcon.png",
         "description":"Realça bordas ou descontinuidades na imagem,\n porém ameniza regiões com nível de cinza\n constante"
     },
     {
          "className":"Input",
          "name":"Entrada",
-         "iconPath":"DefaultShowIcon",
+         "iconPath":"DefaultShowIcon.png",
          "description":"Adiciona uma imagem para processamento"
     },
     {
          "className":"Output",
          "name":"Saída",
-         "iconPath":"DefaultShowIcon",
+         "iconPath":"DefaultShowIcon.png",
          "description":"Visualizador de imagem"
     },
     {
          "className":"Histogram",
          "name":"Histograma",
-         "iconPath":"DefaultShowIcon",
+         "iconPath":"DefaultShowIcon.png",
          "description":"O histograma, também conhecido como distribuição\n de frequências, é a representação gráfica em colunas\n ou em barras (retângulos) de um conjunto de dados \n previamente tabulado e dividido \n em classes uniformes ou não uniformes."
     }
 ]

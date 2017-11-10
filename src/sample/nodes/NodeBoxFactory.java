@@ -34,15 +34,15 @@ public class NodeBoxFactory {
      * Gets a GaussianFilter instance
      * @param workspace Workspace that will add the filter.
      */
-    public void createGaussianFilter(Workspace workspace){
-         new GaussianFilter(workspace).install();
+    public void createGaussianFilter(String title, Workspace workspace, String iconPath){
+         new GaussianFilter(title, workspace, iconPath).install();
     }
 
     /**
      * Gets a Histogram instance
      * @param workspace Workspace that will add the object.
      */
-    public void createHistogram(Workspace workspace){
-         new Histogram(workspace).install();
+    public void createHistogram(String title, Workspace workspace, String iconPath){
+         new Histogram(title, workspace, iconPath).install();
     }
 }
