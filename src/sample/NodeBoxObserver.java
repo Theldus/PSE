@@ -1,9 +1,9 @@
 package sample;
 
-import sample.util.Coordinates;
+import javafx.scene.image.Image;
 
 public interface NodeBoxObserver {
 
-    public void update(Coordinates coordinates);
+    public void update(Image image);
 
 }

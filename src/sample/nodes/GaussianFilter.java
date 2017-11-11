@@ -1,5 +1,6 @@
 package sample.nodes;
 
+import javafx.scene.image.Image;
 import sample.Workspace.Workspace;
 
 import static sample.util.Appearance.ICONS_EXT;
@@ -7,7 +8,7 @@ import static sample.util.Appearance.ICONS_PATH;
 
 /**
  * GaussianFilter class. This is a GaussianFilter node.
- * @author Daniel
+ * @author Daniel, Davidson and Izabela.
  */
 public class GaussianFilter extends NodeBox {
 
@@ -28,5 +29,17 @@ public class GaussianFilter extends NodeBox {
     @Override
     public void install() {
         getRoot().add(this);
+    }
+
+    /**
+     * Receives an image from another node.
+     * @param image Input image
+     */
+    @Override
+    public void update(Image image)
+    {
+        /* TODO: The image processing goes here, and, when finished,
+         * we have to propagate the final processed image for our child.
+         */
     }
 }

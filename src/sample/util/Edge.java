@@ -252,6 +252,10 @@ public class Edge {
             lastConnection = IO.Output;
         else
             lastConnection = IO.Input;
+
+        /* Sends a stub image to the input(target) node. */
+        /* TODO: Send a real image object to the target node. */
+        nodeBoxTarget.update(null);
     }
 
     /**

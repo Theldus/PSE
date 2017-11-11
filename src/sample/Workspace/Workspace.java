@@ -1,29 +1,21 @@
 package sample.Workspace;
 
-
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ZoomEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
-;
-import javafx.scene.shape.Line;
-import sample.NodeBoxObserver;
-import sample.WokspaceSubject;
-
-import sample.util.Coordinates;
+import sample.nodes.NodeBox;
 import sample.util.Dimension;
 
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Workspace extends AnchorPane implements WokspaceSubject {
+public class Workspace extends AnchorPane {
 
     private final static Paint BACKGROUND_COLOR = Paint.valueOf("#111111");
     private final static Paint DOT_COLOR = Paint.valueOf("#DDDDDD");
 
-    List<NodeBoxObserver> nodeBoxList;
+    List<NodeBox> nodeBoxList;
 
     public Workspace(Dimension dimension){
 
@@ -60,32 +52,9 @@ public class Workspace extends AnchorPane implements WokspaceSubject {
         getChildren().remove(nodeBox);
     }
 
-    @Override
-    public void addObserver(NodeBoxObserver nodeBoxObserver) {
-        this.nodeBoxList.add(nodeBoxObserver);
+    public void addNode(NodeBox nodeBox) {
+        this.nodeBoxList.add(nodeBox);
     }
 
-    @Override
-    public void removeObserver(NodeBoxObserver nodeBoxObserver) {
-
-        int indexObj = this.nodeBoxList.indexOf(nodeBoxObserver);
-        if(  indexObj != -1 ){
-            nodeBoxList.remove(indexObj);
-        }
-    }
-
-    @Override
-    public void notifyAllObservers(Coordinates coordinates) {
-        for( NodeBoxObserver observers : nodeBoxList ){
-            observers.update(coordinates);
-        }
-    }
-
-    @Override
-    public void setChange() {
-        //Empty
-    }
-
-
-
+    public void removeNode(NodeBox nodeBox) { this.nodeBoxList.remove(nodeBox); }
 }

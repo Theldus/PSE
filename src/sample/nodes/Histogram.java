@@ -1,5 +1,6 @@
 package sample.nodes;
 
+import javafx.scene.image.Image;
 import sample.Workspace.Workspace;
 
 import static sample.util.Appearance.ICONS_EXT;
@@ -28,5 +29,25 @@ public class Histogram extends NodeBox {
     @Override
     public void install() {
         getRoot().add(this);
+    }
+
+    /**
+     * Receives an image from another node.
+     * @param image Input image
+     */
+    @Override
+    public void update(Image image)
+    {
+        /* TODO: The image processing goes here, and, when finished,
+         * we have to propagate the final processed image for our child.
+         */
+
+        /*
+         * At every single change made in this node, the final image *SHOULD* be
+         * send for every output line connected into this NodeBox by the update()
+         * method.
+         */
+
+        System.out.println("I received an image =)");
     }
 }

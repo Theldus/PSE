@@ -59,14 +59,15 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
      */
     private NodeBoxDraggable nodeBoxDraggable;
 
-    private Coordinates wkc;
-    private Coordinates origin = new Coordinates();
-    private Coordinates cursor = new Coordinates();
-    private Coordinates destiny = new Coordinates();
-
     private final Header header;
     private final Node node;
     private String actionIcon;
+
+    /**
+     * Processing input/output images.
+     */
+    private Image inputImage;
+    private Image outputImage;
 
     /**
      * Setup the appearance: title, icon and workspace.
@@ -79,7 +80,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         this.nodeBoxDraggable = new NodeBoxDraggable(this);
         this.actionIcon = actionIconName;
         this.root = root;
-        this.root.addObserver(this);
+        this.root.addNode(this);
         this.header = new Header(title);
         this.node = new Node();
         this.edgesList = new ArrayList<>();
@@ -101,11 +102,10 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
     /**
      * Updates the mouse movement coordinates.
-     * @param coordinates Current mouse coordinates.
+     * @param image Current image
      */
     @Override
-    public void update(Coordinates coordinates){
-        wkc = coordinates;
+    public void update(Image image){
     }
 
     /**
@@ -309,6 +309,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
                     NodeBox.this.edgesList.clear();
 
                     /* Remove NodeBox. */
+                    getRoot().removeNode(NodeBox.this);
                     NodeBox.this.getRoot().remove(NodeBox.this );
                     event.consume();
                 }
