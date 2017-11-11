@@ -3,11 +3,6 @@ package sample.nodes;
 import sample.MainController;
 import sample.util.Edge;
 
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *  NodeBoxController class. This class holds the logic to
  *  connect the lines between nodes and so on.
@@ -23,7 +18,6 @@ public class NodeBoxController {
     /**
      * Line stuff.
      */
-    public  static List<Edge> edgeList;
     private static Edge edgeTemp = null;
     public  static boolean connAcc = false;
 
@@ -40,7 +34,6 @@ public class NodeBoxController {
      * Initializes this class.
      */
     private NodeBoxController() {
-        edgeList = new ArrayList<>();
     }
 
     /**
@@ -91,7 +84,10 @@ public class NodeBoxController {
                 edgeTemp.setEdge(nodeBox,io);
                 edgeTemp.establishConnection(io);
                 connAcc = false;
-                edgeList.add(edgeTemp);
+
+                /* Adds the line to both the source node and the target node. */
+                edgeTemp.getNodeBoxSource().addEdge(edgeTemp);
+                edgeTemp.getNodeBoxTarget().addEdge(edgeTemp);
                 resetEdge();
             }
         }

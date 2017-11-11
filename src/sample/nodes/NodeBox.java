@@ -21,6 +21,8 @@ import sample.util.Coordinates;
 import sample.util.Dimension;
 import sample.util.Edge;
 
+import java.util.ArrayList;
+
 import static sample.util.Appearance.*;
 
 /**
@@ -45,6 +47,12 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             defaultBorderWidths) );
     private final Workspace root;
     private final static Dimension dimension = new Dimension(74.0f,64.0f);
+
+    /**
+     * Edges list. Every NodeBox should knows all the lines
+     * connected into it.
+     */
+    private ArrayList<Edge> edgesList;
 
     /**
      * Defines all the mouse events for a Node.
@@ -74,6 +82,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         this.root.addObserver(this);
         this.header = new Header(title);
         this.node = new Node();
+        this.edgesList = new ArrayList<>();
         Blend blendMode = new Blend();
         blendMode.setMode(BlendMode.SRC_OVER);
         this.setEffect(blendMode);
@@ -153,6 +162,24 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
      */
     public Node getNode() {
         return node;
+    }
+
+    /**
+     * Adds an Edge into the edgeList.
+     * @param e Edge to be added.
+     */
+    public void addEdge(Edge e) {
+        edgesList.add(e);
+    }
+
+    /**
+     * Remove an Edge from the edgeList.
+     * @param e Edge to be removed.
+     * @return Returns true if the list contained the
+     *         specified edge.
+     */
+    public boolean removeEdge(Edge e){
+        return edgesList.remove(e);
     }
 
     /**

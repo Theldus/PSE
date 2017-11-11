@@ -219,9 +219,15 @@ public class Edge {
         /* Add the line click, to remove the line. */
         line.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
-            public void handle(javafx.scene.input.MouseEvent event) {
+            public void handle(MouseEvent event) {
                 MainController.getCurrentWorkspace().getChildren().remove(line);
-                NodeBoxController.edgeList.remove(this);
+
+                if ( Edge.this.getNodeBoxSource().removeEdge(Edge.this) != true ||
+                        Edge.this.getNodeBoxTarget().removeEdge(Edge.this) != true){
+                    System.err.println("> lineRemove: One of the edges was not removed!");
+                }
+
+                /* TODO: Send a stub image to NodeBox target (input node). */
             }
         });
 
