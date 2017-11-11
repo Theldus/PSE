@@ -287,6 +287,28 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             deleteIcon.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
+
+                    /* Removing all the lines. */
+                    for (int i = 0; i < edgesList.size(); i++)
+                    {
+                        Edge edgeTemp = edgesList.get(i);
+
+                        /* From workspace. */
+                        getRoot().getChildren().remove(edgeTemp.getLine());
+
+                        /* From another NodeBox */
+                        if (edgeTemp.getNodeBoxSource() == NodeBox.this)
+                            edgeTemp.getNodeBoxTarget().removeEdge(edgeTemp);
+                        else
+                            edgeTemp.getNodeBoxSource().removeEdge(edgeTemp);
+                    }
+
+                    /* TODO: Send a stub image to all connected NodeBoxes inputs. */
+
+                    /* Clear all the lines from this NodeBox. */
+                    NodeBox.this.edgesList.clear();
+
+                    /* Remove NodeBox. */
                     NodeBox.this.getRoot().remove(NodeBox.this );
                     event.consume();
                 }
