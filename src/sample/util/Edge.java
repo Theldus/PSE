@@ -246,6 +246,12 @@ public class Edge {
                 line.setCursor(Cursor.DEFAULT);
             }
         });
+
+        /* Toggles the last connection. */
+        if (lastConnection.equals(IO.Input))
+            lastConnection = IO.Output;
+        else
+            lastConnection = IO.Input;
     }
 
     /**

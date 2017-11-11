@@ -165,6 +165,13 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
     }
 
     /**
+     * Gets the edgeList.
+     */
+    public ArrayList<Edge> getEdgeList() {
+        return edgesList;
+    }
+
+    /**
      * Adds an Edge into the edgeList.
      * @param e Edge to be added.
      */
