@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
-import sample.Workspace.Workspace;
+import sample.workspace.Workspace;
 
 import java.awt.*;
 import java.io.File;

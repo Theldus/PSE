@@ -115,9 +115,20 @@ public class NodeBoxDraggable extends DraggedBehavior {
     public void onMouseEntered(MouseEvent event) {
         NodeBox nodeBox = cast();
 
-        //nodeBox.getHeader().setVisible(true);
-        //nodeBox.getNode().add(nodeBox.getNode().getInput());
-        //nodeBox.getNode().add(nodeBox.getNode().getOutput());
+        nodeBox.getHeader().setVisible(true);
+
+        /*
+        if( nodeBox instanceof Input ) {
+            nodeBox.getNode().add(nodeBox.getNode().getOutput());
+        }
+        else if( nodeBox instanceof Output ) {
+            nodeBox.getNode().add(nodeBox.getNode().getInput());
+        }
+        else{
+            nodeBox.getNode().add(nodeBox.getNode().getInput());
+            nodeBox.getNode().add(nodeBox.getNode().getOutput());
+        }
+        */
     }
 
     /**
@@ -127,8 +138,20 @@ public class NodeBoxDraggable extends DraggedBehavior {
     @Override
     public void onMouseExited(MouseEvent event) {
         NodeBox nodeBox = cast();
-        //nodeBox.getHeader().setVisible(false);
-        //nodeBox.getNode().remove(nodeBox.getNode().getInput());
-        //nodeBox.getNode().remove(nodeBox.getNode().getOutput());
+
+        nodeBox.getHeader().setVisible(false);
+
+        /*
+        if( nodeBox instanceof Input ) {
+            nodeBox.getNode().remove(nodeBox.getNode().getOutput());
+        }
+        else if( nodeBox instanceof Output ) {
+            nodeBox.getNode().remove(nodeBox.getNode().getInput());
+        }
+        else{
+            nodeBox.getNode().remove(nodeBox.getNode().getInput());
+            nodeBox.getNode().remove(nodeBox.getNode().getOutput());
+        }
+        */
     }
 }

@@ -1,14 +1,6 @@
 package sample.sideMenu;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import sample.Json.NodeBoxData;
-import sample.MainController;
-import sample.Workspace.Workspace;
-import sample.nodes.NodeBox;
-
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
+import sample.json.NodeBoxData;
 
 /**
  * Created by Daniel on 02/11/2017.

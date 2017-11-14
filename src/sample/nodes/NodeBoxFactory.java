@@ -1,6 +1,6 @@
 package sample.nodes;
 
-import sample.Workspace.Workspace;
+import sample.workspace.Workspace;
 
 /**
  * NodeBoxFactory class. This class follows the Factory pattern
@@ -32,7 +32,7 @@ public class NodeBoxFactory {
 
     /**
      * Gets a GaussianFilter instance
-     * @param workspace Workspace that will add the filter.
+     * @param workspace workspace that will add the filter.
      */
     public void createGaussianFilter(String title, Workspace workspace, String iconPath){
          new GaussianFilter(title, workspace, iconPath).install();
@@ -40,7 +40,7 @@ public class NodeBoxFactory {
 
     /**
      * Gets a Histogram instance
-     * @param workspace Workspace that will add the object.
+     * @param workspace workspace that will add the object.
      */
     public void createHistogram(String title, Workspace workspace, String iconPath){
          new Histogram(title, workspace, iconPath).install();

@@ -6,7 +6,7 @@ import javafx.scene.paint.Paint;
 
 public class Appearance {
 
-    public static String ICONS_PATH = "sample/icons/";
+    public static String ICONS_PATH = "src/sample/icons/";
     public static String ICONS_EXT = ".png";
     public static String FONT_NAME = "Yu Gothic";
     public static String BACKGROUND_COLOR = "#111111";

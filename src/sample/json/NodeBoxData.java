@@ -1,6 +1,4 @@
-package sample.Json;
-
-import javafx.scene.control.ScrollBar;
+package sample.json;
 
 /**
  * Created by Daniel on 02/11/2017.

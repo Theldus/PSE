@@ -1,33 +1,22 @@
 package sample.sideMenu;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.*;
 import javafx.scene.text.*;
-import javafx.util.Duration;
-import sample.Dialogs.Toast;
-import sample.Json.NodeBoxData;
+import sample.dialogs.Toast;
+import sample.json.NodeBoxData;
 import sample.MainController;
-import sample.PSEMainLayout;
-import sample.Workspace.Workspace;
+import sample.workspace.Workspace;
 import sample.nodes.NodeBox;
-import sample.util.Coordinates;
-import sun.util.calendar.Gregorian;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static sample.util.Appearance.*;
 import static sample.util.Appearance.FONT_SIZE;
@@ -124,14 +113,19 @@ public class ItemView extends HBox {
                                                                            content.getIconPath());
                     MainController.getInstance().getCurrentWorkspace().getChildren().add(nodeBox);
                     Workspace ws = MainController.getInstance().getCurrentWorkspace();
+
+                    //Set static position node
                     nodeBox.setLayoutX(350.0f);
                     nodeBox.setLayoutY(0);
 
-                    System.out.println( ws.getLayoutX() + " " + ws.getLayoutY() );
-
-
-
-                    Toast.show(ws,String.format("Nó: %s adicionado!",content.getName()),900,200,200);
+                    Toast.show(ws,
+                               Toast.INFORMATION_MESSAGE,
+                               String.format("Nó: %s adicionado!",content.getName()),
+                               "CheckmarkIcon",
+                               1000,
+                               200,
+                               200,
+                                null);
 
                     nodeBox.toBack();
                 } catch (InstantiationException e) {

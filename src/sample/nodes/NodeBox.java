@@ -1,8 +1,11 @@
 package sample.nodes;
 
+import com.sun.javafx.font.freetype.HBGlyphLayout;
+import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
@@ -11,16 +14,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import sample.NodeBoxObserver;
-import sample.Workspace.Workspace;
-import sample.util.Coordinates;
+import sample.workspace.Workspace;
 import sample.util.Dimension;
 import sample.util.Edge;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static sample.util.Appearance.*;
@@ -31,9 +35,9 @@ import static sample.util.Appearance.*;
  *  @author Daniel, Davidson.
  *  @version v1.0
  */
-public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
+public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Algorithm{
 
-    private Image image;
+    private Image image = new ImageFacade( new File("src/sample/imgs/default.jpg").toURI().toString() );
 
     /**
      * Fields that defines how a NodeBox will look like.
@@ -75,7 +79,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
      * @param root Root element that should contain this NodeBox.
      * @param actionIconName NodeBox icon path.
      */
-    public NodeBox(String title, Workspace root, String actionIconName ){
+    public NodeBox(String title, Workspace root, String actionIconName){
         this.setMinSize(dimension.getWidth(),dimension.getHeight());
         this.nodeBoxDraggable = new NodeBoxDraggable(this);
         this.actionIcon = actionIconName;
@@ -84,9 +88,6 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         this.header = new Header(title);
         this.node = new Node();
         this.edgesList = new ArrayList<>();
-        Blend blendMode = new Blend();
-        blendMode.setMode(BlendMode.SRC_OVER);
-        this.setEffect(blendMode);
         setProperties();
         initialize();
         setEvents();
@@ -94,7 +95,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
 
     /**
      * Installs the NodeBox, i.e: sets everything up to work.
-     * At the moment, this just adds itself into the Workspace.
+     * At the moment, this just adds itself into the workspace.
      * @see GaussianFilter
      * @see Histogram
      */
@@ -106,6 +107,10 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
      */
     @Override
     public void update(Image image){
+        for(Edge e : getEdgeList()){
+            if( e.getNodeBoxTarget() != this )
+                e.getNodeBoxTarget().update(getImage());
+        }
     }
 
     /**
@@ -139,8 +144,8 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
      * @return Returns an ImageView with the image loaded into it.
      */
     private ImageView createIcon(String pathName, Dimension dimension ){
-        pathName = "icons/" + pathName;
-        ImageView imageView = new ImageView( sample.Main.class.getResource(pathName).toString() );
+        //ImageView imageView = new ImageView( sample.Main.class.getResource(pathName).toString() );
+        ImageView imageView = new ImageView( new File(ICONS_PATH + pathName + ICONS_EXT).toURI().toString() );
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setFitWidth(dimension.getWidth());
@@ -187,6 +192,14 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
      */
     public boolean removeEdge(Edge e){
         return edgesList.remove(e);
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     /**
@@ -268,9 +281,9 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             final Dimension imageDimension = new Dimension(13.0f,13.0f);
 
             // Create and config Delete icon
-            defaultDeleteIcon = createIcon( "DefaultDeleteIcon.png", imageDimension );
+            defaultDeleteIcon = createIcon( "DefaultDeleteIcon", imageDimension );
             deleteIcon = new AnchorPane(defaultDeleteIcon);
-            enteredDeleteIcon = createIcon( "EnteredDeleteIcon.png", imageDimension );
+            enteredDeleteIcon = createIcon( "EnteredDeleteIcon", imageDimension );
 
             container.getChildren().add(deleteIcon);
 
@@ -367,13 +380,10 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
         private Circle input;
         private Circle output;
 
-        /**
-         * Default images.
-         */
-        private ImageView defaultActionIcon;
-        private ImageView pressedActionIcon;
-        private ImageView enteredActionIcon;
-        private AnchorPane actionIcon;
+        private ImageView actionIcon;
+        private Button actionBtn;
+
+        private HBox container;
 
         /**
          * Initializes the Node.
@@ -391,7 +401,8 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             setMinSize(NodeBox.this.getMinWidth(),NodeBox.this.getMinHeight());
             setMaxSize(getMinWidth(),getMinHeight());
             setPadding(defaultPadding);
-            setBackgroundColor(this, BACKGROUND_COLOR, defaultCornerRadii,null);
+            setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,defaultCornerRadii,null)));
+            //setBackgroundColor(this, , defaultCornerRadii,null);
             setBorder( defaultBorder );
             setMargin(this,new Insets(0,0,15,0));
         }
@@ -409,7 +420,9 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             getOutput().setLayoutX(NodeBox.this.getMinWidth());
             getChildren().add(getOutput());
 
-            getChildren().add(createContainer());
+            setIcon();
+            setContainer(createContainer());
+            getChildren().add(getContainer());
 
             /* Move input and output to front. */
             input.toFront();
@@ -479,8 +492,15 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             HBox container = new HBox();
             container.setAlignment(Pos.CENTER);
             container.setMinSize(getMinWidth(),getMinHeight());
-            defaultActionIcon = createIcon(NodeBox.this.actionIcon, new Dimension(25.0f,25.0f) );
-            container.getChildren().add(getDefaultActionIcon());
+
+            actionIcon.setSmooth(true);
+
+            actionBtn = new Button();
+            actionBtn.setGraphic(actionIcon);
+            actionBtn.setMinSize(actionIcon.getFitWidth(),actionIcon.getFitHeight());
+            actionBtn.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,null,null)));
+
+            container.getChildren().add(actionBtn);
             return container;
         }
 
@@ -516,20 +536,29 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
             this.output = output;
         }
 
-        /**
-         * Gets the defaultActionIcon, i.e: the default image of a NodeBox.
-         * @return Returns the defaultActionIcon.
-         */
-        public ImageView getDefaultActionIcon() {
-            return defaultActionIcon;
+
+        public Button getActionBtn() {
+            return actionBtn;
         }
 
-        /**
-         * Sets the defaultActionIcon, i.e: the default image of a NodeBox.
-         * @param defaultActionIcon de
-         */
-        public void setDefaultActionIcon(ImageView defaultActionIcon) {
-            this.defaultActionIcon = defaultActionIcon;
+        public void setActionBtn(Button actionBtn) {
+            this.actionBtn = actionBtn;
+        }
+
+        public void setIcon( ImageView actionIcon ){
+            this.actionIcon = actionIcon;
+        }
+
+        public void setIcon(){
+            actionIcon = createIcon(NodeBox.this.actionIcon, new Dimension(23.0f,23.0f) );
+        }
+
+        public HBox getContainer() {
+            return container;
+        }
+
+        public void setContainer(HBox container) {
+            this.container = container;
         }
     }
 
@@ -545,10 +574,10 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver{
     }
 
     /**
-     * Gets the Workspace. Since we support (in the future) multiple
-     * Workspaces, it's important to know which Workspace we are
+     * Gets the workspace. Since we support (in the future) multiple
+     * Workspaces, it's important to know which workspace we are
      * currently using for this Node.
-     * @return Current Workspace.
+     * @return Current workspace.
      */
     protected Workspace getRoot() {
         return  root;

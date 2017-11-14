@@ -2,31 +2,80 @@
     {
         "className":"GaussianFilter",
         "name":"Filtro Gaussiano",
-        "iconPath":"DefaultFilterIcon.png",
-        "description":"Um filtro gaussiano é utilizado para borrar \n ou desfocar a imagem na qual ele é\n aplicado com o objetivo de reduzir os ruídos \n presentes na imagem"
+        "iconPath":"DefaultFilterIcon",
+        "description":" Um filtro gaussiano é utilizado para borrar \n ou desfocar a imagem na qual ele é\n aplicado com o objetivo de reduzir os ruídos \n presentes na imagem"
     },
     {
         "className":"LaplacianFilter",
         "name":"Filtro Laplaciano",
-        "iconPath":"DefaultFilterIcon.png",
-        "description":"Realça bordas ou descontinuidades na imagem,\n porém ameniza regiões com nível de cinza\n constante"
+        "iconPath":"DefaultFilterIcon",
+        "description":" Realça bordas ou descontinuidades \n na imagem, porém ameniza regiões \n com nível de cinza constante"
     },
     {
          "className":"Input",
          "name":"Entrada",
-         "iconPath":"DefaultShowIcon.png",
-         "description":"Adiciona uma imagem para processamento"
+         "iconPath":"DefaultOpenIcon",
+         "description":" Adiciona uma imagem para processamento"
     },
     {
          "className":"Output",
          "name":"Saída",
-         "iconPath":"DefaultShowIcon.png",
-         "description":"Visualizador de imagem"
+         "iconPath":"DefaultShowIcon",
+         "description":" Visualizador de imagem"
     },
     {
          "className":"Histogram",
          "name":"Histograma",
-         "iconPath":"DefaultShowIcon.png",
-         "description":"O histograma, também conhecido como distribuição\n de frequências, é a representação gráfica em colunas\n ou em barras (retângulos) de um conjunto de dados \n previamente tabulado e dividido \n em classes uniformes ou não uniformes."
+         "iconPath":"DefaultShowIcon",
+         "description":" O histograma, também conhecido como \n distribuição de frequências, é a \n representação gráfica em colunas \n ou em barras (retângulos) de um conjunto \n de dados  previamente tabulado e dividido \n em classes uniformes ou não uniformes."
+    },
+    {
+         "className":"ConversionRGB",
+         "name":"Conversão RGB",
+         "iconPath":"ConversionIcon",
+         "description":" Converte uma imagem para o esquema \nde cores RGB."
+    },
+    {
+         "className":"ConversionHSV",
+         "name":"Conversão HSV",
+         "iconPath":"ConversionIcon",
+         "description":" Converte uma imagem para o esquema \nde cores HSV."
+    },
+    {
+         "className":"LogicalOperatorAnd",
+         "name":"Op.Lóg AND",
+         "iconPath":"MathIcon",
+         "description":" Realiza a operação lógica AND."
+    },
+    {
+         "className":"LogicalOperatorOr",
+         "name":"Op.Lóg OR",
+         "iconPath":"MathIcon",
+         "description":" Realiza a operação lógica OR."
+    },
+    {
+         "className":"LogicalOperatorNot",
+         "name":"Op.Lóg NOT",
+         "iconPath":"MathIcon",
+         "description":" Realiza a operação lógica NOT."
+    },
+    {
+         "className":"ArithmeticOperatorSum",
+         "name":"Op.Arit Soma",
+         "iconPath":"MathIcon",
+         "description":" Realiza a operação aritmética de soma."
+    },
+    {
+         "className":"ArithmeticOperatorSubt",
+         "name":"Op.Arit Subt",
+         "iconPath":"MathIcon",
+         "description":" Realiza a operação aritmética Subtração."
+    },
+    {
+         "className":"ArithmeticOperatorMult",
+         "name":"Op.Arit Mult",
+         "iconPath":"MathIcon",
+         "description":" Realiza a operação aritmética Multiplicação."
     }
+
 ]

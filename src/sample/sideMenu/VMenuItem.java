@@ -1,7 +1,7 @@
 package sample.sideMenu;
 
 import javafx.scene.layout.*;
-import sample.Workspace.Workspace;
+import sample.workspace.Workspace;
 
 public class VMenuItem extends VBox {
 

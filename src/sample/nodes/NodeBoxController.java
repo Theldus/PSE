@@ -1,7 +1,9 @@
 package sample.nodes;
 
 import sample.MainController;
+import sample.dialogs.Toast;
 import sample.util.Edge;
+import sample.workspace.Workspace;
 
 /**
  *  NodeBoxController class. This class holds the logic to
@@ -20,6 +22,8 @@ public class NodeBoxController {
      */
     private static Edge edgeTemp = null;
     public  static boolean connAcc = false;
+
+    private static Workspace workspace = MainController.getCurrentWorkspace();
 
     /**
      * Gets an instance of this class, since we are using Singleton
@@ -73,6 +77,14 @@ public class NodeBoxController {
             /* Input/Input or Output/Output / Same node. */
             if (node == nodeBox || io.equals(edgeTemp.getLastConnection()) ) {
                 System.err.println("> initConnection: Invalid connection");
+                Toast.show(workspace,
+                        Toast.ERROR_MESSAGE,
+                        "Conexão inválida!",
+                        "ErrorIcon",
+                        1000,
+                        200,
+                        200,
+                        "Error");
                 MainController.getCurrentWorkspace().getChildren().remove(edgeTemp.getLine());
                 edgeTemp.closeConnection();
                 resetEdge();

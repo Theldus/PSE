@@ -154,8 +154,8 @@ public class Edge {
 
         /*
          * Setup the mouse move event for the line, note
-         * that we are using the Workspace to handle the
-         * event, since we need track the Workspace.
+         * that we are using the workspace to handle the
+         * event, since we need track the workspace.
          */
         filter = new EventHandler<MouseEvent>() {
             private Edge.IO io = Edge.this.lastConnection;
@@ -255,7 +255,8 @@ public class Edge {
 
         /* Sends a stub image to the input(target) node. */
         /* TODO: Send a real image object to the target node. */
-        nodeBoxTarget.update(null);
+
+        nodeBoxTarget.update(getNodeBoxSource().getImage());
     }
 
     /**

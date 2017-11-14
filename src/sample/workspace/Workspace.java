@@ -1,4 +1,4 @@
-package sample.Workspace;
+package sample.workspace;
 
 import sample.nodes.NodeBox;
 import sample.util.Dimension;

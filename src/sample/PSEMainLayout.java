@@ -1,21 +1,20 @@
 package sample;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.AbstractDateTimeDV;
-import javafx.scene.Parent;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import sample.Json.ManipulateJson;
-import sample.Workspace.Workspace;
-import sample.sideMenu.SideMenuPane;
-import sample.sideMenu.VMenuBar;
-import sample.sideMenu.VMenuItem;
-import sample.sideMenu.VMenuItemController;
-import sample.util.Coordinates;
+import sample.json.ManipulateJson;
+import sample.sideMenu.*;
+import sample.workspace.Workspace;
 import sample.util.Dimension;
 
 public class PSEMainLayout extends BorderPane{
 
+    private Scene own;
     private static Stage root;
     private TitlePane titlePane;
     private VMenuBar vMenuBar;
@@ -23,16 +22,17 @@ public class PSEMainLayout extends BorderPane{
     private FooterPane footePane;
     private Dimension prefSize = new Dimension(1024,768);
 
-    public PSEMainLayout(Stage root){
-        setRoot(root);
+    public PSEMainLayout(Stage arg_root){
+        root = arg_root;
+        own = new Scene(this);
         setMinSize(prefSize.getWidth(),prefSize.getHeight());
+        System.out.println(own.getWidth() + " " + own.getHeight());
         addWorkspace();
         addSideMenu();
     }
 
     public void show(){
-        Scene scene = new Scene(this);
-        getRoot().setScene(scene);
+        getRoot().setScene(own);
         getRoot().show();
         System.out.println(getRoot().getWidth() + " " + getRoot().getHeight());
     }
@@ -45,11 +45,50 @@ public class PSEMainLayout extends BorderPane{
         vMenuBar = new VMenuBar();
 
         SideMenuPane addSideMenuPane = new SideMenuPane("Adicionar Nó");
+        addSideMenuPane.setScrollable(true);
+        getRoot().maximizedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                addSideMenuPane.setScrollPaneSize(new Dimension(0,getRoot().getHeight()));
+            }
+        });
+        addSideMenuPane.install();
         vMenuBar.addMenuItem( new VMenuItem("Add", addSideMenuPane,this.workspace));
         ManipulateJson manipulateJson = new ManipulateJson();
         VMenuItemController.getInstance().fill(addSideMenuPane,manipulateJson.read());
-        vMenuBar.addMenuItem( new VMenuItem("Setting",new SideMenuPane("Panel 05"),this.workspace));
-        vMenuBar.addMenuItem( new VMenuItem("Help",new SideMenuPane("Panel 06"),this.workspace));
+
+        vMenuBar.addMenuItem( new VMenuItem("Setting",new SideMenuPane("Configurações"),this.workspace));
+
+        SideMenuPane helpSideMenuPane = new SideMenuPane("Ajuda");
+        StringBuilder helpText = new StringBuilder();
+        helpText.append("O projeto consiste em um PSE (Problem Solving Environment) ");
+        helpText.append("para fins educacionais para área de processamento de imagens. ");
+        helpText.append("O usuário não necessita saber de  alguma linguagem de programação, ");
+        helpText.append("ele manipula blocos, chamados NodeBox, para criar um fluxo de ");
+        helpText.append("execução, também usando linhas para conectá-los.");
+
+        String text = "";
+
+        int spaceCount = 0;
+        for( int i = 0 ; i < helpText.length() ; ++i ){
+
+            if( helpText.charAt(i) == ' ' ){
+                ++spaceCount;
+            }
+
+            if( spaceCount == 9 ){
+                text += "\n";
+                spaceCount = 0;
+            }
+
+            text += helpText.charAt(i);
+
+        }
+
+        ItemViewAdapter helpItemView = new ItemViewAdapter("Sobre",text);
+        helpSideMenuPane.addItem( helpItemView );
+        helpSideMenuPane.install();
+        vMenuBar.addMenuItem( new VMenuItem("Help",helpSideMenuPane,this.workspace));
 
         setLeft(vMenuBar);
     }
@@ -65,13 +104,8 @@ public class PSEMainLayout extends BorderPane{
         //Empty
     }
 
-
-    public Stage getRoot() {
+    public static Stage getRoot() {
         return root;
     }
 
-    public void setRoot(Stage root) {
-        this.root = root;
-        //root.initStyle(StageStyle.TRANSPARENT);
-    }
 }

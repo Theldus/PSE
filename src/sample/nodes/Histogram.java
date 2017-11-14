@@ -1,10 +1,7 @@
 package sample.nodes;
 
 import javafx.scene.image.Image;
-import sample.Workspace.Workspace;
-
-import static sample.util.Appearance.ICONS_EXT;
-import static sample.util.Appearance.ICONS_PATH;
+import sample.workspace.Workspace;
 
 /**
  * Histogram class. This is a Histogram node.
@@ -16,7 +13,7 @@ public class Histogram extends NodeBox {
      * Initializes the Histogram.
      * Currently, just setup the title, workspace and icon.
      * @param title Node title.
-     * @param root Workspace to be added.
+     * @param root workspace to be added.
      * @param iconPath Histogram icon.
      */
     public Histogram(String title, Workspace root, String iconPath) {
@@ -24,7 +21,7 @@ public class Histogram extends NodeBox {
     }
 
     /**
-     * Installs the node, i.e: adds into the Workspace.
+     * Installs the node, i.e: adds into the workspace.
      */
     @Override
     public void install() {
@@ -49,5 +46,10 @@ public class Histogram extends NodeBox {
          */
 
         System.out.println("I received an image =)");
+    }
+
+    @Override
+    public void execute() {
+
     }
 }

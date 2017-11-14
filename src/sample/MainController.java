@@ -1,6 +1,6 @@
 package sample;
 
-import sample.Workspace.Workspace;
+import sample.workspace.Workspace;
 import sample.nodes.NodeBox;
 import sample.nodes.NodeBoxFactory;
 
@@ -19,13 +19,6 @@ public class MainController {
 
     private MainController() {
         this.nodeBoxList = new ArrayList<>();
-    }
-
-    public void installNodes(){
-        NodeBoxFactory.getInstance().createGaussianFilter("Filtro Gaussiano",
-                getCurrentWorkspace(),"DefaultFilterIcon");
-        NodeBoxFactory.getInstance().createHistogram("Histograma",
-                getCurrentWorkspace(), "DefaultShowIcon");
     }
 
     public void setWorkspace(Workspace workspace){
