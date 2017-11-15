@@ -45,6 +45,14 @@ public class ImageUtil {
         return SwingFXUtils.toFXImage(buffImg,null);
     }
 
+    public static int[][] fromImage(BufferedImage buffImg) {
+        int [][] newImg = new int[buffImg.getWidth()][buffImg.getHeight()];
+        for (int i = 0; i < buffImg.getWidth(); i++)
+            for (int j = 0; j < buffImg.getHeight(); j++)
+                newImg[i][j] = buffImg.getRGB(i, j);
+        return newImg;
+    }
+
     //Método para gerar uma imagem escura
     public static int [][] getBlank(int x, int y){
         int [][] blank = new int[x][y];

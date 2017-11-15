@@ -93,13 +93,18 @@ public class NodeBoxController {
 
             /* End point. */
             else {
+
+                /* Sets the edge. */
                 edgeTemp.setEdge(nodeBox,io);
-                edgeTemp.establishConnection(io);
-                connAcc = false;
 
                 /* Adds the line to both the source node and the target node. */
                 edgeTemp.getNodeBoxSource().addEdge(edgeTemp);
                 edgeTemp.getNodeBoxTarget().addEdge(edgeTemp);
+
+                /* Establishes the connection. */
+                edgeTemp.establishConnection(io);
+                connAcc = false;
+
                 resetEdge();
             }
         }

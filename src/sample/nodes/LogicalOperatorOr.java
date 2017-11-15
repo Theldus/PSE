@@ -7,10 +7,11 @@ import sample.util.ImageUtil;
 import sample.workspace.Workspace;
 
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 
 public class LogicalOperatorOr extends NodeBox {
 
-    private int countInput = 0;
+    private int emptyPos = 0;
     private final int INPUT_MAX = 2;
     private BufferedImage[] imagePeer;
 
@@ -32,30 +33,18 @@ public class LogicalOperatorOr extends NodeBox {
     @Override
     public void update(Image image) {
 
-        int countInput = 0;
+        imagePeer[ this.emptyPos++ % 2 ] = SwingFXUtils.fromFXImage(image,null);
 
-        for(Edge e : getEdgeList() ){
-            if( e.getNodeBoxTarget() == this )
-                ++countInput;
-        }
-
-        if( countInput <= 1 )
-            imagePeer[ countInput ] = SwingFXUtils.fromFXImage(image,null);
-
-        if( countInput == 2 )
-            imagePeer[ this.countInput++ % 2 ] = SwingFXUtils.fromFXImage(image,null);
-
-        System.out.println(countInput);
-
-        if( countInput > 0 ){
+        if( getInputNumber() == INPUT_MAX ){
 
             if (imagePeer[0] == null || imagePeer[1] == null )
                 System.out.println("Image NULL!");
 
-            int mtxResult [][] = or(ImageUtil.convertToGreyTone(imagePeer[0]),ImageUtil.convertToGreyTone(imagePeer[1]));
+            int mtxResult [][] = or(ImageUtil.convertToGreyTone(imagePeer[0]), ImageUtil.convertToGreyTone(imagePeer[1]));
             setImage( ImageUtil.toImage( mtxResult ));
             System.out.println("OR!");
-            super.update(image);
+            super.update(getImage());
+
         }
 
     }
@@ -67,9 +56,9 @@ public class LogicalOperatorOr extends NodeBox {
         int o = B.length; //Número de linhas de B
         int p = B[0].length; // Número de colunas B
 
-        if(n != o || m != p){
-            return null;
-        }
+        /* We will run trough the minor image. */
+        n = Math.min(n, o);
+        m = Math.min(m, p);
 
         int [][] C = new int[n][m];
         for(int i=0; i<n; i++){

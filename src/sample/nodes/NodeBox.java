@@ -111,6 +111,34 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
     }
 
     /**
+     * Gets the number of input connections.
+     * @return Returns the number of input connections.
+     */
+    public int getInputNumber()
+    {
+        int count = 0;
+        for (Edge edge : edgesList)
+            if (edge.getNodeBoxTarget() == this)
+                count++;
+
+        return count;
+    }
+
+    /**
+     * Gets the number of output connections.
+     * @return Returns the number of output connections.
+     */
+    public int getOutputNumber()
+    {
+        int count = 0;
+        for (Edge edge : edgesList)
+            if (edge.getNodeBoxSource() == this)
+                count++;
+
+        return count;
+    }
+
+    /**
      * Initialize the NodeBox on the screen.
      */
     public void initialize(){
