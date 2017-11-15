@@ -16,6 +16,7 @@ import sample.workspace.Workspace;
 import sample.nodes.NodeBox;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
 import static sample.util.Appearance.*;
@@ -105,12 +106,24 @@ public class ItemView extends HBox {
             public void handle(MouseEvent event) {
 
                 try {
+                    NodeBox nodeBox;
 
-                    NodeBox nodeBox = (NodeBox) Class.forName("sample.nodes."+content.getClassName())
-                                                              .getConstructor(String.class,Workspace.class,String.class)
-                                                              .newInstance(content.getName(),
-                                                                           MainController.getInstance().getCurrentWorkspace(),
-                                                                           content.getIconPath());
+                    if (content.getClassLoader() == null){
+                        nodeBox = (NodeBox) Class.forName("sample.nodes."+content.getClassName())
+                                .getConstructor(String.class,Workspace.class,String.class)
+                                .newInstance(content.getName(),
+                                MainController.getInstance().getCurrentWorkspace(),
+                                content.getIconPath());
+                    }
+                    else{
+                        Class classObj = content.getClassLoader().loadClass( content.getClassName() );
+
+                        nodeBox = (NodeBox) classObj.getConstructor(String.class, Workspace.class, String.class)
+                                .newInstance(content.getName(),
+                                MainController.getInstance().getCurrentWorkspace(),
+                                content.getIconPath());
+                    }
+
                     MainController.getInstance().getCurrentWorkspace().getChildren().add(nodeBox);
                     Workspace ws = MainController.getInstance().getCurrentWorkspace();
 
