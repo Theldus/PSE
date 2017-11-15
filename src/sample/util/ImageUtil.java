@@ -2,6 +2,7 @@ package sample.util;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.*;
+import javafx.scene.image.Image;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -101,6 +102,14 @@ public class ImageUtil {
         return hsv;
     }
 
+    public static Image scale(Image img, double width, double height, boolean preserveRatio ){
+        ImageView imageView = new ImageView(img);
+        imageView.setSmooth(true);
+        imageView.setPreserveRatio(preserveRatio);
+        imageView.setFitWidth(width);
+        imageView.setFitHeight(height);
+        return imageView.snapshot(null,null);
+    }
 
 
 }

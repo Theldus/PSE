@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
@@ -69,7 +70,6 @@
          <children>
             <StackPane prefHeight="468.0" prefWidth="589.0" style="-fx-background-color: #000000;">
                <children>
-                  <Pane fx:id="settingPane" prefHeight="466.0" prefWidth="566.0" style="-fx-background-color: #000000;" />
                   <Pane fx:id="imagePane" prefHeight="468.0" prefWidth="634.0" style="-fx-background-color: #000000; -fx-border-color: #000000;">
                      <children>
                         <Pane fx:id="mainPane" layoutX="54.0" layoutY="41.0" prefHeight="386.0" prefWidth="475.0" style="-fx-background-color: #070707;">
@@ -79,6 +79,19 @@
                         </Pane>
                      </children>
                   </Pane>
+                  <Pane fx:id="settingPane" prefHeight="466.0" prefWidth="566.0" style="-fx-background-color: #000000;">
+                     <children>
+                        <Label layoutX="37.0" layoutY="43.0" text="Definir Tamanho da imagem:" textFill="#ababab">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="cBoxImgSize" layoutX="50.0" layoutY="78.0" prefWidth="150.0" style="-fx-background-color: #111111;">
+                           <effect>
+                              <DropShadow color="#00ffbf" height="12.1" radius="5.55" width="12.1" />
+                           </effect>
+                        </ComboBox>
+                     </children></Pane>
                </children></StackPane>
             <VBox alignment="TOP_CENTER" prefHeight="468.0" prefWidth="63.0" spacing="10.0" style="-fx-background-color: #090909; -fx-border-color: #000000;">
                <children>
