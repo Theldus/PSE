@@ -19,7 +19,7 @@ public class SideMenuPane extends VBox {
     private final static float FONT_SIZE = 15.0f;
     private final double WIDTH = 300.f;
     private Label title;
-    private Insets padding = new Insets(15,5,15,15);
+    private Insets padding = new Insets(10,5,10,5);
     private ScrollPane scrollPane;
     private VBox container;
     private boolean isScrollable = false;
@@ -27,7 +27,7 @@ public class SideMenuPane extends VBox {
     public SideMenuPane(String title){
         this.title = new Label(title);
         this.scrollPane = new ScrollPane();
-        this.container = new VBox(15.0f);
+        this.container = new VBox(10.0f);
         this.container.setBackground(new Background(new BackgroundFill(Paint.valueOf("#000000"),null,null)));
         this.container.setMinHeight(1268.0f);
         setMinWidth(WIDTH);
@@ -62,7 +62,7 @@ public class SideMenuPane extends VBox {
     public void addScrollPane(){
 
         this.scrollPane.getStylesheets().add("sample/sideMenu/ScrollPaneStyle.css");
-        this.scrollPane.setMaxHeight(800.0f);
+        this.scrollPane.setMaxHeight(768.0f);
         this.scrollPane.setContent(container);
         this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);

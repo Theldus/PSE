@@ -98,8 +98,10 @@ public class LaplacianFilter extends NodeBox {
         }
 
         return image;
-
     }
+
+
+
 
     @Override
     public void execute() {

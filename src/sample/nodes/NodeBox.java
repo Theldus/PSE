@@ -1,14 +1,10 @@
 package sample.nodes;
 
-import com.sun.javafx.font.freetype.HBGlyphLayout;
-import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Blend;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,7 +33,8 @@ import static sample.util.Appearance.*;
  */
 public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Algorithm{
 
-    private Image image = new ImageFacade( new File("src/sample/imgs/default.jpg").toURI().toString() );
+    protected Image auxImg = new ImageFacade( new File("src/sample/imgs/default.jpg").toURI().toString() );
+    private Image image = auxImg;
 
     /**
      * Fields that defines how a NodeBox will look like.
@@ -224,6 +221,12 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
         private ImageView pressedDeleteIcon;
         private AnchorPane deleteIcon;
 
+        private ImageView defaultSettingIcon;
+        private ImageView enteredSettingIcon;
+        //private ImageView pressedSettingIcon;
+        private AnchorPane settingIcon;
+
+
         /**
          * Initializes the Header with the title, container,
          * properties and events.
@@ -231,7 +234,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          */
         public Header( String title ){
             this.title = createTitle(title);
-            this.container = createContainer();
+            this.setContainer(createContainer());
             setProperties();
             setEvents();
             initialize();
@@ -254,7 +257,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          */
         private void initialize(){
             add( title, 0,0 );
-            add( container, 1,0 );
+            add(getContainer(), 1,0 );
         }
 
         /**
@@ -275,7 +278,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          * @return Horizontal box containing the 'X' button.
          */
         private HBox createContainer(){
-            final HBox container = new HBox(5.0f);
+            final HBox container = new HBox(7.0f);
             container.setAlignment(Pos.CENTER_RIGHT);
 
             final Dimension imageDimension = new Dimension(13.0f,13.0f);
@@ -285,6 +288,13 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
             deleteIcon = new AnchorPane(defaultDeleteIcon);
             enteredDeleteIcon = createIcon( "EnteredDeleteIcon", imageDimension );
 
+            //Create and config Setting icon
+            defaultSettingIcon = createIcon("suppIcon", imageDimension );
+            settingIcon = new AnchorPane(defaultSettingIcon);
+            enteredSettingIcon = createIcon("suppEnteredIcon", imageDimension);
+
+            //add icons
+            container.getChildren().add(settingIcon);
             container.getChildren().add(deleteIcon);
 
             return container;
@@ -345,6 +355,46 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                     event.consume();
                 }
             });
+
+            settingIcon.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                private boolean clicked = true;
+                public void handle(MouseEvent event) {
+
+                    if( clicked ){
+                        //add controlPanel
+
+                        clicked = false;
+                    }
+                    else{
+                        setBottom(null);
+                        clicked = true;
+                    }
+                    event.consume();
+                }
+            });
+
+            settingIcon.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    settingIcon.getChildren().remove(0);
+                    settingIcon.getChildren().add(enteredSettingIcon);
+                    event.consume();
+                }
+            });
+
+            settingIcon.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    settingIcon.getChildren().remove(0);
+                    settingIcon.getChildren().add(defaultSettingIcon);
+                    event.consume();
+                }
+            });
+
+        }
+
+        protected void removeSupport(){
+            this.container.getChildren().remove(settingIcon);
         }
 
         /**
@@ -361,6 +411,14 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          */
         public void setTitle(String title) {
             this.title.setText(title);
+        }
+
+        public HBox getContainer() {
+            return container;
+        }
+
+        public void setContainer(HBox container) {
+            this.container = container;
         }
     }
 
@@ -489,20 +547,22 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          * @return Horizontal box container.
          */
         public HBox createContainer(){
-            HBox container = new HBox();
-            container.setAlignment(Pos.CENTER);
-            container.setMinSize(getMinWidth(),getMinHeight());
+            this.container = new HBox();
+            this.container.setAlignment(Pos.CENTER);
+            this.container.setMinSize(getMinWidth(),getMinHeight());
 
-            actionIcon.setSmooth(true);
+            this.getActionIcon().setSmooth(true);
 
-            actionBtn = new Button();
-            actionBtn.setGraphic(actionIcon);
-            actionBtn.setMinSize(actionIcon.getFitWidth(),actionIcon.getFitHeight());
-            actionBtn.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,null,null)));
+            this.actionBtn = new Button();
 
-            container.getChildren().add(actionBtn);
+            this.actionBtn.setGraphic(getActionIcon());
+            this.actionBtn.setMinSize(getActionIcon().getFitWidth(), getActionIcon().getFitHeight());
+            this.actionBtn.setBackground(new Background(new BackgroundFill(Color.TRANSPARENT,null,null)));
+
+            this.container.getChildren().add(actionBtn);
             return container;
         }
+
 
         /**
          * Gets the Circle input.
@@ -546,11 +606,11 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
         }
 
         public void setIcon( ImageView actionIcon ){
-            this.actionIcon = actionIcon;
+            this.setActionIcon(actionIcon);
         }
 
         public void setIcon(){
-            actionIcon = createIcon(NodeBox.this.actionIcon, new Dimension(23.0f,23.0f) );
+            setActionIcon(createIcon(NodeBox.this.actionIcon, new Dimension(23.0f,23.0f) ));
         }
 
         public HBox getContainer() {
@@ -559,6 +619,14 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
 
         public void setContainer(HBox container) {
             this.container = container;
+        }
+
+        public ImageView getActionIcon() {
+            return actionIcon;
+        }
+
+        public void setActionIcon(ImageView actionIcon) {
+            this.actionIcon = actionIcon;
         }
     }
 

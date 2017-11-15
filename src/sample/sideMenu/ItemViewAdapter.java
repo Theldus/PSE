@@ -29,7 +29,7 @@ public class ItemViewAdapter extends VBox {
 
         final VBox layout = new VBox(15.0f);
         layout.setAlignment(Pos.CENTER_LEFT);
-        layout.setPadding(new Insets(5,5,5,5));
+        layout.setPadding(new Insets(10,10,10,10));
         layout.setMaxWidth(300.0f);
 
         final Label title = new Label(this.title);
@@ -38,7 +38,7 @@ public class ItemViewAdapter extends VBox {
 
         final Text description = new Text(this.description);
         description.setFill(Paint.valueOf("#CCCCCC"));
-        description.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,11.0f) );
+        description.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,12.0f) );
         description.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
 
         layout.getChildren().add(title);

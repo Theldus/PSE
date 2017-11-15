@@ -116,7 +116,6 @@ public class NodeBoxDraggable extends DraggedBehavior {
         NodeBox nodeBox = cast();
 
         nodeBox.getHeader().setVisible(true);
-
         /*
         if( nodeBox instanceof Input ) {
             nodeBox.getNode().add(nodeBox.getNode().getOutput());

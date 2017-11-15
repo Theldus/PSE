@@ -2,25 +2,35 @@ package sample;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import sample.json.ManipulateJson;
 import sample.sideMenu.*;
 import sample.workspace.Workspace;
 import sample.util.Dimension;
 
+import java.io.File;
+
 public class PSEMainLayout extends BorderPane{
 
     private Scene own;
     private static Stage root;
-    private TitlePane titlePane;
     private VMenuBar vMenuBar;
     private Workspace workspace;
     private FooterPane footePane;
     private Dimension prefSize = new Dimension(1024,768);
+    private Delta delta = new Delta();
+
+    protected class Delta{
+
+        double x;
+        double y;
+    }
 
     public PSEMainLayout(Stage arg_root){
         root = arg_root;
@@ -33,8 +43,10 @@ public class PSEMainLayout extends BorderPane{
 
     public void show(){
         getRoot().setScene(own);
+        getRoot().setTitle("PSE-IMAGE");
+        //getRoot().getScene().getStylesheets().add(new File("src/sample/PSEMainStyle.css").toURI().toString());
         getRoot().show();
-        System.out.println(getRoot().getWidth() + " " + getRoot().getHeight());
+        //System.out.println(getRoot().getWidth() + " " + getRoot().getHeight());
     }
 
     private void addTitle(){
@@ -49,7 +61,7 @@ public class PSEMainLayout extends BorderPane{
         getRoot().maximizedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-                addSideMenuPane.setScrollPaneSize(new Dimension(0,getRoot().getHeight()));
+                addSideMenuPane.setScrollPaneSize(new Dimension(0,768.0f));
             }
         });
         addSideMenuPane.install();

@@ -17,6 +17,7 @@ import sample.nodes.NodeBox;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
+import java.time.chrono.MinguoChronology;
 
 import static sample.util.Appearance.*;
 import static sample.util.Appearance.FONT_SIZE;
@@ -54,7 +55,7 @@ public class ItemView extends HBox {
 
         final VBox layout = new VBox(5.0f);
         layout.setAlignment(Pos.CENTER_LEFT);
-        layout.setPadding(new Insets(5,5,5,5));
+        layout.setPadding(new Insets(10,10,10,10));
         layout.setMaxWidth(300.0f);
 
         title = new Label(content.getName());
@@ -63,7 +64,7 @@ public class ItemView extends HBox {
 
         description = new Text(content.getDescription());
         description.setFill(Paint.valueOf("#AAAAAA"));
-        description.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.NORMAL,11.0f) );
+        description.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,12.0f) );
         description.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
 
         layout.getChildren().add(title);
@@ -75,7 +76,7 @@ public class ItemView extends HBox {
 
     public void createItemView(){
         this.setAlignment(Pos.CENTER_LEFT);
-        this.setSpacing(10.0f);
+        this.setSpacing(5.0f);
         this.setPadding(new Insets(10,10,10,10));
         this.getChildren().add( createIcon() );
         this.getChildren().add( createText() );
@@ -106,12 +107,15 @@ public class ItemView extends HBox {
 
                 try {
 
+                    MainController mainController = MainController.getInstance();
+
                     NodeBox nodeBox = (NodeBox) Class.forName("sample.nodes."+content.getClassName())
                                                               .getConstructor(String.class,Workspace.class,String.class)
                                                               .newInstance(content.getName(),
-                                                                           MainController.getInstance().getCurrentWorkspace(),
+                                                                           mainController.getCurrentWorkspace(),
                                                                            content.getIconPath());
-                    MainController.getInstance().getCurrentWorkspace().getChildren().add(nodeBox);
+
+                    mainController.getCurrentWorkspace().getChildren().add(nodeBox);
                     Workspace ws = MainController.getInstance().getCurrentWorkspace();
 
                     //Set static position node

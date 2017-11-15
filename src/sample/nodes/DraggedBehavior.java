@@ -87,7 +87,31 @@ public abstract class DraggedBehavior implements Behavior{
      * @param event Mouse event.
      */
     public void onMouseReleased(MouseEvent event){
+
         getComponent().setCursor(Cursor.DEFAULT);
+
+        //to implement Magnetic
+
+
+        int posX = (int) getComponent().getLayoutX();
+        int posY = (int) getComponent().getLayoutY();
+
+        /*
+        System.out.println("Before - PosX: "+ posX + " " + "PosY: " + posY);
+
+        posX = (posX/30)*30;
+        posX = posX == 0 ? 30 : posX;
+
+        posY = (posY/30)*30;
+        posY = posY == 0 ? 30 : posY;
+
+
+        System.out.println("After - PosX: "+ posX + " " + "PosY: " + posY);
+
+        getComponent().setLayoutX(posX);
+        getComponent().setLayoutY(posY);
+        */
+
     }
 
     /**

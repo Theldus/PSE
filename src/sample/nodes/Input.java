@@ -22,6 +22,7 @@ public class Input extends NodeBox {
     public static Image imageAux;
     public Input(String title,Workspace root,String iconPath) {
         super(title, root, iconPath);
+        getHeader().removeSupport();
         getNode().getChildren().remove(getNode().getInput());
         execute();
     }
@@ -55,7 +56,7 @@ public class Input extends NodeBox {
                     if (file != null) {
                         saveImg(file);
                     } else {
-                        Toast.show(MainController.getCurrentWorkspace(),
+                        Toast.show(getRoot(),
                                 Toast.ERROR_MESSAGE,
                                 "Imagem não foi carregada/selecionada!",
                                 "ErrorIcon",
@@ -75,7 +76,7 @@ public class Input extends NodeBox {
         //imageAux = getImage();
         update(null);
 
-        Toast.show(MainController.getCurrentWorkspace(),
+        Toast.show(getRoot(),
                 Toast.INFORMATION_MESSAGE,
                 String.format("Imagem: %s adicionada!",file.getName()),
                 "InformationIcon",

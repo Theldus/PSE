@@ -25,7 +25,7 @@ public class MainController {
         this.workspace = workspace;
     }
 
-    public static Workspace getCurrentWorkspace(){
+    public Workspace getCurrentWorkspace(){
         return workspace;
     }
 }

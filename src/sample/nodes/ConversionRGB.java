@@ -2,7 +2,12 @@ package sample.nodes;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import sample.workspace.Workspace;
+
+import javax.imageio.ImageReader;
 
 public class ConversionRGB extends NodeBox {
     /**
@@ -88,6 +93,26 @@ public class ConversionRGB extends NodeBox {
 
     @Override
     public void execute() {
+
+        Image auxImage = getImage();
+        PixelReader pixelReader = getImage().getPixelReader();
+        Color pxColor = null;
+        double rgb [];
+
+        /*
+        for( int i = 0 ; i < auxImage.getWidth() ; ++i ){
+            for( int j = 0 ; j < auxImage.getHeight() ; ++j ){
+                pxColor = pixelReader.getColor(i,j);
+                rgb =  hsvToRgb(pxColor.getRed(), pxColor.getGreen(),pxColor.getBlue());
+
+
+            }
+
+
+        }
+        */
+
+
 
     }
 }

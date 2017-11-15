@@ -23,7 +23,7 @@ public class NodeBoxController {
     private static Edge edgeTemp = null;
     public  static boolean connAcc = false;
 
-    private static Workspace workspace = MainController.getCurrentWorkspace();
+    private static Workspace workspace = MainController.getInstance().getCurrentWorkspace();
 
     /**
      * Gets an instance of this class, since we are using Singleton
@@ -65,7 +65,7 @@ public class NodeBoxController {
         {
             connAcc = true;
             edgeTemp = new Edge(nodeBox, io);
-            MainController.getCurrentWorkspace().getChildren().add(edgeTemp.setupLine());
+            workspace.getChildren().add(edgeTemp.setupLine());
             edgeTemp.getLine().toBack();
         }
         else
@@ -85,7 +85,7 @@ public class NodeBoxController {
                         200,
                         200,
                         "Error");
-                MainController.getCurrentWorkspace().getChildren().remove(edgeTemp.getLine());
+                workspace.getChildren().remove(edgeTemp.getLine());
                 edgeTemp.closeConnection();
                 resetEdge();
                 connAcc = false;
