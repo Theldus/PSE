@@ -185,7 +185,7 @@ public class Edge {
         };
 
         /* Adds the event filter. */
-        MainController.getCurrentWorkspace().addEventFilter(MouseEvent.MOUSE_MOVED, filter);
+        MainController.getInstance().getCurrentWorkspace().addEventFilter(MouseEvent.MOUSE_MOVED, filter);
         return line;
     }
 
@@ -214,13 +214,13 @@ public class Edge {
         line.setEndY(coordinates.getY());
 
         /* Remove mouse move event filter. */
-        MainController.getCurrentWorkspace().removeEventFilter(MouseEvent.MOUSE_MOVED, filter);
+        MainController.getInstance().getCurrentWorkspace().removeEventFilter(MouseEvent.MOUSE_MOVED, filter);
 
         /* Add the line click, to remove the line. */
         line.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                MainController.getCurrentWorkspace().getChildren().remove(line);
+                MainController.getInstance().getCurrentWorkspace().getChildren().remove(line);
 
                 if ( Edge.this.getNodeBoxSource().removeEdge(Edge.this) != true ||
                         Edge.this.getNodeBoxTarget().removeEdge(Edge.this) != true){
@@ -266,6 +266,6 @@ public class Edge {
     public void closeConnection()
     {
         /* Remove mouse move event filter. */
-        MainController.getCurrentWorkspace().removeEventFilter(MouseEvent.MOUSE_MOVED, filter);
+        MainController.getInstance().getCurrentWorkspace().removeEventFilter(MouseEvent.MOUSE_MOVED, filter);
     }
 }
