@@ -137,6 +137,7 @@ public class PluginController {
                 /* Adds the data into the pane. */
                 VMenuItemController.getInstance().fill(sideMenuPane, list.toArray());
 
+                /* Success message. */
                 Toast.show(MainController.getInstance().getCurrentWorkspace(),
                         Toast.ERROR_MESSAGE,
                         "Plugin " + file.getName() + " successfully loaded!",
@@ -145,6 +146,9 @@ public class PluginController {
                         200,
                         200,
                         "Error");
+
+                /* Save the class name into the HashSet. */
+                loadedClasses.add(nbd.getClassName());
             }
         }
         catch (Exception ioe) { ioe.printStackTrace(); }
