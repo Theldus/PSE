@@ -62,7 +62,7 @@ public class SideMenuPane extends VBox {
     public void addScrollPane(){
 
         this.scrollPane.getStylesheets().add("sample/sideMenu/ScrollPaneStyle.css");
-        this.scrollPane.setMaxHeight(768.0f);
+        this.scrollPane.setMaxHeight(669.0f);
         this.scrollPane.setContent(container);
         this.scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
