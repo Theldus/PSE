@@ -67,7 +67,7 @@ public class PluginController {
         {
             jf = new JarFile(file);
             if ( (ze = jf.getEntry("DESC")) == null) {
-                Toast.show(MainController.getCurrentWorkspace(),
+                Toast.show(MainController.getInstance().getCurrentWorkspace(),
                         Toast.ERROR_MESSAGE,
                         "DESC file was not found inside Jar!",
                         "ErrorIcon",
@@ -93,17 +93,12 @@ public class PluginController {
                 String description = (String) nodeBox.get("description");
 
                 list.add(new NodeBoxData(null, className, name, iconPath, description));
-
-                System.out.println("Class name: " + className);
-                System.out.println("Name: " + name);
-                System.out.println("iconPath: " + iconPath);
-                System.out.println("Description: " + description);
             }
 
             /* Checks if all the classes referred by the DESC file exists. */
             for (NodeBoxData nbd : list){
                 if (jf.getEntry(nbd.getClassName() + ".class") == null){
-                    Toast.show(MainController.getCurrentWorkspace(),
+                    Toast.show(MainController.getInstance().getCurrentWorkspace(),
                             Toast.ERROR_MESSAGE,
                             "Class " + nbd.getClassName() + " not found!",
                             "ErrorIcon",
@@ -123,7 +118,7 @@ public class PluginController {
 
                 /* Class already loaded before. */
                 if (loadedClasses.contains(nbd.getClassName())){
-                    Toast.show(MainController.getCurrentWorkspace(),
+                    Toast.show(MainController.getInstance().getCurrentWorkspace(),
                             Toast.ERROR_MESSAGE,
                             "Class " + nbd.getClassName() + " already loaded before!",
                             "ErrorIcon",
@@ -141,6 +136,15 @@ public class PluginController {
 
                 /* Adds the data into the pane. */
                 VMenuItemController.getInstance().fill(sideMenuPane, list.toArray());
+
+                Toast.show(MainController.getInstance().getCurrentWorkspace(),
+                        Toast.ERROR_MESSAGE,
+                        "Plugin " + file.getName() + " successfully loaded!",
+                        "InformationIcon",
+                        1000,
+                        200,
+                        200,
+                        "Error");
             }
         }
         catch (Exception ioe) { ioe.printStackTrace(); }
