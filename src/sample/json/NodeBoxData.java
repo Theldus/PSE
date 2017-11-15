@@ -5,12 +5,13 @@ package sample.json;
  */
 public class NodeBoxData {
 
+    private ClassLoader classLoader;
     private String className;
     private String name;
     private String iconPath;
     private String description;
 
-    public NodeBoxData(String className,String name, String iconPath, String description){
+    public NodeBoxData(ClassLoader classLoader, String className,String name, String iconPath, String description){
         setClassName(className);
         setName(name);
         setIconPath(iconPath);
@@ -47,5 +48,13 @@ public class NodeBoxData {
 
     public void setClassName(String className) {
         this.className = className;
+    }
+
+    public ClassLoader getClassLoader() {
+        return classLoader;
+    }
+
+    public void setClassLoader(ClassLoader classLoader) {
+        this.classLoader = classLoader;
     }
 }

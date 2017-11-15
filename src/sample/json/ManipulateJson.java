@@ -39,7 +39,12 @@ public class ManipulateJson {
                String iconPath = (String) nodeBox.get("iconPath");
                String description = (String) nodeBox.get("description");
 
-               list.add(new NodeBoxData(className,name,iconPath,description));
+               System.out.println("Class name: " + className);
+               System.out.println("Name: " + name);
+               System.out.println("iconPath: " + iconPath);
+               System.out.println("Description: " + description);
+
+               list.add(new NodeBoxData(null, className, name, iconPath, description));
 
            }
         }

@@ -19,6 +19,9 @@ public class ItemViewAdapter extends VBox {
     private String title;
     private String description;
 
+    private Label lblTitle;
+    private Text txtDescription;
+
     public ItemViewAdapter( String title, String description ){
         this.title = title;
         this.description = description;
@@ -32,17 +35,17 @@ public class ItemViewAdapter extends VBox {
         layout.setPadding(new Insets(10,10,10,10));
         layout.setMaxWidth(300.0f);
 
-        final Label title = new Label(this.title);
-        title.setTextFill(javafx.scene.paint.Paint.valueOf(TEXT_COLOR));
-        title.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE) );
+        lblTitle = new Label(this.title);
+        lblTitle.setTextFill(javafx.scene.paint.Paint.valueOf(TEXT_COLOR));
+        lblTitle.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE) );
 
-        final Text description = new Text(this.description);
-        description.setFill(Paint.valueOf("#CCCCCC"));
-        description.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,12.0f) );
-        description.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
+        txtDescription = new Text(this.description);
+        txtDescription.setFill(Paint.valueOf("#CCCCCC"));
+        txtDescription.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,12.0f) );
+        txtDescription.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
 
-        layout.getChildren().add(title);
-        layout.getChildren().add(description);
+        layout.getChildren().add(lblTitle);
+        layout.getChildren().add(txtDescription);
 
         return layout;
 
@@ -55,4 +58,7 @@ public class ItemViewAdapter extends VBox {
         this.getChildren().add( createText() );
     }
 
+    public Text getDescription() {
+        return this.txtDescription;
+    }
 }

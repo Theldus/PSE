@@ -16,6 +16,7 @@ import sample.workspace.Workspace;
 import sample.nodes.NodeBox;
 
 import java.io.File;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.time.chrono.MinguoChronology;
 
@@ -106,16 +107,25 @@ public class ItemView extends HBox {
             public void handle(MouseEvent event) {
 
                 try {
+                    NodeBox nodeBox;
 
-                    MainController mainController = MainController.getInstance();
+                    if (content.getClassLoader() == null){
+                        nodeBox = (NodeBox) Class.forName("sample.nodes."+content.getClassName())
+                                .getConstructor(String.class,Workspace.class,String.class)
+                                .newInstance(content.getName(),
+                                MainController.getInstance().getCurrentWorkspace(),
+                                content.getIconPath());
+                    }
+                    else{
+                        Class classObj = content.getClassLoader().loadClass( content.getClassName() );
 
-                    NodeBox nodeBox = (NodeBox) Class.forName("sample.nodes."+content.getClassName())
-                                                              .getConstructor(String.class,Workspace.class,String.class)
-                                                              .newInstance(content.getName(),
-                                                                           mainController.getCurrentWorkspace(),
-                                                                           content.getIconPath());
+                        nodeBox = (NodeBox) classObj.getConstructor(String.class, Workspace.class, String.class)
+                                .newInstance(content.getName(),
+                                MainController.getInstance().getCurrentWorkspace(),
+                                content.getIconPath());
+                    }
 
-                    mainController.getCurrentWorkspace().getChildren().add(nodeBox);
+                    MainController.getInstance().getCurrentWorkspace().getChildren().add(nodeBox);
                     Workspace ws = MainController.getInstance().getCurrentWorkspace();
 
                     //Set static position node

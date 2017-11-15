@@ -5,11 +5,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import sample.dialogs.Toast;
 import sample.json.ManipulateJson;
+import sample.plugin.PluginController;
 import sample.sideMenu.*;
 import sample.workspace.Workspace;
 import sample.util.Dimension;
@@ -69,7 +71,55 @@ public class PSEMainLayout extends BorderPane{
         ManipulateJson manipulateJson = new ManipulateJson();
         VMenuItemController.getInstance().fill(addSideMenuPane,manipulateJson.read());
 
-        vMenuBar.addMenuItem( new VMenuItem("Setting",new SideMenuPane("Configurações"),this.workspace));
+        ItemViewAdapter ivaConfig = new ItemViewAdapter("Plugins", "Adicionar plugin");
+        ivaConfig.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ivaConfig.getDescription().setFill(Paint.valueOf("#5e75cd"));
+                event.consume();
+            }
+        });
+
+        ivaConfig.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                ivaConfig.getDescription().setFill(Paint.valueOf("#AAAAAA"));
+                event.consume();
+            }
+        });
+
+        ivaConfig.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                FileChooser fc = new FileChooser();
+                FileChooser.ExtensionFilter fcef = new FileChooser.ExtensionFilter("Plugin File (.jar/.zip) file)","*.jar", "*.zip");
+                fc.setTitle("Open plugin file...");
+                fc.getExtensionFilters().add(fcef);
+
+                File file = fc.showOpenDialog(PSEMainLayout.getRoot());
+                if (file != null){
+                    PluginController.getInstance().loadFileIntoPane(file, addSideMenuPane);
+                }
+                else {
+                    Toast.show(MainController.getInstance().getCurrentWorkspace(),
+                            Toast.ERROR_MESSAGE,
+                            "Plugin não foi carregado/selecionado!",
+                            "ErrorIcon",
+                            1000,
+                            200,
+                            200,
+                            "Error");
+                }
+
+                event.consume();
+            }
+        });
+
+
+        SideMenuPane configSideMenuPane = new SideMenuPane("Configurações");
+        configSideMenuPane.addItem(ivaConfig);
+        configSideMenuPane.install();
+        vMenuBar.addMenuItem( new VMenuItem("Setting", configSideMenuPane ,this.workspace));
 
         SideMenuPane helpSideMenuPane = new SideMenuPane("Ajuda");
         StringBuilder helpText = new StringBuilder();
