@@ -114,10 +114,10 @@ public class PluginController {
             /* All the classes exist =), so, let's try to load them. */
 
             /* Checks if we already loaded some classes before. */
-            for (NodeBoxData nbd : list){
+            for (NodeBoxData nbd : list) {
 
                 /* Class already loaded before. */
-                if (loadedClasses.contains(nbd.getClassName())){
+                if (loadedClasses.contains(nbd.getClassName())) {
                     Toast.show(MainController.getInstance().getCurrentWorkspace(),
                             Toast.ERROR_MESSAGE,
                             "Class " + nbd.getClassName() + " already loaded before!",
@@ -130,26 +130,29 @@ public class PluginController {
                     return;
                 }
 
-                /* Yep, we'll have one ClassLoader for each Jar/Zip read. */
-                ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURI().toURL() });
-                nbd.setClassLoader(classLoader);
-
-                /* Adds the data into the pane. */
-                VMenuItemController.getInstance().fill(sideMenuPane, list.toArray());
-
-                /* Success message. */
-                Toast.show(MainController.getInstance().getCurrentWorkspace(),
-                        Toast.ERROR_MESSAGE,
-                        "Plugin " + file.getName() + " successfully loaded!",
-                        "CheckmarkIcon",
-                        1000,
-                        200,
-                        200,
-                        "Alert");
-
                 /* Save the class name into the HashSet. */
                 loadedClasses.add(nbd.getClassName());
             }
+
+            /* Yep, we'll have one single ClassLoader for each Jar/Zip read. */
+            ClassLoader classLoader = URLClassLoader.newInstance(new URL[] { file.toURI().toURL() });
+
+            /* Assign class loader. */
+            for (NodeBoxData nbd : list)
+                nbd.setClassLoader(classLoader);
+
+            /* Adds the data into the pane. */
+            VMenuItemController.getInstance().fill(sideMenuPane, list.toArray());
+
+            /* Success message. */
+            Toast.show(MainController.getInstance().getCurrentWorkspace(),
+                Toast.ERROR_MESSAGE,
+                "Plugin " + file.getName() + " successfully loaded!",
+                "CheckmarkIcon",
+                1000,
+                200,
+                200,
+                "Alert");
         }
         catch (Exception ioe) { ioe.printStackTrace(); }
     }

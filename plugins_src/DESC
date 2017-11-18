@@ -1,0 +1,20 @@
+[
+    {
+        "className":"ColorInverter",
+        "name":"Inversão de Cores",
+        "iconPath":"DefaultFilterIcon",
+        "description":" Realiza a inversão de cores =)"
+    },
+    {
+        "className":"Grayscale",
+        "name":"Escala de cinza",
+        "iconPath":"DefaultFilterIcon",
+        "description":" Converte a imagem para a escala de cinzas levando \n em conta a diferente sensibilidade dos olhos às cores."
+    },
+    {
+        "className":"Sepia",
+        "name":"Sepia",
+        "iconPath":"DefaultFilterIcon",
+        "description":" Converte a imagem para o efeito Sépia"
+    }
+]
