@@ -24,6 +24,7 @@ public class LaplacianFilter extends NodeBox {
      */
     public LaplacianFilter(String title,Workspace root,String iconPath) {
         super(title, root, iconPath);
+        getHeader().removeSupport();
     }
 
     /**

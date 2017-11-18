@@ -36,11 +36,11 @@ public class ItemViewAdapter extends VBox {
         layout.setMaxWidth(300.0f);
 
         lblTitle = new Label(this.title);
-        lblTitle.setTextFill(javafx.scene.paint.Paint.valueOf(TEXT_COLOR));
+        lblTitle.setTextFill(javafx.scene.paint.Paint.valueOf("#ff0000"));
         lblTitle.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE) );
 
         txtDescription = new Text(this.description);
-        txtDescription.setFill(Paint.valueOf("#CCCCCC"));
+        txtDescription.setFill(Paint.valueOf("#ffffff"));
         txtDescription.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,12.0f) );
         txtDescription.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
 

@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -84,11 +85,6 @@ public class Output extends NodeBox {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-                    //StackPane stageImg = new StackPane(img);
-                    //WinPreviewPane winPreviewPane = new WinPreviewPane(newWinPreview,img);
-                    //winPreviewPane.install();
-
                 }
                 event.consume();
 
@@ -106,10 +102,11 @@ public class Output extends NodeBox {
     public void execute() {
 
         getNode().getChildren().remove(getNode().getContainer());
-        getNode().setMinSize(180,180);
+        getNode().setMinSize(180,160);
         ImageView img = new ImageView(getImage());
         img.setFitWidth(140.0f);
-        img.setFitHeight(140.0f);
+        img.setFitHeight(120.0f);
+        img.setEffect(new DropShadow());
         getNode().setActionIcon(img);
         getNode().getChildren().add( getNode().createContainer() );
         setOpenWinEvent();

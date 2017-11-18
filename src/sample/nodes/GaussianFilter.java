@@ -16,7 +16,39 @@ import java.awt.image.WritableRaster;
  */
 public class GaussianFilter extends NodeBox {
 
-    private int[][] matMasc = new int[3][3];
+    private Image imageReserve;
+
+
+    enum Mask{
+
+        MASK_3_X_3( new int[][]{ {1,2,1},
+                                 {2,4,2},
+                                 {1,2,1} } ),
+
+        MASK_5_X_5( new int[][]{ {1,4,6,4,1},
+                                 {4,16,24,16,4},
+                                 {6,24,36,24,6},
+                                 {4,16,24,16,4},
+                                 {1,4,6,4,1} } ),
+
+        MASK_7_X_7(new int[][]{ {0,1,4,5,4,1,0},
+                                {1,9,23,29,23,9,1},
+                                {4,23,61,78,61,23,4},
+                                {5,29,78,100,78,29,5},
+                                {4,23,61,78,61,23,4},
+                                {1,9,23,29,23,9,1},
+                                {0,1,4,5,4,1,0} });
+
+        public int mask [][];
+
+        Mask(int[][] mask) {
+            this.mask = mask;
+        }
+
+        public int[][] getMask() {
+            return mask;
+        }
+    }
 
     /**
      * Initializes the GaussianFilter.
@@ -27,6 +59,8 @@ public class GaussianFilter extends NodeBox {
      */
     public GaussianFilter(String title,Workspace root,String iconPath) {
         super(title, root, iconPath);
+        ToosUINodeBoxController.setRoot(this);
+        this.imageReserve = getImage();
     }
 
     /**
@@ -48,7 +82,14 @@ public class GaussianFilter extends NodeBox {
          * we have to propagate the final processed image for our child.
          */
 
-        setImage(image);
+        if( image != null ){
+            setImage(image);
+            this.imageReserve = getImage();
+        }
+        else{
+            setImage(imageReserve);
+        }
+
         execute();
 
         if( ! (getImage() instanceof ImageFacade) ){
@@ -65,28 +106,53 @@ public class GaussianFilter extends NodeBox {
 
         double somatorio = 0;
 
-        matMasc[0][0] = 1;
-        matMasc[0][1] = 2;
-        matMasc[0][2] = 1;
-        matMasc[1][0] = 2;
-        matMasc[1][1] = 4;
-        matMasc[1][2] = 2;
-        matMasc[2][0] = 1;
-        matMasc[2][1] = 2;
-        matMasc[2][2] = 1;
+        System.out.println("Processing...");
+
+        Mask mask = null;
+        int shift = 1;
+        switch ( ToosUINodeBoxController.getMask() ){
+
+            case "3x3":
+                mask = Mask.MASK_3_X_3;
+                System.out.println("Mask 3x3");
+                break;
+            case "5x5":
+                mask = Mask.MASK_5_X_5;
+                shift = 2;
+                System.out.println("Mask 5x5");
+                break;
+            default:
+                mask = Mask.MASK_7_X_7;
+                shift = 3;
+                System.out.println("Mask 7x7");
+                break;
+        }
 
 
-        for (int x = 2; x < width - 2; x++) {
-            for (int y = 2; y < height - 2; y++) {
+        for (int x = shift; x < width - shift; x++) {
+            for (int y = shift; y < height - shift; y++) {
 
                 somatorio = 0;
 
+                /*
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
                         somatorio += matrix[x + (i - 1)][y + (j - 1)] * matMasc[i][j]; // convoluindo masc e imagem
                     }
                 }
-                matrix[x][y] = (int) somatorio / 16;
+                */
+
+                int weight = 0;
+                for (int i = 0; i < mask.getMask().length; i++) {
+                    for (int j = 0; j < mask.getMask()[i].length; j++) {
+
+                        weight += mask.getMask()[i][j];
+                        somatorio += matrix[x + (i - shift)][y + (j - shift)] * mask.getMask()[i][j]; // convoluindo masc e imagem
+
+                    }
+                }
+
+                matrix[x][y] = (int) somatorio / weight;
             }
         }
 

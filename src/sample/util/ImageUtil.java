@@ -119,5 +119,26 @@ public class ImageUtil {
         return imageView.snapshot(null,null);
     }
 
+    public static String replaceLast(String oldText, char regex){
+
+        if( oldText == null || oldText.length() == 0 )
+            return "";
+
+        String newText = oldText;
+
+        int i = oldText.length() -1 ;
+        while ( i >= 0 ){
+            if( oldText.charAt(i) == regex )
+                break;
+
+            --i;
+        }
+
+        if( i != -1 ){
+            newText = oldText.substring(0,i+1);
+        }
+        return newText;
+    }
+
 
 }

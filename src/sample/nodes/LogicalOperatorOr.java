@@ -24,6 +24,7 @@ public class LogicalOperatorOr extends NodeBox {
      */
     public LogicalOperatorOr(String title, Workspace root, String actionIconName) {
         super(title, root, actionIconName);
+        getHeader().removeSupport();
         imagePeer = new BufferedImage[INPUT_MAX];
         for( int i = 0; i < imagePeer.length ; ++i )
             imagePeer[i] = SwingFXUtils.fromFXImage(auxImg,null);
@@ -56,9 +57,9 @@ public class LogicalOperatorOr extends NodeBox {
         int o = B.length; //Número de linhas de B
         int p = B[0].length; // Número de colunas B
 
-        /* We will run trough the minor image. */
-        n = Math.min(n, o);
-        m = Math.min(m, p);
+        if(n != o || m != p){
+            return ImageUtil.convertToGreyTone(SwingFXUtils.fromFXImage(auxImg,null));
+        }
 
         int [][] C = new int[n][m];
         for(int i=0; i<n; i++){

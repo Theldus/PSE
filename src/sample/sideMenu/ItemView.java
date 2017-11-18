@@ -64,7 +64,7 @@ public class ItemView extends HBox {
         title.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE) );
 
         description = new Text(content.getDescription());
-        description.setFill(Paint.valueOf("#AAAAAA"));
+        description.setFill(Paint.valueOf("#ffffff"));
         description.setFont( javafx.scene.text.Font.font(FONT_NAME, FontWeight.BOLD,12.0f) );
         description.setBoundsType(TextBoundsType.LOGICAL_VERTICAL_CENTER);
 
@@ -89,7 +89,9 @@ public class ItemView extends HBox {
         this.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                description.setFill(Paint.valueOf("#5e75cd"));
+                //description.setFill(Paint.valueOf("#5e75cd"));
+                ItemView.this.title.setTextFill(Paint.valueOf("#00ffb2"));
+                ItemView.this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#131313"),null,null)));
                 event.consume();
             }
         });
@@ -97,7 +99,9 @@ public class ItemView extends HBox {
         this.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                description.setFill(Paint.valueOf("#AAAAAA"));
+                //description.setFill(Paint.valueOf("#AAAAAA"));
+                ItemView.this.title.setTextFill(Paint.valueOf("#ffffff"));
+                ItemView.this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#000000"),null,null)));
                 event.consume();
             }
         });
@@ -132,6 +136,8 @@ public class ItemView extends HBox {
                     nodeBox.setLayoutX(350.0f);
                     nodeBox.setLayoutY(0);
 
+                    //Notify node addicted
+                    /*
                     Toast.show(ws,
                                Toast.INFORMATION_MESSAGE,
                                String.format("Nó: %s adicionado!",content.getName()),
@@ -140,6 +146,7 @@ public class ItemView extends HBox {
                                200,
                                200,
                                 null);
+                    */
 
                     nodeBox.toBack();
                 } catch (InstantiationException e) {

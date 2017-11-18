@@ -1,8 +1,11 @@
 package sample.nodes;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -21,6 +24,7 @@ import sample.util.Dimension;
 import sample.util.Edge;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import static sample.util.Appearance.*;
@@ -33,7 +37,7 @@ import static sample.util.Appearance.*;
  */
 public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Algorithm{
 
-    protected Image auxImg = new ImageFacade( new File("src/sample/imgs/default.jpg").toURI().toString() );
+    protected Image auxImg = new ImageFacade( new File("src/sample/imgs/default.png").toURI().toString() );
     private Image image = auxImg;
 
     /**
@@ -295,7 +299,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          */
         private Label createTitle(String title){
             final Label auxTitle = new Label(title);
-            auxTitle.setTextFill(Paint.valueOf(TEXT_COLOR));
+            auxTitle.setTextFill(Paint.valueOf("#00f6ff"));
             auxTitle.setFont( Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE) );
             auxTitle.setMaxWidth( 150.0f );
             return auxTitle;
@@ -390,6 +394,17 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
 
                     if( clicked ){
                         //add controlPanel
+
+                        try {
+
+                            Parent toolsPane = FXMLLoader.load(getClass().getResource("/sample/nodes/ToolsUINodeBox.fxml"));
+                            setBottom(toolsPane);
+
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
 
                         clicked = false;
                     }
@@ -657,6 +672,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
             this.actionIcon = actionIcon;
         }
     }
+
 
     /**
      * Sets the Node background color.

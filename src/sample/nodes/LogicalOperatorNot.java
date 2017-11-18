@@ -15,6 +15,7 @@ public class LogicalOperatorNot extends NodeBox {
      */
     public LogicalOperatorNot(String title, Workspace root, String actionIconName) {
         super(title, root, actionIconName);
+        getHeader().removeSupport();
     }
 
     @Override

@@ -105,6 +105,7 @@ public final class Toast extends BorderPane {
         layout.setPadding(new Insets(10,5,10,5));
 
         this.msg.setTextFill(Paint.valueOf(TEXT_COLOR));
+        this.msg.setMaxWidth(320.0f);
         this.msg.setFont( Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE) );
 
         layout.getChildren().add(getIcon());

@@ -8,6 +8,7 @@ import sample.MainController;
 import sample.PSEMainLayout;
 import sample.dialogs.Toast;
 import sample.util.Edge;
+import sample.util.ImageUtil;
 import sample.workspace.Workspace;
 
 import java.io.File;
@@ -18,7 +19,7 @@ import java.io.File;
 public class Input extends NodeBox {
 
     private final FileChooser fileChooser = new FileChooser();
-    private FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image File","*.png","*.jpg","*.raw");
+    private FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image File","*.png","*.jpg","*.jpeg","*.raw","*.bpm");
     public static Image imageAux;
     public Input(String title,Workspace root,String iconPath) {
         super(title, root, iconPath);
@@ -34,6 +35,7 @@ public class Input extends NodeBox {
     public void configFileChooser(){
         this.fileChooser.setTitle("Abrir Imagem");
         this.fileChooser.getExtensionFilters().add(extensionFilter);
+        //lastPathName = this.fileChooser.getInitialDirectory().getAbsolutePath();
     }
 
     @Override
@@ -55,6 +57,8 @@ public class Input extends NodeBox {
                     File file = fileChooser.showOpenDialog(PSEMainLayout.getRoot());
                     if (file != null) {
                         saveImg(file);
+                        fileChooser.setInitialDirectory(new File(ImageUtil.replaceLast(file.getAbsolutePath(),'\\')));
+
                     } else {
                         Toast.show(getRoot(),
                                 Toast.ERROR_MESSAGE,

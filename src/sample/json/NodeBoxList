@@ -26,20 +26,8 @@
     {
          "className":"Histogram",
          "name":"Histograma",
-         "iconPath":"DefaultShowIcon",
+         "iconPath":"lineChartIcon",
          "description":" O histograma, também conhecido como \n distribuição de frequências, é a \n representação gráfica em colunas \n ou em barras (retângulos) de um conjunto \n de dados  previamente tabulado e dividido \n em classes uniformes ou não uniformes."
-    },
-    {
-         "className":"ConversionRGB",
-         "name":"Conversão RGB",
-         "iconPath":"ConversionIcon",
-         "description":" Converte uma imagem para o esquema \nde cores RGB."
-    },
-    {
-         "className":"ConversionHSV",
-         "name":"Conversão HSV",
-         "iconPath":"ConversionIcon",
-         "description":" Converte uma imagem para o esquema \nde cores HSV."
     },
     {
          "className":"LogicalOperatorAnd",
@@ -76,6 +64,19 @@
          "name":"Op.Arit Mult",
          "iconPath":"MathIcon",
          "description":" Realiza a operação aritmética Multiplicação."
+    },
+    {
+         "className":"PSNR",
+         "name":"PSNR",
+         "iconPath":"SignalIcon"
+         "description":" Relação sinal ruído de uma imagem."
+    },
+    {
+        "className":"MSE",
+         "name":"MSE",
+         "iconPath":"SignalIcon"
+         "description":"Calcula o erro médio quadrático entre duas imagens."
+
     }
 
 ]

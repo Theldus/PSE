@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 
 public class ArithmeticOperatorSubt extends NodeBox {
 
-    private int countInput = 0;
+    private int emptyPos = 0;
     private final int INPUT_MAX = 2;
     private BufferedImage[] imagePeer = new BufferedImage[INPUT_MAX];
 
@@ -23,35 +23,28 @@ public class ArithmeticOperatorSubt extends NodeBox {
      */
     public ArithmeticOperatorSubt(String title, Workspace root, String actionIconName) {
         super(title, root, actionIconName);
+        getHeader().removeSupport();
+        for( int i = 0; i < imagePeer.length ; ++i )
+            imagePeer[i] = SwingFXUtils.fromFXImage(auxImg,null);
     }
 
 
     @Override
     public void update(Image image) {
 
-        int countInput = 0;
+        imagePeer[ this.emptyPos++ % 2 ] = SwingFXUtils.fromFXImage(image,null);
 
-        for(Edge e : getEdgeList() ){
-            if( e.getNodeBoxTarget() == this )
-                ++countInput;
-        }
+        if( getInputNumber() == INPUT_MAX ){
 
-        if( countInput <= 1 )
-            imagePeer[ countInput ] = SwingFXUtils.fromFXImage(image,null);
+            if (imagePeer[0] == null || imagePeer[1] == null )
+                System.out.println("Image NULL!");
 
-        if( countInput == 2 )
-            imagePeer[ this.countInput++ % 2 ] = SwingFXUtils.fromFXImage(image,null);
-
-        System.out.println(countInput);
-
-        if( countInput > 0 ){
-
-            int mtxResult [][] = minus(ImageUtil.convertToGreyTone(imagePeer[0]),ImageUtil.convertToGreyTone(imagePeer[1]));
+            int mtxResult [][] = minus(ImageUtil.convertToGreyTone(imagePeer[0]), ImageUtil.convertToGreyTone(imagePeer[1]));
             setImage( ImageUtil.toImage( mtxResult ));
-            System.out.println("Subt!");
-            super.update(image);
-        }
+            System.out.println("Sub!");
+            super.update(getImage());
 
+        }
     }
 
     //Método para fazer soma entre imagens A e B
@@ -69,7 +62,7 @@ public class ArithmeticOperatorSubt extends NodeBox {
 
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                C[i][j] = normalize(Math.abs( A[i][j] + B[i][j] ) );
+                C[i][j] = normalize(Math.abs( A[i][j] - B[i][j] ) );
             }
         }
         return C;

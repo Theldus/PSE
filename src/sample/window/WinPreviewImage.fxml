@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -18,13 +18,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="654.0" style="-fx-background-color: none; -fx-background-radius: 0; -fx-border-radius: 0; -fx-border-color: #000000;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.window.WinPreviewImageController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="632.0" style="-fx-background-color: #090909; -fx-border-color: #000000; -fx-border-width: 0;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.window.WinPreviewImageController">
    <top>
-      <AnchorPane prefHeight="43.0" prefWidth="652.0" style="-fx-background-color: #000000; -fx-border-color: #000000;" BorderPane.alignment="CENTER">
+      <AnchorPane minWidth="621.0" prefHeight="52.0" prefWidth="621.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="50.0" prefWidth="646.0">
+            <VBox alignment="CENTER" layoutX="14.0" minWidth="0.0" prefHeight="50.0" prefWidth="614.0">
                <children>
-                  <GridPane prefHeight="60.0" prefWidth="800.0">
+                  <GridPane prefHeight="60.0" prefWidth="632.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -35,32 +35,44 @@
                      <children>
                         <VBox>
                            <children>
-                              <Label prefHeight="60.0" prefWidth="245.0" text="Pré-visualização" textFill="#d7d7d7">
-                                 <padding>
-                                    <Insets bottom="10.0" left="15.0" right="10.0" top="10.0" />
-                                 </padding>
+                              <Label prefHeight="60.0" prefWidth="253.0" text="Pré-visualização" textFill="WHITE">
                                  <font>
-                                    <Font name="Yu Gothic UI Bold" size="16.0" />
+                                    <Font name="Yu Gothic Bold" size="15.0" />
                                  </font>
+                                 <effect>
+                                    <DropShadow />
+                                 </effect>
                               </Label>
-                              <Separator opacity="0.3" prefHeight="0.0" prefWidth="308.0" />
+                              <Separator opacity="0.3" prefHeight="0.0" prefWidth="308.0" style="-fx-background-color: #000000; -fx-border-width: 1.5;" />
                            </children>
                         </VBox>
-                        <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="316.0" GridPane.columnIndex="1">
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="4.0" GridPane.columnIndex="1">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
                            <children>
-                              <Button fx:id="closeBtn" mnemonicParsing="false" onMouseClicked="#closeClickedEvent" onMouseEntered="#closeEnteredEvent" onMouseExited="#closeExitedEvent" style="-fx-background-color: none;">
-                                 <padding>
-                                    <Insets right="15.0" />
-                                 </padding>
-                              </Button>
+                              <ImageView fx:id="minimizeBtn" fitHeight="22.0" fitWidth="22.0" onMouseClicked="#minimizeClickedEvent" onMouseEntered="#minimizeEnteredEvent" onMouseExited="#minimizeExitedEvent" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView fx:id="closeBtn" fitHeight="22.0" fitWidth="22.0" onMouseClicked="#closeClickedEvent" onMouseEntered="#closeEnteredEvent" onMouseExited="#closeExitedEvent" pickOnBounds="true" preserveRatio="true" />
                            </children>
+                           <GridPane.margin>
+                              <Insets right="15.0" />
+                           </GridPane.margin>
                         </HBox>
                      </children>
                      <opaqueInsets>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets />
                      </opaqueInsets>
                   </GridPane>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets left="15.0" top="20.0" />
+               </padding>
             </VBox>
          </children>
       </AnchorPane>
@@ -68,44 +80,48 @@
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="468.0" prefWidth="589.0" style="-fx-background-color: #000000;">
+            <StackPane prefHeight="457.0" prefWidth="557.0">
                <children>
-                  <Pane fx:id="imagePane" prefHeight="468.0" prefWidth="634.0" style="-fx-background-color: #000000; -fx-border-color: #000000;">
+                  <Pane fx:id="imagePane" prefHeight="468.0" prefWidth="553.0">
                      <children>
-                        <Pane fx:id="mainPane" layoutX="54.0" layoutY="41.0" prefHeight="386.0" prefWidth="475.0" style="-fx-background-color: #070707;">
+                        <Pane fx:id="mainPane" layoutX="46.0" layoutY="39.0" prefHeight="386.0" prefWidth="475.0" style="-fx-background-color: #000000;">
                            <effect>
-                              <DropShadow color="#00ffb0" />
+                              <DropShadow color="#3c3c3c" height="64.08" radius="20.02" width="18.0" />
                            </effect>
                         </Pane>
                      </children>
                   </Pane>
-                  <Pane fx:id="settingPane" prefHeight="466.0" prefWidth="566.0" style="-fx-background-color: #000000;">
+                  <Pane fx:id="settingPane" prefHeight="468.0" prefWidth="569.0">
                      <children>
-                        <Label layoutX="37.0" layoutY="43.0" text="Definir Tamanho da imagem:" textFill="#ababab">
+                        <Label layoutX="37.0" layoutY="43.0" text="Definir Tamanho da imagem:" textFill="#00ffb2">
                            <font>
-                              <Font size="14.0" />
+                              <Font size="13.0" />
                            </font>
                         </Label>
                         <ComboBox fx:id="cBoxImgSize" layoutX="50.0" layoutY="78.0" prefWidth="150.0" style="-fx-background-color: #111111;">
                            <effect>
-                              <DropShadow color="#00ffbf" height="12.1" radius="5.55" width="12.1" />
+                              <DropShadow height="12.1" radius="5.55" width="12.1" />
                            </effect>
                         </ComboBox>
                      </children></Pane>
                </children></StackPane>
-            <VBox alignment="TOP_CENTER" prefHeight="468.0" prefWidth="63.0" spacing="10.0" style="-fx-background-color: #090909; -fx-border-color: #000000;">
+            <AnchorPane prefHeight="468.0" prefWidth="95.0">
                <children>
-                  <Button fx:id="saveBtn" mnemonicParsing="false" onMouseClicked="#saveClickedEvent" onMouseEntered="#saveEnteredEvent" onMouseExited="#saveExitedEvent" style="-fx-background-color: none;" />
-                  <Button fx:id="configBtn" mnemonicParsing="false" onMouseClicked="#configClickedEvent" onMouseEntered="#configEnteredEvent" onMouseExited="#configExitedEvent" style="-fx-background-color: none;" />
+                  <VBox alignment="CENTER" layoutY="51.0" prefHeight="124.0" prefWidth="59.0" spacing="5.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30; -fx-border-radius: 30; -fx-border-color: #ffffff; -fx-border-width: 0;">
+                     <children>
+                        <Button fx:id="saveBtn" mnemonicParsing="false" onMouseClicked="#saveClickedEvent" onMouseEntered="#saveEnteredEvent" onMouseExited="#saveExitedEvent" style="-fx-background-color: none;" />
+                        <Button fx:id="configBtn" mnemonicParsing="false" onMouseClicked="#configClickedEvent" onMouseEntered="#configEnteredEvent" onMouseExited="#configExitedEvent" style="-fx-background-color: none;" />
+                     </children>
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </VBox>
                </children>
-               <padding>
-                  <Insets top="50.0" />
-               </padding>
-               <effect>
-                  <InnerShadow />
-               </effect>
-            </VBox>
+            </AnchorPane>
          </children>
       </HBox>
    </center>
+   <effect>
+      <DropShadow />
+   </effect>
 </BorderPane>

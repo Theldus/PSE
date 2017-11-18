@@ -28,7 +28,7 @@ public class VMenuBar extends HBox {
     private final class SideBar extends VBox {
 
        private final double WIDTH = 50.0f;
-       private final Paint BACKGROUND_COLOR = Paint.valueOf("#42f49e");
+       private final Paint BACKGROUND_COLOR = Paint.valueOf("#00ffb2");
 
        public SideBar(){
            setMinHeight(WIDTH);

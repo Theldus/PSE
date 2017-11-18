@@ -13,6 +13,7 @@ import sample.dialogs.Toast;
 import sample.json.ManipulateJson;
 import sample.plugin.PluginController;
 import sample.sideMenu.*;
+import sample.util.ImageUtil;
 import sample.workspace.Workspace;
 import sample.util.Dimension;
 
@@ -72,10 +73,11 @@ public class PSEMainLayout extends BorderPane{
         VMenuItemController.getInstance().fill(addSideMenuPane,manipulateJson.read());
 
         ItemViewAdapter ivaConfig = new ItemViewAdapter("Plugins", "Adicionar plugin");
+        ivaConfig.getDescription().setFill(Paint.valueOf("#ffffff"));
         ivaConfig.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                ivaConfig.getDescription().setFill(Paint.valueOf("#5e75cd"));
+                ivaConfig.getDescription().setFill(Paint.valueOf("#00ffb2"));
                 event.consume();
             }
         });
@@ -83,7 +85,7 @@ public class PSEMainLayout extends BorderPane{
         ivaConfig.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                ivaConfig.getDescription().setFill(Paint.valueOf("#AAAAAA"));
+                ivaConfig.getDescription().setFill(Paint.valueOf("#ffffff"));
                 event.consume();
             }
         });

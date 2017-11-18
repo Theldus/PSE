@@ -27,7 +27,7 @@ public class SideMenuPane extends VBox {
     public SideMenuPane(String title){
         this.title = new Label(title);
         this.scrollPane = new ScrollPane();
-        this.container = new VBox(10.0f);
+        this.container = new VBox(0.0f);
         this.container.setBackground(new Background(new BackgroundFill(Paint.valueOf("#000000"),null,null)));
         this.container.setMinHeight(1268.0f);
         setMinWidth(WIDTH);

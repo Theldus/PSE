@@ -141,11 +141,11 @@ public class PluginController {
                 Toast.show(MainController.getInstance().getCurrentWorkspace(),
                         Toast.ERROR_MESSAGE,
                         "Plugin " + file.getName() + " successfully loaded!",
-                        "InformationIcon",
+                        "CheckmarkIcon",
                         1000,
                         200,
                         200,
-                        "Error");
+                        "Alert");
 
                 /* Save the class name into the HashSet. */
                 loadedClasses.add(nbd.getClassName());
