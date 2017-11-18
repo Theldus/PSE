@@ -5,9 +5,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,8 @@ public class ManipulateJson {
 
         try
         {
-           JSONArray listObjs = (JSONArray) jsonParser.parse(new FileReader("src/sample/json/NodeBoxList"));
+           JSONArray listObjs = (JSONArray) jsonParser.parse(new FileReader(
+                   new File(sample.Main.class.getResource("json/NodeBoxList").toURI() )));
 
            for(Object obj : listObjs ){
 
@@ -48,6 +51,8 @@ public class ManipulateJson {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
 

@@ -19,6 +19,8 @@ import javafx.util.Duration;
 import sample.workspace.Workspace;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 
 import static sample.util.Appearance.*;
 
@@ -38,7 +40,7 @@ public final class Toast extends BorderPane {
     public Toast(String title, String msg, String iconName){
         setTitle(new Label(title));
         setMsg(new Label(msg));
-        setIcon(new ImageView( new File( ICONS_PATH + iconName + ICONS_EXT ).toURI().toString() ));
+        setIcon(new ImageView( sample.Main.class.getResource(ICONS_PATH + iconName + ICONS_EXT).toString() ) );
         create();
     }
 
@@ -69,8 +71,14 @@ public final class Toast extends BorderPane {
         //Emit sound
         if( audioPath != null ){
 
-            String musicFile = "src/sample/audio/" + audioPath + ".wav";     // For example
-            Media sound = new Media(new File(musicFile).toURI().toString());
+            String musicFile = "audio/" + audioPath + ".wav";     // For example
+
+            Media sound = null;
+            try {
+                sound = new Media( new File( sample.Main.class.getResource(musicFile).toURI().toString() ).toString() );
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();
 

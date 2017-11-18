@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static sample.util.Appearance.ICONS_PATH;
+
 /**
  * Created by Daniel on 13/11/2017.
  */
@@ -106,16 +108,16 @@ public class WinPreviewImageController implements Initializable {
         //set default size image
         dimensionImage = new Dimension(getImage().getWidth(),getImage().getHeight());
 
-        closeBtn.setImage( new Image("sample/icons/closeIcon.png") );
+        closeBtn.setImage( new Image( sample.Main.class.getResource(ICONS_PATH + "closeIcon.png").toString() ) );
         closeBtn.setFitWidth(20.0f);
         closeBtn.setFitHeight(20.f);
 
-        minimizeBtn.setImage(new Image("sample/icons/minimizeIcon.png"));
+        minimizeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "minimizeIcon.png").toString() ));
         minimizeBtn.setFitWidth(20.0f);
         minimizeBtn.setFitHeight(20.f);
 
-        saveBtn.setGraphic(new ImageView(new Image("sample/icons/saveIcon.png")));
-        configBtn.setGraphic(new ImageView(new Image("sample/icons/settIcon.png")));
+        saveBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "saveIcon.png").toString() )));
+        configBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "settIcon.png").toString() )));
 
         mainPane.setVisible(true);
         settingPane.setVisible(false);
@@ -152,11 +154,11 @@ public class WinPreviewImageController implements Initializable {
     }
 
     public void saveEnteredEvent(MouseEvent event) {
-        saveBtn.setGraphic(new ImageView(new Image("sample/icons/saveEnteredIcon.png")));
+        saveBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "saveEnteredIcon.png").toString() )));
     }
 
     public void saveExitedEvent(MouseEvent event) {
-        saveBtn.setGraphic(new ImageView(new Image("sample/icons/saveIcon.png")));
+        saveBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "saveIcon.png").toString() )));
     }
 
     public void configClickedEvent(MouseEvent event) {
@@ -205,11 +207,11 @@ public class WinPreviewImageController implements Initializable {
     }
 
     public void configEnteredEvent(MouseEvent event) {
-        configBtn.setGraphic(new ImageView(new Image("sample/icons/settEnteredIcon.png")));
+        configBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "settEnteredIcon.png").toString() )));
     }
 
     public void configExitedEvent(MouseEvent event) {
-        configBtn.setGraphic(new ImageView(new Image("sample/icons/settIcon.png")));
+        configBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "settIcon.png").toString() )));
     }
 
     public void closeClickedEvent(MouseEvent event) {
@@ -217,11 +219,11 @@ public class WinPreviewImageController implements Initializable {
     }
 
     public void closeEnteredEvent(MouseEvent event) {
-        closeBtn.setImage(new Image("sample/icons/closeEnteredIcon.png"));
+        closeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "closeEnteredIcon.png").toString() ));
     }
 
     public void closeExitedEvent(MouseEvent event) {
-        closeBtn.setImage(new Image("sample/icons/closeIcon.png"));
+        closeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "closeIcon.png").toString() ));
     }
 
     public void minimizeClickedEvent(MouseEvent mouseEvent) {
@@ -229,10 +231,10 @@ public class WinPreviewImageController implements Initializable {
     }
 
     public void minimizeEnteredEvent(MouseEvent mouseEvent) {
-        minimizeBtn.setImage(new Image("sample/icons/minimizeEnteredIcon.png"));
+        minimizeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "minimizeEnteredIcon.png").toString() ));
     }
 
     public void minimizeExitedEvent(MouseEvent mouseEvent) {
-        minimizeBtn.setImage(new Image("sample/icons/minimizeIcon.png"));
+        minimizeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "minimizeIcon.png").toString() ));
     }
 }

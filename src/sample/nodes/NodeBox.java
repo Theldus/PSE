@@ -25,6 +25,7 @@ import sample.util.Edge;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import static sample.util.Appearance.*;
@@ -37,7 +38,8 @@ import static sample.util.Appearance.*;
  */
 public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Algorithm{
 
-    protected Image auxImg = new ImageFacade( new File("src/sample/imgs/default.png").toURI().toString() );
+    protected Image auxImg = new ImageFacade(new File(
+            sample.Main.class.getResource("imgs/default.png").toString()).toString() );
     private Image image = auxImg;
 
     /**
@@ -173,8 +175,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
      * @return Returns an ImageView with the image loaded into it.
      */
     private ImageView createIcon(String pathName, Dimension dimension ){
-        //ImageView imageView = new ImageView( sample.Main.class.getResource(pathName).toString() );
-        ImageView imageView = new ImageView( new File(ICONS_PATH + pathName + ICONS_EXT).toURI().toString() );
+        ImageView imageView = new ImageView( sample.Main.class.getResource(ICONS_PATH + pathName + ICONS_EXT).toString() );
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setFitWidth(dimension.getWidth());

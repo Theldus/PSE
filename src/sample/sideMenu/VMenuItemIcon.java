@@ -10,8 +10,6 @@ import javafx.scene.paint.Paint;
 import sample.workspace.Workspace;
 
 import java.awt.*;
-import java.io.File;
-
 import static sample.util.Appearance.setBGColor;
 
 public class VMenuItemIcon extends HBox {
@@ -21,7 +19,7 @@ public class VMenuItemIcon extends HBox {
     private Button itemButton;
     private Pane paneIndicator;
     private String iconName;
-    private static final String PATH = "src/sample/icons/";
+    private static final String PATH = "icons/";
     private static final String EXTENSION = "Icon.png";
     private Workspace workspace;
 
@@ -36,7 +34,7 @@ public class VMenuItemIcon extends HBox {
         this.workspace = workspace;
         setMyParent(myParent);
         setIconName(iconName);
-        setItemIcon(new ImageView(new File(PATH+iconName+EXTENSION).toURI().toString()));
+        setItemIcon(new ImageView( sample.Main.class.getResource(PATH + iconName + EXTENSION).toString() ) );
         setItemButton(new Button());
         setPaneIndicator(new Pane());
         createComponent();
@@ -109,7 +107,7 @@ public class VMenuItemIcon extends HBox {
     }
 
     public void changeIcon(String pathName){
-          getItemIcon().setImage(new Image(new File(pathName).toURI().toString()));
+          getItemIcon().setImage(new Image( sample.Main.class.getResource(pathName).toString() ));
     }
 
     public ImageView getItemIcon() {

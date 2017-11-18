@@ -41,7 +41,9 @@ public class ItemView extends HBox {
         StackPane layout = new StackPane();
         layout.setAlignment(Pos.CENTER);
 
-        final ImageView imageView = new ImageView(new File(ICONS_PATH+ content.getIconPath() +ICONS_EXT).toURI().toString());
+        final ImageView imageView = new ImageView(
+                sample.Main.class.getResource(ICONS_PATH + content.getIconPath() + ICONS_EXT).toString() );
+
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setFitHeight(25.0f);
