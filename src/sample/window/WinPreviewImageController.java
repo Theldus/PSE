@@ -130,11 +130,8 @@ public class WinPreviewImageController implements Initializable {
 
     private void setFileChooser(){
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Todas imagens", "*.*"),
                 new FileChooser.ExtensionFilter("png", "*.png"),
-                new FileChooser.ExtensionFilter("jpg","*.jpg","*.jpeg"),
-                new FileChooser.ExtensionFilter("pbm","*.pbm"),
-                new FileChooser.ExtensionFilter("raw","*.raw")
+                new FileChooser.ExtensionFilter("jpg","*.jpg","*.jpeg")
         );
     }
 
@@ -146,7 +143,7 @@ public class WinPreviewImageController implements Initializable {
             fileChooser.setInitialDirectory(file.getParentFile());
             Image img = ImageUtil.scale(getImage(),dimensionImage.getWidth(),dimensionImage.getHeight(),false);
             ImageIO.write(SwingFXUtils.fromFXImage(img,null),
-                                                   formatImg,
+                                                   fileChooser.getSelectedExtensionFilter().getDescription(),
                                                     file);
         }else {
             //Empty
