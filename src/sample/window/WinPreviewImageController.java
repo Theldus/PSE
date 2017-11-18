@@ -143,7 +143,7 @@ public class WinPreviewImageController implements Initializable {
         fileChooser.setTitle("Salvar Imagem");
         File file = fileChooser.showSaveDialog(rootStage);
         if (file != null){
-            fileChooser.setInitialDirectory(new File(ImageUtil.replaceLast(file.getAbsolutePath(),'\\')));
+            fileChooser.setInitialDirectory(file.getParentFile());
             Image img = ImageUtil.scale(getImage(),dimensionImage.getWidth(),dimensionImage.getHeight(),false);
             ImageIO.write(SwingFXUtils.fromFXImage(img,null),
                                                    formatImg,

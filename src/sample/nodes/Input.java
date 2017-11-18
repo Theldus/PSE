@@ -57,8 +57,7 @@ public class Input extends NodeBox {
                     File file = fileChooser.showOpenDialog(PSEMainLayout.getRoot());
                     if (file != null) {
                         saveImg(file);
-                        fileChooser.setInitialDirectory(new File(ImageUtil.replaceLast(file.getAbsolutePath(),'\\')));
-
+                        fileChooser.setInitialDirectory(file.getParentFile());
                     } else {
                         Toast.show(getRoot(),
                                 Toast.ERROR_MESSAGE,
