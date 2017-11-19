@@ -26,7 +26,7 @@ public class VMenuItemIcon extends HBox {
     private static VMenuItem currentMenuItem = null;
     private boolean isChange = false;
     
-    private static final Paint BUTTON_COLOR = Paint.valueOf("#42f49e");
+    private static final Paint BUTTON_COLOR = Paint.valueOf("#00ffb2");
     private static final Dimension SIZE = new Dimension(50,50);
     private static final double SPACING = 2.0f;
 
@@ -96,8 +96,8 @@ public class VMenuItemIcon extends HBox {
 
     public void hover(VMenuItem menuItem){
         changeIcon(PATH+menuItem.getIcon().getIconName()+EXTENSION);
-        setBGColor(menuItem.getIcon().getItemButton(),"#42f49e",null,null);
-        setBGColor(menuItem.getIcon().getPaneIndicator(),"#42f49e",null,null);
+        setBGColor(menuItem.getIcon().getItemButton(),"#00ffb2",null,null);
+        setBGColor(menuItem.getIcon().getPaneIndicator(),"#00ffb2",null,null);
     }
 
     public void active(VMenuItem menuItem){
