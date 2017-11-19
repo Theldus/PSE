@@ -82,7 +82,8 @@ public class PluginController {
             /* Reads the entire DESC file. */
             List<NodeBoxData> list = new ArrayList<>();
             JSONParser jsonParser = new JSONParser();
-            JSONArray  listObjs   = (JSONArray) jsonParser.parse(new InputStreamReader(jf.getInputStream(ze)));
+            JSONArray  listObjs   = (JSONArray) jsonParser.parse(new InputStreamReader(jf.getInputStream(ze),
+                    "UTF-8"));
 
             for (Object obj : listObjs ){
                 JSONObject nodeBox = (JSONObject) obj;
