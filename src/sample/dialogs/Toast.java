@@ -75,7 +75,7 @@ public final class Toast extends BorderPane {
 
             Media sound = null;
             try {
-                sound = new Media( new File( sample.Main.class.getResource(musicFile).toURI().toString() ).toString() );
+                sound = new Media( sample.Main.class.getResource(musicFile).toURI().toString() );
             } catch (URISyntaxException e) {
                 e.printStackTrace();
             }

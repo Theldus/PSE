@@ -28,7 +28,7 @@ public class ManipulateJson {
         try
         {
            JSONArray listObjs = (JSONArray) jsonParser.parse(
-                   new InputStreamReader(sample.Main.class.getResourceAsStream("json/NodeBoxList")));
+                   new InputStreamReader(sample.Main.class.getResourceAsStream("json/NodeBoxList"), "UTF-8"));
 
            for(Object obj : listObjs ){
 

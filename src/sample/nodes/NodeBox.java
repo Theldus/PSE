@@ -25,6 +25,8 @@ import sample.util.Edge;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
@@ -38,8 +40,7 @@ import static sample.util.Appearance.*;
  */
 public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Algorithm{
 
-    protected Image auxImg = new ImageFacade(new File(
-            sample.Main.class.getResource("imgs/default.png").toString()).toString() );
+    protected  Image auxImg = new ImageFacade( sample.Main.class.getResourceAsStream("imgs/default.png") );
     private Image image = auxImg;
 
     /**
