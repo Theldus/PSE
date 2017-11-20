@@ -14,9 +14,19 @@ import sample.sideMenu.VMenuItem;
 
 import java.awt.*;
 
+/**
+ * Main class. Here is the the entry point
+ * of this PSE Image.
+ * @author Daniel
+ */
 public class
 Main extends Application {
 
+    /**
+     * Starts the application.
+     * @param primaryStage Stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         PSEMainLayout pseMainLayout = new PSEMainLayout(primaryStage);
@@ -24,6 +34,10 @@ Main extends Application {
 
     }
 
+    /**
+     * Main function
+     * @param args Argument list.
+     */
     public static void main(String[] args) {
         launch(args);
     }

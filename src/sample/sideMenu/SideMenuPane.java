@@ -13,8 +13,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import sample.util.Dimension;
 
+/**
+ * SideMenuPane
+ * @author Daniel
+ * @since 2017-11-02
+ */
 public class SideMenuPane extends VBox {
 
+    /* Private data. */
     private final static String FONT_NAME = "Yu Gothic";
     private final static float FONT_SIZE = 15.0f;
     private final double WIDTH = 300.f;
@@ -24,6 +30,10 @@ public class SideMenuPane extends VBox {
     private VBox container;
     private boolean isScrollable = false;
 
+    /**
+     * SideMenuPane constructor.
+     * @param title SideMenuPane title.
+     */
     public SideMenuPane(String title){
         this.title = new Label(title);
         this.scrollPane = new ScrollPane();
@@ -38,6 +48,9 @@ public class SideMenuPane extends VBox {
         addTitle();
     }
 
+    /**
+     * Set up the title into the SideMenu.
+     */
     public void addTitle(){
         this.title.setTextFill(Paint.valueOf("#FFFFFF"));
         this.title.setFont(Font.font(FONT_NAME, FontWeight.EXTRA_BOLD,FONT_SIZE));
@@ -45,6 +58,9 @@ public class SideMenuPane extends VBox {
         this.getChildren().add(this.title);
     }
 
+    /**
+     * Configures the ScrollPane.
+     */
     public void install(){
         if(isScrollable()){
             addScrollPane();
@@ -55,10 +71,17 @@ public class SideMenuPane extends VBox {
         }
     }
 
+    /**
+     * Sets the ScrollPane size given a dimension.
+     * @param dimension Dimension object.
+     */
     public void setScrollPaneSize(Dimension dimension){
         this.scrollPane.setMaxHeight(dimension.getHeight());
     }
 
+    /**
+     * Sets the ScrollPane
+     */
     public void addScrollPane(){
 
         this.scrollPane.getStylesheets().add(sample.Main.class.getResource("sideMenu/ScrollPaneStyle.css").toString() );
@@ -69,22 +92,43 @@ public class SideMenuPane extends VBox {
         this.scrollPane.setContent(container);
     }
 
+    /**
+     * Sets the title
+     * @param title SideMenuPane title.
+     */
     public void setTitle(String title){
         this.title.setText(title);
     }
 
+    /**
+     * Gets the title.
+     * @return Returns SideMenuPane title.
+     */
     public String getTitle(){
         return this.title.getText();
     }
 
+    /**
+     * Adds an arbitrary element into the SideMenuPane.
+     * @param item Item to be added.
+     */
     public void addItem( Pane item ){
         this.container.getChildren().add(item);
     }
 
+    /**
+     * Checks if the menu is scrollable.
+     * @return Returns true if the pane is scrollable,
+     * false otherwise.
+     */
     public boolean isScrollable() {
         return isScrollable;
     }
 
+    /**
+     * Enables/Disables scrolling into the pane.
+     * @param scrollable Enables or not the scroll in the menu.
+     */
     public void setScrollable(boolean scrollable) {
         isScrollable = scrollable;
     }

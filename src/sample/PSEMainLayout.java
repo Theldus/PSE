@@ -19,8 +19,13 @@ import sample.util.Dimension;
 
 import java.io.File;
 
+/**
+ * PSEMainLayout class. Defines the main layout
+ * @author Daniel.
+ */
 public class PSEMainLayout extends BorderPane{
 
+    /* Some important instances. */
     private Scene own;
     private static Stage root;
     private VMenuBar vMenuBar;
@@ -29,12 +34,16 @@ public class PSEMainLayout extends BorderPane{
     private Dimension prefSize = new Dimension(1024,768);
     private Delta delta = new Delta();
 
+    /* Delta class. */
     protected class Delta{
-
         double x;
         double y;
     }
 
+    /**
+     * PSEMainLayout constructor.
+     * @param arg_root Root stage.
+     */
     public PSEMainLayout(Stage arg_root){
         root = arg_root;
         own = new Scene(this);
@@ -44,21 +53,28 @@ public class PSEMainLayout extends BorderPane{
         addSideMenu();
     }
 
+    /**
+     * Shows the main window.
+     */
     public void show(){
         getRoot().setScene(own);
         getRoot().setTitle("PSE-IMAGE");
-        //getRoot().getScene().getStylesheets().add(new File("src/sample/PSEMainStyle.css").toURI().toString());
         getRoot().show();
-        //System.out.println(getRoot().getWidth() + " " + getRoot().getHeight());
     }
 
+    /**
+     * Adds a title.
+     */
     private void addTitle(){
-        //Empty
     }
 
+    /**
+     * Constructs the sideMenu.
+     */
     private void addSideMenu(){
         vMenuBar = new VMenuBar();
 
+        /* Node area. */
         SideMenuPane addSideMenuPane = new SideMenuPane("Adicionar Nó");
         addSideMenuPane.setScrollable(true);
         getRoot().maximizedProperty().addListener(new ChangeListener<Boolean>() {
@@ -72,6 +88,7 @@ public class PSEMainLayout extends BorderPane{
         ManipulateJson manipulateJson = new ManipulateJson();
         VMenuItemController.getInstance().fill(addSideMenuPane,manipulateJson.read());
 
+        /* Plugins area. */
         ItemViewAdapter ivaConfig = new ItemViewAdapter("Plugins", "Adicionar plugin");
         ivaConfig.getDescription().setFill(Paint.valueOf("#ffffff"));
         ivaConfig.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
@@ -117,12 +134,13 @@ public class PSEMainLayout extends BorderPane{
             }
         });
 
-
+        /* Configurations area. */
         SideMenuPane configSideMenuPane = new SideMenuPane("Configurações");
         configSideMenuPane.addItem(ivaConfig);
         configSideMenuPane.install();
         vMenuBar.addMenuItem( new VMenuItem("Setting", configSideMenuPane ,this.workspace));
 
+        /* About. */
         SideMenuPane helpSideMenuPane = new SideMenuPane("Ajuda");
         StringBuilder helpText = new StringBuilder();
         helpText.append("O projeto consiste em um PSE (Problem Solving Environment) ");
@@ -135,18 +153,14 @@ public class PSEMainLayout extends BorderPane{
 
         int spaceCount = 0;
         for( int i = 0 ; i < helpText.length() ; ++i ){
-
-            if( helpText.charAt(i) == ' ' ){
+            if( helpText.charAt(i) == ' ' )
                 ++spaceCount;
-            }
 
             if( spaceCount == 9 ){
                 text += "\n";
                 spaceCount = 0;
             }
-
             text += helpText.charAt(i);
-
         }
 
         ItemViewAdapter helpItemView = new ItemViewAdapter("Sobre",text);
@@ -157,19 +171,26 @@ public class PSEMainLayout extends BorderPane{
         setLeft(vMenuBar);
     }
 
+    /**
+     * Adds the Workspace.
+     */
     private void addWorkspace(){
         workspace = new Workspace(new Dimension(1024,768));
         MainController.getInstance().setWorkspace(this.workspace);
-        //MainController.getInstance().installNodes();
         setCenter(workspace);
     }
 
+    /**
+     * Adds a footer pane.
+     */
     private void addFooterPane(){
-        //Empty
     }
 
+    /**
+     * Gets the root stage.
+     * @return Returns the root stage.
+     */
     public static Stage getRoot() {
         return root;
     }
-
 }

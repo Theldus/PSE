@@ -1,9 +1,9 @@
 package sample;
 
-import javafx.event.Event;
-
+/**
+ * Generic interface that defines a generic behaviour.
+ * @author Daniel.
+ */
 public interface Behavior {
-
-    public void make();
-
+    void make();
 }

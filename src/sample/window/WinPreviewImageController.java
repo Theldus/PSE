@@ -31,10 +31,12 @@ import java.util.ResourceBundle;
 import static sample.util.Appearance.ICONS_PATH;
 
 /**
- * Created by Daniel on 13/11/2017.
+ * WinPreviewImageController class. Controller class for the
+ * WinPreviewImage.fxml, that manages the preview image window.
  */
 public class WinPreviewImageController implements Initializable {
 
+    /* FXML components. */
     @FXML
     private Pane mainPane;
 
@@ -56,7 +58,7 @@ public class WinPreviewImageController implements Initializable {
     @FXML
     private ComboBox cBoxImgSize;
 
-
+    /* Private data. */
     private Dimension dimPreviewImage = new Dimension(475,386);
     private Dimension dimensionImage;
     private static Stage rootStage;
@@ -67,30 +69,56 @@ public class WinPreviewImageController implements Initializable {
     private boolean clicked = false;
     private String formatImg = "png";
 
+    /**
+     * Sets root component.
+     * @param stage Stage component.
+     */
     public static void setRoot( Stage stage ){
         rootStage = stage;
     }
 
-    public static void setImage( Image img ){
-        image = img;
-    }
-
+    /**
+     * Sets the current root component as the rootStage.
+     */
     public void setRoot(){
         currRootStage = rootStage;
     }
 
+    /**
+     * Gets the root component.
+     * @return Returns the root component.
+     */
     public Stage getRoot(){
         return currRootStage;
     }
 
+    /**
+     * Sets the preview image.
+     * @param img Input image.
+     */
+    public static void setImage( Image img ){
+        image = img;
+    }
+
+    /**
+     * Sets the current preview image as the image.
+     */
     public void setImage(){
         currImg = image;
     }
 
+    /**
+     * Gets the current image.
+     * @return Returns the image.
+     */
     public Image getImage(){
         return currImg;
     }
 
+    /**
+     * Resize the image.
+     * @return Resized image.
+     */
     public ImageView changeDimensionImage(){
         ImageView imageView = new ImageView( getImage() );
         imageView.setFitWidth(dimPreviewImage.getWidth());
@@ -98,6 +126,11 @@ public class WinPreviewImageController implements Initializable {
         return imageView;
     }
 
+    /**
+     * Initializes the components.
+     * @param location location.
+     * @param resources resources.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setRoot();
@@ -105,7 +138,7 @@ public class WinPreviewImageController implements Initializable {
 
         setFileChooser();
 
-        //set default size image
+        /* Set default size image. */
         dimensionImage = new Dimension(getImage().getWidth(),getImage().getHeight());
 
         closeBtn.setImage( new Image( sample.Main.class.getResource(ICONS_PATH + "closeIcon.png").toString() ) );
@@ -128,6 +161,9 @@ public class WinPreviewImageController implements Initializable {
         mainPane.getChildren().add(changeDimensionImage());
     }
 
+    /**
+     * Sets the fileChooser.
+     */
     private void setFileChooser(){
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("png", "*.png"),
@@ -135,6 +171,11 @@ public class WinPreviewImageController implements Initializable {
         );
     }
 
+    /**
+     * Image save button.
+     * @param event Event.
+     * @throws IOException
+     */
     public void saveClickedEvent(MouseEvent event) throws IOException {
 
         fileChooser.setTitle("Salvar Imagem");
@@ -145,23 +186,32 @@ public class WinPreviewImageController implements Initializable {
             ImageIO.write(SwingFXUtils.fromFXImage(img,null),
                                                    fileChooser.getSelectedExtensionFilter().getDescription(),
                                                     file);
-        }else {
-            //Empty
         }
     }
 
+    /**
+     * OnMosueEntered event.
+     * @param event Event.
+     */
     public void saveEnteredEvent(MouseEvent event) {
         saveBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "saveEnteredIcon.png").toString() )));
     }
 
+    /**
+     * OnMouseExited event.
+     * @param event Event.
+     */
     public void saveExitedEvent(MouseEvent event) {
         saveBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "saveIcon.png").toString() )));
     }
 
+    /**
+     * Configures the click event.
+     * @param event Event.
+     */
     public void configClickedEvent(MouseEvent event) {
-
         if( clicked ){
-            //add controlPanel
+            /* Add controlPanel. */
             settingPane.setVisible(true);
             mainPane.setVisible(false);
             clicked = false;
@@ -173,20 +223,23 @@ public class WinPreviewImageController implements Initializable {
         }
     }
 
+    /**
+     * Sets the image sizes.
+     */
     private void setComboBoxImgSize(){
-
         cBoxImgSize.setPromptText("Tamanho imagem");
         cBoxImgSize.getItems().addAll("tamanho original","600x400","800x600","1024x768","1280x1024");
-
     }
 
+    /**
+     * Watch for the dimension value changes
+     */
     @Action
     private void setValuePropertyComboBoxSize(){
 
         cBoxImgSize.valueProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
-
                 if(newValue.toString().equals("tamanho original")){
                     dimensionImage.setWidth(getImage().getWidth());
                     dimensionImage.setHeight(getImage().getHeight());
@@ -198,39 +251,70 @@ public class WinPreviewImageController implements Initializable {
                 }
 
                 System.out.println("Dim: "+ dimensionImage.getWidth() + " " + dimensionImage.getHeight());
-
             }
         });
     }
 
+    /**
+     * Configure OnMouseEntered event.
+     * @param event Event.
+     */
     public void configEnteredEvent(MouseEvent event) {
         configBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "settEnteredIcon.png").toString() )));
     }
 
+    /**
+     * Configure OnMouseExited event.
+     * @param event Event.
+     */
     public void configExitedEvent(MouseEvent event) {
         configBtn.setGraphic(new ImageView(new Image(sample.Main.class.getResource(ICONS_PATH + "settIcon.png").toString() )));
     }
 
+    /**
+     * Close OnMouseClicked event.
+     * @param event Event.
+     */
     public void closeClickedEvent(MouseEvent event) {
         getRoot().getScene().getWindow().hide();
     }
 
+    /**
+     * Close OnMouseEntered event.
+     * @param event Event.
+     */
     public void closeEnteredEvent(MouseEvent event) {
         closeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "closeEnteredIcon.png").toString() ));
     }
 
+    /**
+     * Close OnMouseExited event.
+     * @param event Event.
+     */
     public void closeExitedEvent(MouseEvent event) {
         closeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "closeIcon.png").toString() ));
     }
 
+    /**
+     * Minimize OnMouseClicked event.
+     * @param mouseEvent Event.
+     */
     public void minimizeClickedEvent(MouseEvent mouseEvent) {
         getRoot().setIconified(true);
     }
 
+    /**
+     * Minimize OnMouseEntered event.
+     * @param mouseEvent Event.
+     */
     public void minimizeEnteredEvent(MouseEvent mouseEvent) {
         minimizeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "minimizeEnteredIcon.png").toString() ));
     }
 
+    /**
+     * Minimize OnMouseExited event.
+     * @param mouseEvent Event.
+     */
     public void minimizeExitedEvent(MouseEvent mouseEvent) {
         minimizeBtn.setImage(new Image(sample.Main.class.getResource(ICONS_PATH + "minimizeIcon.png").toString() ));
     }

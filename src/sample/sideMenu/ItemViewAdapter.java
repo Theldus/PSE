@@ -14,20 +14,35 @@ import static sample.util.Appearance.FONT_NAME;
 import static sample.util.Appearance.FONT_SIZE;
 import static sample.util.Appearance.TEXT_COLOR;
 
+/**
+ * ItemView class.
+ * @author Daniel
+ * @since 2017-11-02
+ */
 public class ItemViewAdapter extends VBox {
 
+    /* Private data. */
     private String title;
     private String description;
 
     private Label lblTitle;
     private Text txtDescription;
 
+    /**
+     * ItemViewAdapter constructor.
+     * @param title Title
+     * @param description Description
+     */
     public ItemViewAdapter( String title, String description ){
         this.title = title;
         this.description = description;
         createItemView();
     }
 
+    /**
+     * Creates the title and description text.
+     * @return Returns a VBox containing the data.
+     */
     public VBox createText(){
 
         final VBox layout = new VBox(15.0f);
@@ -51,6 +66,9 @@ public class ItemViewAdapter extends VBox {
 
     }
 
+    /**
+     * Sets up some attributes.
+     */
     public void createItemView(){
         this.setAlignment(Pos.CENTER_LEFT);
         this.setSpacing(10.0f);
@@ -58,6 +76,10 @@ public class ItemViewAdapter extends VBox {
         this.getChildren().add( createText() );
     }
 
+    /**
+     * Gets the description.
+     * @return Returns NodeBox description.
+     */
     public Text getDescription() {
         return this.txtDescription;
     }

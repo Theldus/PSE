@@ -24,19 +24,31 @@ import static sample.util.Appearance.*;
 import static sample.util.Appearance.FONT_SIZE;
 
 /**
- * Created by Daniel on 02/11/2017.
+ * ItemView class, each item in the algorithm
+ * selection menu is actually an ItemView.
+ * @author Daniel
+ * @since 2017-11-02
  */
 public class ItemView extends HBox {
 
+    /* Private data. */
     private NodeBoxData content;
     private Label title;
     private Text description;
 
+    /**
+     * ItemView constructor
+     * @param content NodeBoxData object
+     */
     public ItemView(NodeBoxData content){
         this.content = content;
         createItemView();
     }
 
+    /**
+     * Creates the left side Icon
+     * @return Returns a StackPane
+     */
     public StackPane createIcon(){
         StackPane layout = new StackPane();
         layout.setAlignment(Pos.CENTER);
@@ -54,6 +66,10 @@ public class ItemView extends HBox {
         return layout;
     }
 
+    /**
+     * Creates the title and description text
+     * @return Returns a VBox containing the texts.
+     */
     public VBox createText(){
 
         final VBox layout = new VBox(5.0f);
@@ -77,6 +93,9 @@ public class ItemView extends HBox {
 
     }
 
+    /**
+     * Creates the ItemView.
+     */
     public void createItemView(){
         this.setAlignment(Pos.CENTER_LEFT);
         this.setSpacing(5.0f);
@@ -86,18 +105,22 @@ public class ItemView extends HBox {
         setEvent();
     }
 
+    /**
+     * Setup all the events.
+     */
     public void setEvent(){
 
+        /* MouseEntered event. */
         this.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                //description.setFill(Paint.valueOf("#5e75cd"));
                 ItemView.this.title.setTextFill(Paint.valueOf("#00ffb2"));
                 ItemView.this.setBackground(new Background(new BackgroundFill(Paint.valueOf("#131313"),null,null)));
                 event.consume();
             }
         });
 
+        /* MouseExited event. */
         this.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -108,6 +131,7 @@ public class ItemView extends HBox {
             }
         });
 
+        /* MouseClicked event, here we instantiate the NodeBox properly. */
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -115,6 +139,7 @@ public class ItemView extends HBox {
                 try {
                     NodeBox nodeBox;
 
+                    /* NodeBoxes default.*/
                     if (content.getClassLoader() == null){
                         nodeBox = (NodeBox) Class.forName("sample.nodes."+content.getClassName())
                                 .getConstructor(String.class,Workspace.class,String.class)
@@ -122,6 +147,8 @@ public class ItemView extends HBox {
                                 MainController.getInstance().getCurrentWorkspace(),
                                 content.getIconPath());
                     }
+
+                    /* NodeBoxes loaded dynamically, aka plugin. */
                     else{
                         Class classObj = content.getClassLoader().loadClass( content.getClassName() );
 
@@ -131,24 +158,12 @@ public class ItemView extends HBox {
                                 content.getIconPath());
                     }
 
+                    /* Adds into the Workspace. */
                     MainController.getInstance().getCurrentWorkspace().getChildren().add(nodeBox);
-                    Workspace ws = MainController.getInstance().getCurrentWorkspace();
 
-                    //Set static position node
+                    /* Set static position node. */
                     nodeBox.setLayoutX(350.0f);
                     nodeBox.setLayoutY(0);
-
-                    //Notify node addicted
-                    /*
-                    Toast.show(ws,
-                               Toast.INFORMATION_MESSAGE,
-                               String.format("Nó: %s adicionado!",content.getName()),
-                               "CheckmarkIcon",
-                               1000,
-                               200,
-                               200,
-                                null);
-                    */
 
                     nodeBox.toBack();
                 } catch (InstantiationException e) {
@@ -168,5 +183,4 @@ public class ItemView extends HBox {
             }
         });
     }
-
 }

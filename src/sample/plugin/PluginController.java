@@ -148,7 +148,7 @@ public class PluginController {
 
             /* Success message. */
             Toast.show(MainController.getInstance().getCurrentWorkspace(),
-                Toast.ERROR_MESSAGE,
+                Toast.INFORMATION_MESSAGE,
                 "Plugin " + file.getName() + " successfully loaded!",
                 "CheckmarkIcon",
                 1000,
