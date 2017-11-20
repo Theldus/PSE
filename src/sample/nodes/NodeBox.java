@@ -225,10 +225,18 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
         return edgesList.remove(e);
     }
 
+    /**
+     * Gets the NodeBox image.
+     * @return Returns the NodeBox image.
+     */
     public Image getImage() {
         return image;
     }
 
+    /**
+     * Sets the NodeBox image.
+     * @param image Image.
+     */
     public void setImage(Image image) {
         this.image = image;
     }
