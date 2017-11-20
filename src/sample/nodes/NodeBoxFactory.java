@@ -31,16 +31,20 @@ public class NodeBoxFactory {
     }
 
     /**
-     * Gets a GaussianFilter instance
-     * @param workspace workspace that will add the filter.
+     * Creates a GaussianFilter instance.
+     * @param title Title.
+     * @param workspace Workspace.
+     * @param iconPath Icon path.
      */
     public void createGaussianFilter(String title, Workspace workspace, String iconPath){
          new GaussianFilter(title, workspace, iconPath).install();
     }
 
     /**
-     * Gets a Histogram instance
-     * @param workspace workspace that will add the object.
+     * Creates a Histogram instance.
+     * @param title Title.
+     * @param workspace Workspace.
+     * @param iconPath Icon path.
      */
     public void createHistogram(String title, Workspace workspace, String iconPath){
          new Histogram(title, workspace, iconPath).install();

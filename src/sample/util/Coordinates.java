@@ -80,7 +80,7 @@ public class Coordinates {
 
     /**
      * Does translation based in some extremity.
-     * @param extremity
+     * @param extremity Extremity coordinates.
      */
     public void translation( Coordinates extremity ) {
         setCoordinates( getX() - extremity.x , getY() - extremity.y  );

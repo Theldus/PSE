@@ -174,7 +174,6 @@ public class WinPreviewImageController implements Initializable {
     /**
      * Image save button.
      * @param event Event.
-     * @throws IOException
      */
     public void saveClickedEvent(MouseEvent event) throws IOException {
 

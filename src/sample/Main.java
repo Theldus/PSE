@@ -25,7 +25,6 @@ Main extends Application {
     /**
      * Starts the application.
      * @param primaryStage Stage
-     * @throws Exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception{

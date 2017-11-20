@@ -201,7 +201,8 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
     }
 
     /**
-     * Gets the edgeList.
+     * Gets the edge list.
+     * @return Returns an edge list.
      */
     public ArrayList<Edge> getEdgeList() {
         return edgesList;
@@ -456,25 +457,33 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
         }
 
         /**
-         * Get Header title.
-         * @return Header title.
+         * Gets Header title.
+         * @return Returns the header title.
          */
         public String getTitle() {
             return title.getText();
         }
 
         /**
-         * Set Header title.
-         * @param title
+         * Sets Header title.
+         * @param title Header title.
          */
         public void setTitle(String title) {
             this.title.setText(title);
         }
 
+        /**
+         * Gets the container.
+         * @return Returns the container.
+         */
         public HBox getContainer() {
             return container;
         }
 
+        /**
+         * Sets the horizontal box container.
+         * @param container Container to be added.
+         */
         public void setContainer(HBox container) {
             this.container = container;
         }
@@ -571,7 +580,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
 
         /**
          * Sets the appearance of an IO button.
-         * @return
+         * @return Returns an I/O button.
          */
         public Circle createIOButton(){
             Circle channel = new Circle(5.0f);
