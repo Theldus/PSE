@@ -341,6 +341,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
          */
         private void setEvents(){
 
+            /* Delete node event. */
             deleteIcon.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -372,6 +373,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                 }
             });
 
+            /* Delete icon mouse hover. */
             deleteIcon.addEventFilter(MouseEvent.MOUSE_ENTERED,new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -381,6 +383,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                 }
             });
 
+            /* Delete icon mouse exited. */
             deleteIcon.addEventFilter(MouseEvent.MOUSE_EXITED,new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -390,23 +393,20 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                 }
             });
 
+            /* Settings icon clicked. */
             settingIcon.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 private boolean clicked = true;
                 public void handle(MouseEvent event) {
 
                     if( clicked ){
-                        //add controlPanel
+                        /* add control Panel. */
 
                         try {
-
                             Parent toolsPane = FXMLLoader.load(getClass().getResource("/sample/nodes/ToolsUINodeBox.fxml"));
                             setBottom(toolsPane);
-
-
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-
 
                         clicked = false;
                     }
@@ -418,6 +418,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                 }
             });
 
+            /* Settings icon mouse hover. */
             settingIcon.addEventFilter(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -427,6 +428,7 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                 }
             });
 
+            /* Settings icon mouse exited. */
             settingIcon.addEventFilter(MouseEvent.MOUSE_EXITED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -435,9 +437,12 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
                     event.consume();
                 }
             });
-
         }
 
+        /**
+         * Removes the setting icon, it's necessary if the
+         * node does not use it.
+         */
         protected void removeSupport(){
             this.container.getChildren().remove(settingIcon);
         }
@@ -641,40 +646,69 @@ public abstract class NodeBox extends BorderPane implements NodeBoxObserver, Alg
             this.output = output;
         }
 
-
+        /**
+         * Gets the actionBtn.
+         * @return Returns the actionBtn.
+         */
         public Button getActionBtn() {
             return actionBtn;
         }
 
+        /**
+         * Configures the actionBtn.
+         * @param actionBtn actionBtn.
+         */
         public void setActionBtn(Button actionBtn) {
             this.actionBtn = actionBtn;
         }
 
+        /**
+         * Sets the NodeBox icon.
+         * @param actionIcon actionIcon.
+         */
         public void setIcon( ImageView actionIcon ){
             this.setActionIcon(actionIcon);
         }
 
+        /**
+         * Sets the NodeBox icon, using the current icon.
+         */
         public void setIcon(){
             setActionIcon(createIcon(NodeBox.this.actionIcon, new Dimension(23.0f,23.0f) ));
         }
 
+        /**
+         * Gets the current container.
+         * @return Returns the container.
+         */
         public HBox getContainer() {
             return container;
         }
 
+        /**
+         * Sets the current container.
+         * @param container Container.
+         */
         public void setContainer(HBox container) {
             this.container = container;
         }
 
+        /**
+         * Gets the actionIcon.
+         * @return Returns the actionIcon.
+         */
         public ImageView getActionIcon() {
             return actionIcon;
         }
 
+        /**
+         * Sets the actionIcon.
+         * @param actionIcon actionIcon.
+         */
         public void setActionIcon(ImageView actionIcon) {
             this.actionIcon = actionIcon;
         }
     }
-
 
     /**
      * Sets the Node background color.

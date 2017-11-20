@@ -5,6 +5,10 @@ import javafx.scene.image.Image;
 import sample.util.ImageUtil;
 import sample.workspace.Workspace;
 
+/**
+ * LogicalOperatorNot class. This is a NOT node.
+ * @author Pertence, Daniel.
+ */
 public class LogicalOperatorNot extends NodeBox {
     /**
      * Setup the appearance: title, icon and workspace.
@@ -18,22 +22,28 @@ public class LogicalOperatorNot extends NodeBox {
         getHeader().removeSupport();
     }
 
+    /**
+     * Receives an image from another node.
+     * @param image Input image
+     */
     @Override
     public void update(Image image) {
-
         setImage(image);
         execute();
 
         if( ! (getImage() instanceof ImageFacade) ){
             super.update(getImage());
         }
-
     }
 
-    //Método para fazer NOT em uma imagens A.
+    /**
+     * Negate an image.
+     * @param A Input image.
+     * @return Returns a matrix representing the operation.
+     */
     int[][] not(int [][] A){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
+        int n = A.length;    /* A lines.  */
+        int m = A[0].length; /* A columns */
         int [][] B = new int[n][m];
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
@@ -43,12 +53,18 @@ public class LogicalOperatorNot extends NodeBox {
         return B;
     }
 
-
+    /**
+     * Installs the node, i.e: adds into the workspace.
+     */
     @Override
     public void install() {
-
     }
 
+    /**
+     * Execute alias: converts the input image,
+     * calls the algorithm, convert back, and
+     * stores.
+     */
     @Override
     public void execute() {
         setImage( ImageUtil.toImage( not( ImageUtil.convertToGreyTone( SwingFXUtils.fromFXImage(getImage(),null) ) ) ) );

@@ -13,7 +13,7 @@ import sample.util.Edge;
  * methods to work properly.
  * @implNote Unlike the name, this class handles all
  * mouse events, not just drag events.
- * @author Daniel
+ * @author Daniel, Davidson
  * @version v1.0
  */
 public class NodeBoxDraggable extends DraggedBehavior {
@@ -114,20 +114,7 @@ public class NodeBoxDraggable extends DraggedBehavior {
     @Override
     public void onMouseEntered(MouseEvent event) {
         NodeBox nodeBox = cast();
-
         nodeBox.getHeader().setVisible(true);
-        /*
-        if( nodeBox instanceof Input ) {
-            nodeBox.getNode().add(nodeBox.getNode().getOutput());
-        }
-        else if( nodeBox instanceof Output ) {
-            nodeBox.getNode().add(nodeBox.getNode().getInput());
-        }
-        else{
-            nodeBox.getNode().add(nodeBox.getNode().getInput());
-            nodeBox.getNode().add(nodeBox.getNode().getOutput());
-        }
-        */
     }
 
     /**
@@ -137,20 +124,6 @@ public class NodeBoxDraggable extends DraggedBehavior {
     @Override
     public void onMouseExited(MouseEvent event) {
         NodeBox nodeBox = cast();
-
         nodeBox.getHeader().setVisible(false);
-
-        /*
-        if( nodeBox instanceof Input ) {
-            nodeBox.getNode().remove(nodeBox.getNode().getOutput());
-        }
-        else if( nodeBox instanceof Output ) {
-            nodeBox.getNode().remove(nodeBox.getNode().getInput());
-        }
-        else{
-            nodeBox.getNode().remove(nodeBox.getNode().getInput());
-            nodeBox.getNode().remove(nodeBox.getNode().getOutput());
-        }
-        */
     }
 }

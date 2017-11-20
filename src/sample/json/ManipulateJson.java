@@ -11,16 +11,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Daniel on 02/11/2017.
+ * Reads a NodeBoxList JSON file and creates a list
+ * of NodeBox data ready to insert into the GUI.
+ * @author Daniel, Davidson.
+ * @since 2017-11-02
  */
 public class ManipulateJson {
 
     JSONParser jsonParser;
 
+    /**
+     * ManipulateJson constructor.
+     */
     public ManipulateJson(){
         jsonParser = new JSONParser();
     }
 
+    /**
+     * Reads a json/NodeBoxList file and fills an array of NodeBoxData.
+     * @return NodeBoxData array.
+     */
     public Object[] read(){
 
         final List<NodeBoxData> list = new ArrayList<>();
@@ -53,8 +63,4 @@ public class ManipulateJson {
 
         return list.toArray();
     }
-
-
-
-
 }

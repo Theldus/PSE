@@ -14,13 +14,21 @@ import sample.workspace.Workspace;
 import java.io.File;
 
 /**
- * Created by Daniel on 02/11/2017.
+ * Input class, let the user to choose an image from a file system.
+ * @since 2017-11-02
  */
 public class Input extends NodeBox {
 
     private final FileChooser fileChooser = new FileChooser();
-    private FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Image File","*.png","*.jpg","*.jpeg","*.raw","*.bpm");
-    public static Image imageAux;
+    private FileChooser.ExtensionFilter extensionFilter = new FileChooser.
+            ExtensionFilter("Image File","*.png","*.jpg","*.jpeg","*.raw","*.bpm");
+
+    /**
+     * Input constructor.
+     * @param title Title.
+     * @param root Parent root.
+     * @param iconPath Icon path.
+     */
     public Input(String title,Workspace root,String iconPath) {
         super(title, root, iconPath);
         getHeader().removeSupport();
@@ -28,16 +36,26 @@ public class Input extends NodeBox {
         execute();
     }
 
+    /**
+     * Installs the node inside the parent.
+     */
     public void install() {
         getRoot().add(this);
     }
 
+    /**
+     * Setup the fileChooser.
+     */
     public void configFileChooser(){
         this.fileChooser.setTitle("Abrir Imagem");
         this.fileChooser.getExtensionFilters().add(extensionFilter);
-        //lastPathName = this.fileChooser.getInitialDirectory().getAbsolutePath();
     }
 
+    /**
+     * Whenever the input is changed or a new connection
+     * is made this function is called.
+     * @param image Current image
+     */
     @Override
     public void update(Image image) {
 
@@ -46,6 +64,9 @@ public class Input extends NodeBox {
         }
     }
 
+    /**
+     * Open the fileChooser the choose the image.
+     */
     @Override
     public void execute() {
         configFileChooser();
@@ -73,10 +94,12 @@ public class Input extends NodeBox {
         });
     }
 
+    /**
+     * Saves the image given a file.
+     * @param file Target file.
+     */
     private void saveImg(File file){
-
         setImage(new Image(file.toURI().toString()));
-        //imageAux = getImage();
         update(null);
 
         Toast.show(getRoot(),
@@ -87,8 +110,5 @@ public class Input extends NodeBox {
                 200,
                 200,
                 "Alert");
-
     }
-
 }
-

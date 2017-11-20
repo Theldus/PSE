@@ -8,6 +8,12 @@ import sample.workspace.Workspace;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * ArithmeticOperatorSubt, does a image subtraction.
+ * @author Daniel.
+ * @implNote Note that this class is multi-input implementation
+ * of a node.
+ */
 public class ArithmeticOperatorSubt extends NodeBox {
 
     private int emptyPos = 0;
@@ -28,7 +34,11 @@ public class ArithmeticOperatorSubt extends NodeBox {
             imagePeer[i] = SwingFXUtils.fromFXImage(auxImg,null);
     }
 
-
+    /**
+     * Whenever the input is changed or a new connection
+     * is made this function is called.
+     * @param image Current image
+     */
     @Override
     public void update(Image image) {
 
@@ -47,41 +57,41 @@ public class ArithmeticOperatorSubt extends NodeBox {
         }
     }
 
-    //Método para fazer soma entre imagens A e B
+    /**
+     * Method to do image subtraction between two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns the matrix representing the operation.
+     */
     private int[][] minus(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns. */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
 
-        if(n != o || m != p){
+        if(n != o || m != p)
             return ImageUtil.convertToGreyTone(SwingFXUtils.fromFXImage(auxImg,null));
-        }
 
         int [][] C = new int[n][m];
 
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
-                C[i][j] = normalize(Math.abs( A[i][j] - B[i][j] ) );
+                C[i][j] = ImageUtil.normalize(Math.abs( A[i][j] - B[i][j] ) );
             }
         }
         return C;
     }
 
-
-    //Método para normalizar um pixel entre valores 0 e 255
-    private int normalize(int i){
-        if(i<0)
-            i = 0;
-        if(i>255)
-            i = 255;
-        return i;
-    }
-
+    /**
+     * Installs the NodeBox, i.e: sets everything up to work.
+     */
     @Override
     public void install() {
     }
 
+    /**
+     * The algorithm goes here.
+     */
     @Override
     public void execute() {
     }

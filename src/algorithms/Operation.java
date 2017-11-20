@@ -1,20 +1,32 @@
 package algorithms;
 
 //Classe com métodos para fazer operações aritméticas e lógicas sobre imagens
+
+/**
+ * Class with methods to do math and logic operations
+ * in images.
+ * @author Pertence.
+ */
 public class Operation {
 
     private Utility util = new Utility();
 
     //Método para fazer soma entre imagens A e B
-    public int[][] sum(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
 
-        if(n != o || m != p){
+    /**
+     * Sum two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns a matrix representing the sum.
+     */
+    public int[][] sum(int [][] A, int [][] B){
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns. */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
+
+        if(n != o || m != p)
             return null;
-        }
 
         int [][] C = new int[n][m];
 
@@ -26,16 +38,20 @@ public class Operation {
         return C;
     }
 
-    //Método para fazer subtração entre imagens A e B
+    /**
+     * Subtracts two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns a matrix representing the operation.
+     */
     public int[][] minus(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns. */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
 
-        if(n != o || m != p){
+        if(n != o || m != p)
             return null;
-        }
 
         int [][] C = new int[n][m];
 
@@ -47,16 +63,20 @@ public class Operation {
         return C;
     }
 
-    //Método para fazer multiplicação entre imagens A e B
+    /**
+     * Multiply two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns a matrix representing the multiplication.
+     */
     public int[][] times(int [][] A, int [][] B)  {
         int n = A.length; //Número de linhas de A
         int m = A[0].length; //Número de colunas de A
         int o = B.length; //Número de linhas de B
         int p = B[0].length; // Número de colunas B
 
-        if (m != n) {
+        if (m != n)
             return null;
-        }
 
         int [][] C = new int[n][p];
         for (int i = 0; i < n; i++) {
@@ -70,10 +90,14 @@ public class Operation {
         return C;
     }
 
-    //Método para fazer NOT em uma imagens A.
+    /**
+     * Negate an image.
+     * @param A Input image.
+     * @return Returns a matrix representing the operation.
+     */
     int[][] not(int [][] A){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
+        int n = A.length;    /* A lines.  */
+        int m = A[0].length; /* A columns */
         int [][] B = new int[n][m];
         for(int i=0; i<n; i++){
             for(int j=0; j<m; j++){
@@ -83,16 +107,20 @@ public class Operation {
         return B;
     }
 
-    //Método para fazer AND entre imagens A e B
+    /**
+     * AND two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns a matrix representing the operation.
+     */
     int[][] and(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns  */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
 
-        if(n != o || m != p){
+        if(n != o || m != p)
             return null;
-        }
 
         int [][] C = new int[n][m];
         for(int i=0; i<m; i++){
@@ -103,16 +131,20 @@ public class Operation {
         return C;
     }
 
-    //Método para fazer OR entre imagens A e B
+    /**
+     * OR two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns a matrix representing the operation.
+     */
     int[][] or(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns. */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
 
-        if(n != o || m != p){
+        if(n != o || m != p)
             return null;
-        }
 
         int [][] C = new int[n][m];
         for(int i=0; i<m; i++){
@@ -122,5 +154,4 @@ public class Operation {
         }
         return C;
     }
-
 }

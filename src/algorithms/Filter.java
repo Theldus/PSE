@@ -1,18 +1,27 @@
 package algorithms;
 
-//Classe com métodos para fitrar uma imagem
+/**
+ * Class that contains some methods that apply some
+ * filters in the image.
+ * @author Pertence.
+ */
 public class Filter {
 
-    //Método para aplicar filtro gaussiano em uma imagem A
+    /**
+     * Method that applies the gaussian filter in an image.
+     * @param A Image.
+     * @return Returns a matrix that contains the image.
+     */
     int[][] gauss(int [][] A){
-
         return A;
     }
 
-    //Método para aplicar filtro laplaciano em uma imagem A
+    /**
+     * Method that applies the laplacian filter in an image.
+     * @param A Image.
+     * @return Returns a matrix that contains the image.
+     */
     int[][] laplace(int [][] A){
-
         return A;
     }
-
 }

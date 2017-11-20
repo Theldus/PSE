@@ -12,7 +12,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
 
 /**
- * Created by Daniel on 17/11/2017.
+ * MSE filter.
+ * @author Adhonay, Daniel.
+ * @since 2017-17-11
  */
 public class MSE extends NodeBox{
 
@@ -34,9 +36,12 @@ public class MSE extends NodeBox{
             imagePeer[i] = SwingFXUtils.fromFXImage(auxImg,null);
     }
 
+    /**
+     * Receives an image from another node.
+     * @param image Input image
+     */
     @Override
     public void update(Image image) {
-
         imagePeer[ this.emptyPos++ % 2 ] = SwingFXUtils.fromFXImage(image,null);
 
         if( getInputNumber() == INPUT_MAX ){
@@ -53,11 +58,15 @@ public class MSE extends NodeBox{
             setImage(SwingFXUtils.toFXImage(bImg,null));
             System.out.printf("PSNR: %s\n",result);
             super.update(getImage());
-
         }
-
     }
 
+    /**
+     * MSE algorithm.
+     * @param im1 Input image1.
+     * @param im2 Input image2.
+     * @return Returns the similarity between two images.
+     */
     public static String MSE (BufferedImage im1, BufferedImage im2) {
         assert(
                 im1.getType() == im2.getType()
@@ -82,19 +91,23 @@ public class MSE extends NodeBox{
         mse /= (double) (width * height);
         System.err.println("MSE = " + mse);
         float x = (100*sum)/(width * height);
-        System.out.println("A PORCENTAGEM DE SIMILARIDADE É APROXIMADAMENTE="+x+"%");
+        System.out.println("The percentage of similarity is approximately="+x+"%");
         return String.format("%.2f",mse);
     }
 
-
+    /**
+     * Execute alias: converts the input image,
+     * calls the algorithm, convert back, and
+     * stores.
+     */
     @Override
     public void execute() {
-        //Empty
     }
 
+    /**
+     * Installs the node, i.e: adds into the workspace.
+     */
     @Override
     public void install() {
-
     }
-
 }

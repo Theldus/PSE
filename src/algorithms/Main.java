@@ -9,13 +9,20 @@ import java.io.FileReader;
 import java.io.Reader;
 
 //Classe para executar scripts
+
+/**
+ * Test-bench class, reads a JavaScript file
+ * and execute some tests.
+ * @author Pertence.
+ */
 public class Main {
 
-    /*É necessário passar o caminho do script como argumento
-      caso contrário o método joga uma exceção e o programa para.*/
-    //Método para executar scripts
+    /**
+     * Main function, just execute the scripts.
+     * @param args Arguments list.
+     */
     public static void main(String[] args) {
-        //Utiliza-se a engine chamada nashorn para executar javascript
+        /* Nashorn engine. */
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("nashorn");
         File file = new File(args[0]);

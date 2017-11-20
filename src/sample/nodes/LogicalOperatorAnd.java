@@ -8,6 +8,10 @@ import sample.workspace.Workspace;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * LogicalOperatorAnd class. This is a AND node.
+ * @author Pertence, Daniel.
+ */
 public class LogicalOperatorAnd extends NodeBox {
 
     private int emptyPos = 0;
@@ -28,10 +32,12 @@ public class LogicalOperatorAnd extends NodeBox {
             imagePeer[i] = SwingFXUtils.fromFXImage(auxImg,null);
     }
 
-
+    /**
+     * Receives an image from another node.
+     * @param image Input image
+     */
     @Override
     public void update(Image image) {
-
         imagePeer[ this.emptyPos++ % 2 ] = SwingFXUtils.fromFXImage(image,null);
 
         if( getInputNumber() == INPUT_MAX ){
@@ -43,21 +49,23 @@ public class LogicalOperatorAnd extends NodeBox {
             setImage( ImageUtil.toImage( mtxResult ));
             System.out.println("AND!");
             super.update(getImage());
-
         }
-
     }
 
-    //Método para fazer AND entre imagens A e B
+    /**
+     * AND two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns a matrix representing the operation.
+     */
     int[][] and(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns  */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
 
-        if(n != o || m != p){
+        if(n != o || m != p)
             return ImageUtil.convertToGreyTone(SwingFXUtils.fromFXImage(auxImg,null));
-        }
 
         int [][] C = new int[n][m];
         for(int i=0; i<n; i++){
@@ -68,10 +76,18 @@ public class LogicalOperatorAnd extends NodeBox {
         return C;
     }
 
+    /**
+     * Installs the node, i.e: adds into the workspace.
+     */
     @Override
     public void install() {
     }
 
+    /**
+     * Execute alias: converts the input image,
+     * calls the algorithm, convert back, and
+     * stores.
+     */
     @Override
     public void execute() {
     }

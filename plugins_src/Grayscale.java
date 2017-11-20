@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Grayscale class. This is a GrayScale node.
- * @author Daniel
+ * @author Davidson
  */
 public class Grayscale extends NodeBox {
 
@@ -70,8 +70,8 @@ public class Grayscale extends NodeBox {
                 /* New grayscale intensity. */
                 int intensity = (int)((0.299*r) + (0.587*g) + (0.114*b));
 
-				/* Normalize. */
-				intensity = ImageUtil.normalize(intensity);
+                /* Normalize. */
+                intensity = ImageUtil.normalize(intensity);
                 
                 /* RGB image. */
                 colors = (intensity << 16) | (intensity << 8) | intensity;

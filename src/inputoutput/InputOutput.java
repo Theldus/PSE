@@ -7,10 +7,17 @@ import java.util.Scanner;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
-//Classe com métodos para fazer operações de entrada e saída
+/**
+ * CLass with I/O methods operation.
+ * @author Pertence.
+ */
 public class InputOutput {
 
-    //Método para ler uma imagem em um path
+    /**
+     * Reads a image given a path.
+     * @param path Image path.
+     * @return Returns the image matrix.
+     */
     public int [][] read(String path){
         BufferedImage bfrimg = null;
         try { bfrimg = ImageIO.read(new File(path)); }

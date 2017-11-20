@@ -85,6 +85,7 @@ public class PluginController {
             JSONArray  listObjs   = (JSONArray) jsonParser.parse(new InputStreamReader(jf.getInputStream(ze),
                     "UTF-8"));
 
+            /* Reads the file and builds a list with the values. */
             for (Object obj : listObjs ){
                 JSONObject nodeBox = (JSONObject) obj;
 

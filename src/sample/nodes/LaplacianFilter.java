@@ -54,14 +54,18 @@ public class LaplacianFilter extends NodeBox {
     }
 
     public BufferedImage execute (BufferedImage imagemEnt){
-        //filtro passa alta Laplaciano :
         int[][] matrizImagem = null;
         BufferedImage image = null;
         try {
             int width  = imagemEnt.getWidth();
             int height = imagemEnt.getHeight();
-            // o codigo abaixo pega os valores de intensidade em RGB  que são os mesmos para todos os componentes  pois a imagem esta em tons  de cinza.
-            // as coordenadas dos pixels são combinadas da forma a baixo , depois a variável vResp  recebe operação aritmética sobre os valores obtidos
+
+            /**
+             * The following code gets the RGB intensities values
+             * (which are the same, since we are in greyscale).
+             * The pixels coordinates are combined below, after, the variable
+             * vResp receives the arithmetic operation in the obtained values.
+             */
             matrizImagem = new int[width][height];
             for (int i = 1; i < width - 1; i++) {
                 for (int j = 1; j < height - 1; j++) {
@@ -74,7 +78,8 @@ public class LaplacianFilter extends NodeBox {
                     Color p20 = new Color(imagemEnt.getRGB(i+1, j-1));
                     Color p21 = new Color(imagemEnt.getRGB(i+1, j));
                     Color p22 = new Color(imagemEnt.getRGB(i+1, j+1));
-                    // poderia ter sido utilizado  o componente azul ou verde pois a imagem é acromática
+
+                    /* Could be used the B or G component, since the image is achromatic. */
                     int vRes = -p0.getRed() -   p1.getRed() - p2.getRed() +
                             -p10.getRed() + 8*p11.getRed() - p12.getRed() +
                             -p20.getRed() -   p21.getRed() - p22.getRed();
@@ -84,7 +89,7 @@ public class LaplacianFilter extends NodeBox {
                 }
             }
 
-            // retornando o resultado para uma nova imagem image utilizando raster
+            /* Builds the new image. */
             image = new BufferedImage(width,height, BufferedImage.TYPE_BYTE_GRAY);
             WritableRaster raster = image.getRaster();
             for (int i = 0; i < width; i++) {
@@ -93,7 +98,6 @@ public class LaplacianFilter extends NodeBox {
                 }
             }
 
-
         } catch (Exception err) {
             err.printStackTrace();
         }
@@ -101,9 +105,9 @@ public class LaplacianFilter extends NodeBox {
         return image;
     }
 
-
-
-
+    /**
+     * Executes the algorithm.
+     */
     @Override
     public void execute() {
         Image img = SwingFXUtils.toFXImage( execute( SwingFXUtils.fromFXImage(getImage(),null) ),null  );

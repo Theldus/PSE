@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * ColorInverter class. This is a Histogram node.
- * @author Daniel
+ * @author Davidson
  */
 public class ColorInverter extends NodeBox {
 

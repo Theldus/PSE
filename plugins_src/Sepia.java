@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Sepia class. This is a Sepia node.
- * @author Daniel
+ * @author Davidson
  */
 public class Sepia extends NodeBox {
 

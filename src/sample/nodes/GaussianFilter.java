@@ -18,7 +18,7 @@ public class GaussianFilter extends NodeBox {
 
     private Image imageReserve;
 
-
+    /* Gaussian masks. */
     enum Mask{
 
         MASK_3_X_3( new int[][]{ {1,2,1},
@@ -97,10 +97,15 @@ public class GaussianFilter extends NodeBox {
         }
     }
 
+    /**
+     * GaussianFilter algorithm.
+     * @param imagemEnt Input image.
+     * @return Returns the resulting image.
+     */
     public BufferedImage execute(BufferedImage imagemEnt) {
 
-        BufferedImage image = null;
-        int matrix [][] = ImageUtil.convertToGreyTone(imagemEnt); // instanciando matriz de trabalho
+        BufferedImage image;
+        int matrix [][] = ImageUtil.convertToGreyTone(imagemEnt);
         int width = matrix.length;
         int height = matrix[0].length;
 
@@ -128,30 +133,16 @@ public class GaussianFilter extends NodeBox {
                 break;
         }
 
-
         for (int x = shift; x < width - shift; x++) {
             for (int y = shift; y < height - shift; y++) {
-
                 somatorio = 0;
-
-                /*
-                for (int i = 0; i < 3; i++) {
-                    for (int j = 0; j < 3; j++) {
-                        somatorio += matrix[x + (i - 1)][y + (j - 1)] * matMasc[i][j]; // convoluindo masc e imagem
-                    }
-                }
-                */
-
                 int weight = 0;
                 for (int i = 0; i < mask.getMask().length; i++) {
                     for (int j = 0; j < mask.getMask()[i].length; j++) {
-
                         weight += mask.getMask()[i][j];
-                        somatorio += matrix[x + (i - shift)][y + (j - shift)] * mask.getMask()[i][j]; // convoluindo masc e imagem
-
+                        somatorio += matrix[x + (i - shift)][y + (j - shift)] * mask.getMask()[i][j];
                     }
                 }
-
                 matrix[x][y] = (int) somatorio / weight;
             }
         }
@@ -167,6 +158,9 @@ public class GaussianFilter extends NodeBox {
         return image;
     }
 
+    /**
+     * Executes the algorithm.
+     */
     @Override
     public void execute() {
         Image img = SwingFXUtils.toFXImage( execute( SwingFXUtils.fromFXImage(getImage(),null) ),null  );

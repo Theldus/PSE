@@ -9,7 +9,7 @@ import java.awt.image.BufferedImage;
 
 /**
  * Histogram class. This is a Histogram node.
- * @author Daniel
+ * @author Davidson, Daniel
  */
 public class Histogram extends NodeBox {
 
@@ -84,9 +84,6 @@ public class Histogram extends NodeBox {
         for (int i = 0; i < 256; i++)
             if (histogram[i] > top)
                 top = histogram[i];
-
-        /* Draws a title. TODO: Fix this title. */
-        //g2d.drawString("Histograma (0-255)", 30, 30);
 
         /* Draws. */
         for (int i = 0; i < 256; i++)

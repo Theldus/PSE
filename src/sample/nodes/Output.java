@@ -17,13 +17,24 @@ import java.io.IOException;
 /**
  * Created by Daniel on 02/11/2017.
  */
+
+/**
+ * Output NodeBox. Shows the input image into the screen.
+ */
 public class Output extends NodeBox {
 
+    /* Delta. */
     private class Delta{
         double x;
         double y;
     }
 
+    /**
+     * Output constructor.
+     * @param title Title.
+     * @param root Workspace root.
+     * @param iconPath iconPath.
+     */
     public Output(String title,Workspace root,String iconPath) {
         super(title, root, iconPath);
         getHeader().removeSupport();
@@ -31,10 +42,16 @@ public class Output extends NodeBox {
         setOpenWinEvent();
     }
 
+    /**
+     * Installs the node, i.e: adds into the workspace.
+     */
     public void install() {
         getRoot().add(this);
     }
 
+    /**
+     * Configures the event that shows the preview window.
+     */
     private void setOpenWinEvent(){
 
         getNode().getContainer().addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -45,6 +62,7 @@ public class Output extends NodeBox {
 
                     Delta delta = new Delta();
 
+                    /* Attributes. */
                     System.out.println("Show IMG!!!");
                     Stage newWinPreview = new Stage();
                     newWinPreview.setMaximized(false);
@@ -62,6 +80,7 @@ public class Output extends NodeBox {
 
                         Scene scene = new Scene(root);
 
+                        /* Get the coordinates. */
                         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
@@ -70,6 +89,7 @@ public class Output extends NodeBox {
                             }
                         });
 
+                        /* Drag the window. */
                         scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
                             @Override
                             public void handle(MouseEvent event) {
@@ -92,15 +112,21 @@ public class Output extends NodeBox {
         });
     }
 
+    /**
+     * Receives an image from another node.
+     * @param image Input image
+     */
     @Override
     public void update(Image image) {
         setImage(image);
         execute();
     }
 
+    /**
+     * Shows the current image into the screen.
+     */
     @Override
     public void execute() {
-
         getNode().getChildren().remove(getNode().getContainer());
         getNode().setMinSize(180,160);
         ImageView img = new ImageView(getImage());
@@ -110,6 +136,5 @@ public class Output extends NodeBox {
         getNode().setActionIcon(img);
         getNode().getChildren().add( getNode().createContainer() );
         setOpenWinEvent();
-
     }
 }

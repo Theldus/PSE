@@ -8,6 +8,12 @@ import sample.workspace.Workspace;
 
 import java.awt.image.BufferedImage;
 
+/**
+ * ArithmeticOperatorMult, does a image multiplication.
+ * @author Daniel.
+ * @implNote Note that this class is multi-input implementation
+ * of a node.
+ */
 public class ArithmeticOperatorMult extends NodeBox {
 
     private int emptyPos = 0;
@@ -28,7 +34,11 @@ public class ArithmeticOperatorMult extends NodeBox {
             imagePeer[i] = SwingFXUtils.fromFXImage(auxImg,null);
     }
 
-
+    /**
+     * Whenever the input is changed or a new connection
+     * is made this function is called.
+     * @param image Current image
+     */
     @Override
     public void update(Image image) {
 
@@ -48,12 +58,17 @@ public class ArithmeticOperatorMult extends NodeBox {
 
     }
 
-    //Método para fazer soma entre imagens A e B
+    /**
+     * Method to do image multiplication between two images.
+     * @param A First image.
+     * @param B Second image.
+     * @return Returns the matrix representing the operation.
+     */
     private int[][] times(int [][] A, int [][] B){
-        int n = A.length; //Número de linhas de A
-        int m = A[0].length; //Número de colunas de A
-        int o = B.length; //Número de linhas de B
-        int p = B[0].length; // Número de colunas B
+        int n = A.length;    /* A lines.   */
+        int m = A[0].length; /* A columns. */
+        int o = B.length;    /* B lines.   */
+        int p = B[0].length; /* B columns. */
 
         if(n != o || m != p){
             return ImageUtil.convertToGreyTone(SwingFXUtils.fromFXImage(auxImg,null));
@@ -69,10 +84,16 @@ public class ArithmeticOperatorMult extends NodeBox {
         return C;
     }
 
+    /**
+     * Installs the NodeBox, i.e: sets everything up to work.
+     */
     @Override
     public void install() {
     }
 
+    /**
+     * The algorithm goes here.
+     */
     @Override
     public void execute() {
     }
