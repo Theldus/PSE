@@ -4,5 +4,5 @@ RhoSigmaEpsilon (PSE) is a flow based programming environment for image processi
 <p align="center">
 	<img align="center" src="https://i.imgur.com/vEzv3vV.png" alt="Screen Prototype">
 	<br>
-	<i>Protótipo de tela</i>
+	<i>Screen Prototype</i>
 </p>
