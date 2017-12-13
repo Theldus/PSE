@@ -1,5 +1,5 @@
 # PSE
-RhoSigmaEpsilon (PSE) is a flow based programming environment for image processing learning
+RhoSigmaEpsilon (PSE) is a dataflow programming environment for image processing learning
 
 <p align="center">
 	<img align="center" src="https://i.imgur.com/vEzv3vV.png" alt="Screen Prototype">
